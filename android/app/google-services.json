@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "986725180065",
+    "firebase_url": "https://fluttertestproject-f9da8.firebaseio.com",
+    "project_id": "fluttertestproject-f9da8",
+    "storage_bucket": "fluttertestproject-f9da8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986725180065:android:9c18f05f443eba8ebdc6e0",
+        "android_client_info": {
+          "package_name": "com.anandamargapracharaksangha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986725180065-elqdje4hkqgoulpbrvrs70l42rl85qaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDKKufx9NyNHGyYTH062l6ieV1UT6EYMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986725180065-elqdje4hkqgoulpbrvrs70l42rl85qaa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986725180065:android:9acf2fd2700b18c8bdc6e0",
+        "android_client_info": {
+          "package_name": "com.example.testflutterfirst"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986725180065-elqdje4hkqgoulpbrvrs70l42rl85qaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDKKufx9NyNHGyYTH062l6ieV1UT6EYMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986725180065-elqdje4hkqgoulpbrvrs70l42rl85qaa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
