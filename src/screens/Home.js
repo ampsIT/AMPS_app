@@ -6,6 +6,9 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
 
 import AppColors from './../lib/AppColors';
 
+import HomeToolbar from './../components/homecomponents/toolbar/ToolBarHome';
+import HomeMain from './../components/homecomponents/main/HomeMain';
+
 export class Home extends Component {
     constructor(props){
         super(props)
@@ -17,9 +20,12 @@ export class Home extends Component {
     render() {
         return (
                 <View style={styles.container}>
-                    <Text style={styles.txtContainer}>
-                        This is Home Page...
-                    </Text>
+                   <HomeToolbar 
+                    navigation={this.props.navigation}
+                    />
+                    <HomeMain style={styles.mainContainer}
+                    navigation={this.props.navigation}
+                    />
                 </View>
             );
     }
@@ -27,16 +33,7 @@ export class Home extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: AppColors.white,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    txtContainer: {
-        color: AppColors.primary,
-        fontSize: 20,
-        alignSelf: "center",
-        justifyContent: "center"
+        flex: 1
     }
 });
 
