@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
       }
   });
   
-  export default withGlobalContext(HomeToolbar);
+  export default HomeToolbar;
