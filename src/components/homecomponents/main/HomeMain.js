@@ -18,7 +18,7 @@ export class HomeMain extends Component {
         return (
                 <View style={styles.container}>
                     <Text style={styles.txtContainer}>
-                        This is Home Page...
+                        This is Home Page...DSFDSF
                     </Text>
                 </View>
             );

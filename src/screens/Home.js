@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
     ImageBackground, Image, Alert,TouchableOpacity  } from 'react-native';
 
-import AppColors from './../lib/AppColors';
+import AppColors from '../lib/AppColors';
 
 import HomeToolbar from './../components/homecomponents/toolbar/ToolBarHome';
 import HomeMain from './../components/homecomponents/main/HomeMain';
@@ -26,6 +26,7 @@ export class Home extends Component {
                     <HomeMain style={styles.mainContainer}
                     navigation={this.props.navigation}
                     />
+
                 </View>
             );
     }
