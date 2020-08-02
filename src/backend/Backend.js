@@ -4,6 +4,7 @@ import { Alert, Platform } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 
+
 class backend{
     uid = "";
    
@@ -11,6 +12,16 @@ class backend{
        
     }
 
+    // getNews = async ()=>{
+    //     var newslist =[]
+    //     var snapshot = await firebaseApp.firestore()
+    //                .collections('news')
+    //                .get()
+    //     snapshot.forEach((doc)=>{
+    //         newslist.push(doc.data())
+    //     })
+    //     return newslist
+    // }
    
 }
 
