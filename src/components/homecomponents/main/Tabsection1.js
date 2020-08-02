@@ -32,17 +32,18 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
               <Image
               resizeMode='cover'
               style={styles.CardImage}
-              source={{uri: 'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg',}}
+              source={{uri: {image}}}
               />
               <Text style={styles.title}>
                 {postTitle}
               </Text>
               <Text style={styles.timestamp}>
-                {timestamp.toDate().toDateString()}
+                {timestamp.toLocaleString()}
                 {/* 12:00 pm 2 Aug, 2020 */}
               </Text>
               <Text style={styles.paragraph}>
               {content}
+              
               </Text>
             </View>
           );
