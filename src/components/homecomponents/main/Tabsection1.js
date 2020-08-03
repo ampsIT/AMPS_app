@@ -29,14 +29,22 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
               </Text>
             </View>
           );
-
-
+     
     export default class TabSection1 extends Component {
         constructor(props){
             super(props)
-            this.state = {Newlist:[]}
+            this.state = {Newlist:[],
+                          // Hlist:[]
+                          }
         }
         componentDidMount(){
+
+          this.getNews()
+          
+          
+          
+        }
+        getNews=()=>{
           firestore()
           .collection('news')
           .get()
@@ -45,7 +53,9 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
               this.setState({Newlist:[...this.state.Newlist,documentSnapshot.data()]})
             });
           });
+
         }
+        
 
         render() {
             const renderItem = ({ item }) => (
@@ -56,12 +66,15 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
                 timestamp={item.timestamp.toDate().toLocaleString()}
                 />
               );
+            
             return (
                 <SafeAreaView style={styles.container}>
+                
                 <FlatList
                   data={this.state.Newlist}
                   renderItem={renderItem}
                   keyExtractor={item => item.postId}
+                  showsVerticalScrollIndicator={false}
                 />
                
               </SafeAreaView>
@@ -73,6 +86,7 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
         container: {
           flex: 1,
           marginTop: StatusBar.currentHeight || 0,
+          // alignItems: 'center'
         },
         item: {
           backgroundColor: 'white',
@@ -97,5 +111,6 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
           marginBottom:hp2dp('2%')
 
         }
+        
       });
       
