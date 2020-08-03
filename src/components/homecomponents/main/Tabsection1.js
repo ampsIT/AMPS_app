@@ -4,42 +4,24 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,Dimensions,
     ImageBackground, Alert,TouchableOpacity,SafeAreaView, StatusBar, FlatList,Image} from 'react-native';
 
-    // import firebase from 'firebase';
-    // import firebase from '../../../../firebaseconfig'n
     import firestore from '@react-native-firebase/firestore';
     import {
       widthPercentageToDP as wp2dp,
       heightPercentageToDP as hp2dp,
     } from 'react-native-responsive-screen';   
 
-    const DATA = [
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-          postTitle: 'Heading 1',
-        },
-        {
-          id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-          postTitle: 'Heading 2',
-        },
-        {
-          id: '58694a0f-3da1-471f-bd96-145571e29d72',
-          postTitle: 'Heading 3',
-        },
-      ];    
-
     const Item = ({postTitle,content,image,timestamp}) => (
             <View style={styles.item}>
               <Image
               resizeMode='cover'
               style={styles.CardImage}
-              source={{uri: {image}}}
+              source={{uri: image}}
               />
               <Text style={styles.title}>
                 {postTitle}
               </Text>
               <Text style={styles.timestamp}>
-                {timestamp.toLocaleString()}
-                {/* 12:00 pm 2 Aug, 2020 */}
+                {timestamp}
               </Text>
               <Text style={styles.paragraph}>
               {content}
@@ -60,9 +42,7 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
           .get()
           .then(querySnapshot => {
             querySnapshot.forEach(documentSnapshot => {
-              // console.log(documentSnapshot.data());
               this.setState({Newlist:[...this.state.Newlist,documentSnapshot.data()]})
-              console.log(this.state)
             });
           });
         }
@@ -73,15 +53,13 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
                 postTitle={item.postTitle} 
                 content={item.content}
                 image={item.images}
-                timestamp={item.timestamp}
+                timestamp={item.timestamp.toDate().toLocaleString()}
                 />
               );
             return (
                 <SafeAreaView style={styles.container}>
-                  {/* (!this.state.Newlist)?: */}
                 <FlatList
                   data={this.state.Newlist}
-                  // data={DATA}
                   renderItem={renderItem}
                   keyExtractor={item => item.postId}
                 />
