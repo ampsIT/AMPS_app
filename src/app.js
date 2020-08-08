@@ -11,7 +11,7 @@ import { Home } from './screens/Home';
 import { Loading } from './screens/Loading';
 import {Login} from './screens/Login'
 import {Register} from './screens/Register'
-
+import {NavigationDrawer} from '../src/components/homecomponents/main/NavigationDrawer'
 
 // const Authnavigator = createStackNavigator({
 //     Login:{screen: Login},
@@ -76,9 +76,13 @@ const Auth = () =>(
 
 const Drawer = createDrawerNavigator()
 const DrawerNavigator = () => (
-    <Drawer.Navigator initialRouteName='Home' screenOptions={{
+    <Drawer.Navigator 
+    initialRouteName='Home' 
+    screenOptions={{
         headerShown: false
-      }}>
+      }}
+    drawerContent={() => <NavigationDrawer />}
+      >
        <Drawer.Screen name="Home" component={HomeScreen} />
     </Drawer.Navigator>
 )

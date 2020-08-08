@@ -18,8 +18,8 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
                 <Image
                 resizeMode='cover'
                 style={styles.CardImage}
-                // source={{uri: image}}
-                source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                source={{uri: image}}
+                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
                 />
                 </View>
 

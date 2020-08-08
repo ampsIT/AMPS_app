@@ -3,8 +3,9 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
     ImageBackground, Image, Alert,TouchableOpacity,FlatList,SafeAreaView } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import AppColors from './../../../lib/AppColors';
 import Tabsection1 from './Tabsection1'
@@ -65,7 +66,7 @@ export class HomeMain extends Component {
       }
 
     render() {
-        const Tab = createBottomTabNavigator();
+        const Tab = createMaterialBottomTabNavigator();
         const hrenderItem = ({item}) => (
              
             <HItem 
@@ -100,14 +101,17 @@ export class HomeMain extends Component {
                     <Tab.Navigator
                     initialRouteName="Section1"
                     style={styles.bottomtab}
+                    activeColor="#f0edf6"
+                    inactiveColor="#3e2465"
+                    barStyle={{ backgroundColor: AppColors.primary }}
                     >
                     <Tab.Screen
                         name="Section1"
                         component={Tabsection1}
                         options={{
-                        tabBarLabel: 'Section1',
+                        tabBarLabel: 'Home',
                         tabBarIcon: () => (
-                            <Icon name="home" color={'grey'} size={30} />
+                            <Icon name="home" color={'white'} size={22} />
                         ),
                         }}
                     />
@@ -115,9 +119,9 @@ export class HomeMain extends Component {
                         name="Section2"
                         component={Tabsection2}
                         options={{
-                        tabBarLabel: 'Section2',
+                        tabBarLabel: 'Ideology',
                         tabBarIcon: () => (
-                            <Icon name="address-book" color={'grey'} size={30} />
+                            <Icon name="info-circle" color={'white'} size={22} />
                         ),
                         }}
                     />
@@ -125,19 +129,19 @@ export class HomeMain extends Component {
                         name="Section3"
                         component={Tabsection3}
                         options={{
-                        tabBarLabel: 'Section3',
+                        tabBarLabel: 'Video',
                         tabBarIcon: () => (
-                            <Icon name="comments" color={'grey'} size={30} />
+                            <Icon name="video" color={'white'} size={22} />
                         ),
                         }}
                     />
-                    {/* <Tab.Screen
+                    <Tab.Screen
                         name="Section4"
                         component={Tabsection3}
                         options={{
-                        tabBarLabel: 'Section3',
+                        tabBarLabel: 'Publications',
                         tabBarIcon: () => (
-                            <Icon name="comments" color={'grey'} size={30} />
+                            <Icon name="book" color={'white'} size={22} />
                         ),
                         }}
                     />
@@ -145,12 +149,13 @@ export class HomeMain extends Component {
                         name="Section5"
                         component={Tabsection3}
                         options={{
-                        tabBarLabel: 'Section3',
+                        tabBarLabel: 'Events',
                         tabBarIcon: () => (
-                            <Icon name="comments" color={'grey'} size={30} />
+                            <Icon name="calendar-alt" color={'white'} size={22} />
                         ),
                         }}
-                    /> */}
+                        labeled={false}
+                    />
                     </Tab.Navigator>
                     {/* </View> */}
                 </SafeAreaView>
@@ -217,7 +222,7 @@ const styles = StyleSheet.create({
       },
       Hlist:{
         backgroundColor: 'white',
-        // elevation:3
+        elevation:3
         // borderWidth:1
       }
 });

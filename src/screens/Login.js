@@ -16,7 +16,7 @@ import {
     GoogleSigninButton,
     statusCodes,
   } from 'react-native-google-signin';
-export  class Login extends Component {
+export class Login extends Component {
     constructor(props){
         super(props)
 
@@ -104,14 +104,15 @@ export  class Login extends Component {
         }
       };
 
-      signOut = async () => {
+    signOut = async () => {
         try {
           await GoogleSignin.revokeAccess();
           await GoogleSignin.signOut();
           auth()
             .signOut()
             .then(() => alert('Your are signed out!'));
-          setloggedIn(false);
+        //   setloggedIn(false);
+        this.setState({ loggedIn: false,user:[]})
           // setuserInfo([]);
         } catch (error) {
           console.error(error);
@@ -267,7 +268,7 @@ const styles = StyleSheet.create({
     loginButton: {
         marginTop:hp2dp('1%'),
         borderRadius:25,
-        backgroundColor:'#ff6e6e',
+        backgroundColor:AppColors.primary,
         width:wp2dp('80%'),
         height:hp2dp('7%'),
         alignItems:'center',
@@ -321,7 +322,7 @@ const styles = StyleSheet.create({
     registerText: {
         fontSize: 20,
         marginLeft:wp2dp('1%'),
-        color:'#ff6e6e'
+        color:AppColors.primary
     },
     registerContainer:{
         alignItems:'center',
