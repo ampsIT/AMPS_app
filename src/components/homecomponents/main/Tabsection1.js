@@ -18,8 +18,8 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
                 <Image
                 resizeMode='cover'
                 style={styles.CardImage}
-                source={{uri: image}}
-                // source={{uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'}}
+                // source={{uri: image}}
+                source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
                 />
                 </View>
 
@@ -44,8 +44,7 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
               style={styles.CView}
               >
                 <Text style={styles.paragraph}>
-                  {/* {content} */}
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                  {content}
                 </Text>
               </View>
             </View>
@@ -150,12 +149,9 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
         },
         TView: {
           // backgroundColor:'red',
-
-
         },
         CView:{
           // backgroundColor:'red',
-
         }
         
       });

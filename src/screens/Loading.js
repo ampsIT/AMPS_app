@@ -5,20 +5,37 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
     ImageBackground, Image, Alert,TouchableOpacity  } from 'react-native';
 
 import AppColors from './../lib/AppColors';
+import auth, { firebase } from "@react-native-firebase/auth";
 
 export class Loading extends Component {
     constructor(props){
         super(props)
 
-        this.state = {}
+        this.state = {initializing:true,
+                        user:[]
+                    }
         this.navigate = this.props.navigation.navigate;
     }
-
+   onAuthStateChanged=(user)=> {
+        this.setState({user:user})
+        if(this.state.initializing){
+            this.setState({initializing:false})
+        }
+      }
     componentDidMount(){
         let self = this;
-        setTimeout(() => {
-            self.navigate('Home')
-        }, 3000);
+        const subscriber = auth().onAuthStateChanged(self.onAuthStateChanged);
+        // unsubscribe on unmount
+        if(this.state.user==[]){
+                self.navigate('Login')
+            }else{
+                self.navigate('Drawer')
+            }
+        // setTimeout(() => {
+        //     self.navigate('Login')
+        // }, 3000);
+        
+        return subscriber; 
     }
 
     render() {

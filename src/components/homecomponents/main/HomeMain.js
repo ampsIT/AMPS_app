@@ -66,7 +66,6 @@ export class HomeMain extends Component {
 
     render() {
         const Tab = createBottomTabNavigator();
-
         const hrenderItem = ({item}) => (
              
             <HItem 
@@ -132,11 +131,28 @@ export class HomeMain extends Component {
                         ),
                         }}
                     />
-                        
+                    {/* <Tab.Screen
+                        name="Section4"
+                        component={Tabsection3}
+                        options={{
+                        tabBarLabel: 'Section3',
+                        tabBarIcon: () => (
+                            <Icon name="comments" color={'grey'} size={30} />
+                        ),
+                        }}
+                    />
+                    <Tab.Screen
+                        name="Section5"
+                        component={Tabsection3}
+                        options={{
+                        tabBarLabel: 'Section3',
+                        tabBarIcon: () => (
+                            <Icon name="comments" color={'grey'} size={30} />
+                        ),
+                        }}
+                    /> */}
                     </Tab.Navigator>
                     {/* </View> */}
-                    
-                    
                 </SafeAreaView>
             );
     }
@@ -165,7 +181,7 @@ const styles = StyleSheet.create({
     Hitem:{
         // backgroundColor: 'white',
         // padding: wp2dp('3%'),
-        paddingTop:hp2dp('1%'),
+        paddingTop:hp2dp('2%'),
         // paddingHorizontal: wp2dp('2%'),
         // marginLeft:wp2dp('-20%'),
 
@@ -200,7 +216,9 @@ const styles = StyleSheet.create({
         textAlign: 'center'
       },
       Hlist:{
-        // backgroundColor: 'white',
+        backgroundColor: 'white',
+        // elevation:3
+        // borderWidth:1
       }
 });
 

@@ -26,7 +26,6 @@ export class Home extends Component {
                     <HomeMain style={styles.mainContainer}
                     navigation={this.props.navigation}
                     />
-
                 </View>
             );
     }
