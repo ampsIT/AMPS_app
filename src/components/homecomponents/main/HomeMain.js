@@ -101,17 +101,17 @@ export class HomeMain extends Component {
                     <Tab.Navigator
                     initialRouteName="Section1"
                     style={styles.bottomtab}
-                    activeColor="#f0edf6"
-                    inactiveColor="#3e2465"
-                    barStyle={{ backgroundColor: AppColors.primary }}
+                    activeColor={AppColors.primary}
+                    inactiveColor={"grey"}
+                    barStyle={{ backgroundColor: "white" }}
                     >
                     <Tab.Screen
                         name="Section1"
                         component={Tabsection1}
                         options={{
                         tabBarLabel: 'Home',
-                        tabBarIcon: () => (
-                            <Icon name="home" color={'white'} size={22} />
+                        tabBarIcon: ({color}) => (
+                            <Icon name="home" color={color} size={22} />
                         ),
                         }}
                     />
@@ -120,8 +120,8 @@ export class HomeMain extends Component {
                         component={Tabsection2}
                         options={{
                         tabBarLabel: 'Ideology',
-                        tabBarIcon: () => (
-                            <Icon name="info-circle" color={'white'} size={22} />
+                        tabBarIcon: ({color}) => (
+                            <Icon name="info-circle" color={color} size={22} />
                         ),
                         }}
                     />
@@ -130,8 +130,8 @@ export class HomeMain extends Component {
                         component={Tabsection3}
                         options={{
                         tabBarLabel: 'Video',
-                        tabBarIcon: () => (
-                            <Icon name="video" color={'white'} size={22} />
+                        tabBarIcon: ({color}) => (
+                            <Icon name="video" color={color} size={22} />
                         ),
                         }}
                     />
@@ -140,8 +140,8 @@ export class HomeMain extends Component {
                         component={Tabsection3}
                         options={{
                         tabBarLabel: 'Publications',
-                        tabBarIcon: () => (
-                            <Icon name="book" color={'white'} size={22} />
+                        tabBarIcon: ({color}) => (
+                            <Icon name="book" color={color} size={22} />
                         ),
                         }}
                     />
@@ -150,8 +150,8 @@ export class HomeMain extends Component {
                         component={Tabsection3}
                         options={{
                         tabBarLabel: 'Events',
-                        tabBarIcon: () => (
-                            <Icon name="calendar-alt" color={'white'} size={22} />
+                        tabBarIcon: ({color}) => (
+                            <Icon name="calendar-alt" color={color} size={22} />
                         ),
                         }}
                         labeled={false}
@@ -180,8 +180,6 @@ const styles = StyleSheet.create({
     },
     bottomtab:{
         justifyContent:'flex-end',
-        backgroundColor:'red'
-
     },
     Hitem:{
         // backgroundColor: 'white',

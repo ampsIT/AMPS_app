@@ -124,7 +124,7 @@ export class NavigationDrawer extends Component{
                 size={24}
                 />)}
                 label="Feedback"
-                labelStyle={[styles.labelStyle]}
+                labelStyle={[styles.labelStyle,{marginLeft:wp2dp('-1%')}]}
                 onPress={() => {}}
             />
             </View>
@@ -166,7 +166,8 @@ const styles = StyleSheet.create({
     },
     labelStyle:{
         fontSize:16,
-        
+        // fontWeight:'500'
+        color:'black'
     },
     comItems:{
         borderBottomWidth:0.2

@@ -26,14 +26,15 @@ export class Loading extends Component {
         let self = this;
         const subscriber = auth().onAuthStateChanged(self.onAuthStateChanged);
         // unsubscribe on unmount
-        if(this.state.user==[]){
-                self.navigate('Login')
-            }else{
-                self.navigate('Drawer')
-            }
-        // setTimeout(() => {
-        //     self.navigate('Login')
-        // }, 3000);
+        console.log(this.state.user)
+        // if(this.state.user===[]){
+        //         self.navigate('Login')
+        //     }else{
+        //         self.navigate('Drawer')
+        //     }
+        setTimeout(() => {
+            self.navigate('Login')
+        }, 3000);
         
         return subscriber; 
     }

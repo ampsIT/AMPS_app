@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
     ImageBackground, Image, Alert,TouchableOpacity,Button,SafeAreaView  } from 'react-native';
 import auth, { firebase } from "@react-native-firebase/auth";
-
+import backend from '../backend/Backend'
 import AppColors from '../lib/AppColors';
 import {
     widthPercentageToDP as wp2dp,
@@ -16,6 +16,8 @@ import {
     GoogleSigninButton,
     statusCodes,
   } from 'react-native-google-signin';
+
+
 export class Login extends Component {
     constructor(props){
         super(props)
@@ -31,21 +33,21 @@ export class Login extends Component {
         this.navigate = this.props.navigation.navigate;
     }
     componentDidMount(){
-        GoogleSignin.configure({
-            scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
-            webClientId:
-              '739140978292-u2e6j50amn52928htk3l3394l12l21u0.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-            offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-          });
-          const subscriber = auth().onAuthStateChanged(this.onAuthStateChanged);
-          return subscriber; // unsubscribe on unmount
+        // GoogleSignin.configure({
+        //     scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
+        //     webClientId:
+        //       '739140978292-u2e6j50amn52928htk3l3394l12l21u0.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+        //     offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+        //   });
+        //   const subscriber = auth().onAuthStateChanged(this.onAuthStateChanged);
+        //   return subscriber; // unsubscribe on unmount
     }
-    onAuthStateChanged=(user)=>{
-        // setUser(user);
-        this.setState({user:user})
-        // console.log(user);
-        if (user) {this.setState({loggedIn:true})};
-      }
+    // onAuthStateChanged=(user)=>{
+    //     // setUser(user);
+    //     this.setState({user:user})
+    //     // console.log(user);
+    //     if (user) {this.setState({loggedIn:true})};
+    //   }
 
     setVisible = () =>{
         if(this.state.press==false){
@@ -56,68 +58,78 @@ export class Login extends Component {
         }
     }
     
-    loginFunction =()=>{
+    loginFunction =async()=>{
         console.log(this.state.email,this.state.password)
-        this.SignIn(this.state.email,this.state.password)
+        
+        let response = await backend.SignIn(this.state.email,this.state.password)
+        if (response && response.user) {
+            Alert.alert("Success ✅", "Logged successfully");
+            this.navigate('Drawer')
+          }
+        else{
+            console.log('error',response)
+        }
+        // this.SignIn(this.state.email,this.state.password)
     }
 
-    SignIn=async (email,password)=>{
-        try {
-            let response = await auth().signInWithEmailAndPassword(email, password);
-            if (response && response.user) {
-              Alert.alert("Success ✅", "Logged successfully");
-              this.navigate('Home')
-            }
-          } catch (e) {
-            console.error(e.message);
-          }
-    }
+    // SignIn=async (email,password)=>{
+    //     try {
+    //         let response = await auth().signInWithEmailAndPassword(email, password);
+    //         if (response && response.user) {
+    //           Alert.alert("Success ✅", "Logged successfully");
+    //           console.log(response)
+    //         //   this.navigate('Drawer')
+    //         }
+    //       } catch (e) {
+    //         console.error(e.message);
+    //       }
+    // }
     
-    googleLogin = async () => {
-        try {
-          await GoogleSignin.hasPlayServices();
-          const {accessToken, idToken} = await GoogleSignin.signIn();
-          this.setState({loggedIn: true});
+    // googleLogin = async () => {
+    //     try {
+    //       await GoogleSignin.hasPlayServices();
+    //       const {accessToken, idToken} = await GoogleSignin.signIn();
+    //       this.setState({loggedIn: true});
 
-          const credential = auth.GoogleAuthProvider.credential(
-            idToken,
-            accessToken,
-          );
-         const res =await auth().signInWithCredential(credential);
-         if (res.user){
-            this.navigate('Home')
-         }
+    //       const credential = auth.GoogleAuthProvider.credential(
+    //         idToken,
+    //         accessToken,
+    //       );
+    //      const res =await auth().signInWithCredential(credential);
+    //      if (res.user){
+    //         this.navigate('Home')
+    //      }
           
-        } catch (error) {
-          if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-            // user cancelled the login flow
-            alert('Cancel');
-          } else if (error.code === statusCodes.IN_PROGRESS) {
-            alert('Signin in progress');
-            // operation (f.e. sign in) is in progress already
-          } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-            alert('PLAY_SERVICES_NOT_AVAILABLE');
-            // play services not available or outdated
-          } else {
-            // some other error happened
-          }
-        }
-      };
+    //     } catch (error) {
+    //       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+    //         // user cancelled the login flow
+    //         alert('Cancel');
+    //       } else if (error.code === statusCodes.IN_PROGRESS) {
+    //         alert('Signin in progress');
+    //         // operation (f.e. sign in) is in progress already
+    //       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+    //         alert('PLAY_SERVICES_NOT_AVAILABLE');
+    //         // play services not available or outdated
+    //       } else {
+    //         // some other error happened
+    //       }
+    //     }
+    //   };
 
-    signOut = async () => {
-        try {
-          await GoogleSignin.revokeAccess();
-          await GoogleSignin.signOut();
-          auth()
-            .signOut()
-            .then(() => alert('Your are signed out!'));
-        //   setloggedIn(false);
-        this.setState({ loggedIn: false,user:[]})
-          // setuserInfo([]);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+    // signOut = async () => {
+    //     try {
+    //       await GoogleSignin.revokeAccess();
+    //       await GoogleSignin.signOut();
+    //       auth()
+    //         .signOut()
+    //         .then(() => alert('Your are signed out!'));
+    //     //   setloggedIn(false);
+    //     this.setState({ loggedIn: false,user:[]})
+    //       // setuserInfo([]);
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   };
 
 
     render() {
@@ -173,16 +185,17 @@ export class Login extends Component {
                         </Text>
                     </TouchableOpacity>
 
-                    <Text style={styles.orText}>
+                    {/* <Text style={styles.orText}>
                         Or
-                    </Text>
+                    </Text> */}
                     <View>
-                    <TouchableOpacity style={styles.googleButton}
-                    onPress={this.googleLogin}
-                    >
                         {/* <Icon name="google" color={'red'}size={23}
                         style={styles.gicon}
                         /> */}
+                    {/* <TouchableOpacity style={styles.googleButton}
+                    onPress={this.googleLogin}
+                    >
+                        
                         <View style={styles.imgcontainer}>
                         <Image
                             source={require('../lib/gicon.png')}
@@ -194,7 +207,7 @@ export class Login extends Component {
                                 Login with Google
                             </Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <View style={styles.registerContainer}>
                         <Text style={styles.AccountText}>
                             Don't Have an Account?
@@ -328,6 +341,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:hp2dp('2%'),
         flexDirection:'row',
-        marginLeft:wp2dp('15%')
+        // marginLeft:wp2dp('5%')
     }
 }) 

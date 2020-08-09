@@ -75,7 +75,7 @@ export class HomeToolbar extends Component{
       <View style={styles.toolbarcontainer}>
         <View style={styles.logocontainer}>	
             <Text style={styles.toolbarheadertext}>
-              Ananda Marga
+              AMPS
             </Text>
         </View>
       </View>
