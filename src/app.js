@@ -12,7 +12,7 @@ import { Loading } from './screens/Loading';
 import {Login} from './screens/Login'
 import {Register} from './screens/Register'
 import {NavigationDrawer} from '../src/components/homecomponents/main/NavigationDrawer'
-
+import {Department} from './screens/Department'
 // const Authnavigator = createStackNavigator({
 //     Login:{screen: Login},
 //     Register:{screen: Register},
@@ -59,6 +59,7 @@ const HomeScreen = () =>(
         }}
         >
             <Homenavigator.Screen name='homeScreen' component={Home}/>
+            <Homenavigator.Screen name='DeptScreen' component={Department}/>
     </Homenavigator.Navigator>
 )
 const Authnavigator = createStackNavigator();

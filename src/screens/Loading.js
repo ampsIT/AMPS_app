@@ -33,7 +33,7 @@ export class Loading extends Component {
         //         self.navigate('Drawer')
         //     }
         setTimeout(() => {
-            self.navigate('Login')
+            self.navigate('Drawer')
         }, 3000);
         
         return subscriber; 

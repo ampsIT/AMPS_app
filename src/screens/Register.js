@@ -146,20 +146,16 @@ export class Register extends Component {
                 </TouchableOpacity>
             </View>
                 
-            
-               
-                
-
                 <View style={styles.InputandIcon}>
                     <Icon name="phone" color={'grey'} size={23}
                     style={styles.inputIcon}
                     />
                     <TextInput
-                placeholder={'Contact No.'}
-                style={styles.textInput}
-                onChangeText={(text)=>{this.setState({contactno:text})}}
-                keyboardType={'number-pad'}
-                />
+                        placeholder={'Contact No.'}
+                        style={styles.textInput}
+                        onChangeText={(text)=>{this.setState({contactno:text})}}
+                        keyboardType={'number-pad'}
+                    />
                 
                 </View>
             

@@ -11,14 +11,18 @@ import AppColors from './../../../lib/AppColors';
 import Tabsection1 from './Tabsection1'
 import Tabsection2 from './Tabsection2'
 import Tabsection3 from './Tabsection3'
+import Tabsection4 from './Tabsection4'
 import firestore from '@react-native-firebase/firestore';
+
 import {
     widthPercentageToDP as wp2dp,
     heightPercentageToDP as hp2dp,
   } from 'react-native-responsive-screen';
 
-const HItem = ({name,icon}) => (
-    <View 
+const HItem = ({name,icon,onPress}) => (
+
+  <TouchableOpacity onPress={onPress}>
+        <View 
     style={styles.Hitem}
     >
         <View 
@@ -41,6 +45,8 @@ const HItem = ({name,icon}) => (
           </Text>
         </View>
     </View>
+  </TouchableOpacity>
+    
         
       );
 export class HomeMain extends Component {
@@ -48,6 +54,7 @@ export class HomeMain extends Component {
         super(props)
 
         this.state = {Hlist:[]}
+        this.navigate= this.props.navigation.navigate
         
     }
     componentDidMount(){
@@ -65,13 +72,18 @@ export class HomeMain extends Component {
 
       }
 
+      onPressDept=(item)=>{
+        console.log(item)
+        this.navigate('DeptScreen')
+      }
     render() {
         const Tab = createMaterialBottomTabNavigator();
         const hrenderItem = ({item}) => (
              
             <HItem 
             name={item.name}
-            icon={item.icon} 
+            icon={item.icon}
+            onPress={() => {this.onPressDept(item)}} 
             />
           
         )
@@ -83,15 +95,13 @@ export class HomeMain extends Component {
                     <View
                     style={styles.Hlist}
                     >
-                    <FlatList
-                    horizontal
-                    data={this.state.Hlist}
-                    renderItem={hrenderItem}
-                    keyExtractor={item => item.postId}
-                    showsHorizontalScrollIndicator={false}
-                    // stickyHeaderIndices={[1]}
-
-                    />
+                      <FlatList
+                      horizontal
+                      data={this.state.Hlist}
+                      renderItem={hrenderItem}
+                      showsHorizontalScrollIndicator={false}
+                      // stickyHeaderIndices={[1]}
+                      />
                     </View>
                  
 
@@ -137,7 +147,7 @@ export class HomeMain extends Component {
                     />
                     <Tab.Screen
                         name="Section4"
-                        component={Tabsection3}
+                        component={Tabsection4}
                         options={{
                         tabBarLabel: 'Publications',
                         tabBarIcon: ({color}) => (
@@ -220,7 +230,7 @@ const styles = StyleSheet.create({
       },
       Hlist:{
         backgroundColor: 'white',
-        elevation:3
+        elevation:2
         // borderWidth:1
       }
 });

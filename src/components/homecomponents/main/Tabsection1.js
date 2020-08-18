@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,Dimensions,
     ImageBackground, Alert,TouchableOpacity,SafeAreaView, StatusBar, FlatList,Image} from 'react-native';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
     import firestore from '@react-native-firebase/firestore';
     import {
@@ -22,7 +23,7 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
                 // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
                 />
                 </View>
-
+              <View style={styles.contentContianer}>
               <View
               style={styles.TView}
               >
@@ -45,8 +46,11 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
               >
                 <Text style={styles.paragraph}>
                   {content}
+                  {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  */}
                 </Text>
               </View>
+              </View>
+              
             </View>
           );
      
@@ -107,29 +111,35 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
           flex: 1,
           // marginTop: StatusBar.currentHeight || 0,
           // marginTop: HW'',
-          marginTop:hp2dp('0.5%')
+          // marginTop:hp2dp('0.5%')
           // alignItems: 'center'
         },
         item: {
-          backgroundColor: 'white',
-          padding: wp2dp('4%'),
-          marginVertical: hp2dp('2%'),
-          marginHorizontal: wp2dp('3%'),
-          width:wp2dp('95%'),
-          elevation:3,
-          borderRadius:8
+          backgroundColor:'white',
+          // padding: wp2dp('4%'),
+          // marginVertical: hp2dp('1%'),
+          marginBottom:hp2dp('0.5%'),
+          // marginHorizontal: wp2dp('3%'),
+          width:wp2dp('100%'),
+          elevation:1,
+          // borderBottomWidth:0.8
+          // borderWidth:0.8
+
+          // borderRadius:8
         },
         title: {
           fontSize: 30,
+          fontWeight:'700'
         },
         CardImage: {
-          width: wp2dp('95%'),
-          height:hp2dp('40%'),
+          width: wp2dp('100%'),
+          height:hp2dp('35%'),
           // marginBottom:hp2dp('1%'),
-          marginTop:hp2dp('-2.3%'),
+          // marginTop:hp2dp('-2.3%'),
+
           // backgroundColor:'black',
-          borderTopRightRadius:8,
-          borderTopLeftRadius:8
+          // borderTopRightRadius:8,
+          // borderTopLeftRadius:8
         },
         paragraph: {
           fontSize: 16
@@ -141,9 +151,14 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
         },
         IView:{
           alignItems: 'center',
+          // borderBottomWidth:1,
+          // backgroundColor:'black',
+          width:wp2dp('100%'),
+          borderBottomWidth:1,
+          borderColor:'rgba(128,128,128,0.2)'
         },
         HView:{
-          // marginTop:hp2dp('1%'),
+          marginTop:hp2dp('-0.5%'),
           // backgroundColor:'red',
           alignItems:'flex-start'
         },
@@ -152,6 +167,11 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
         },
         CView:{
           // backgroundColor:'red',
+          
+        },
+        contentContianer: {
+          paddingHorizontal:wp2dp('4%'),
+          paddingVertical:hp2dp('1%')
         }
         
       });
