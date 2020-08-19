@@ -12,6 +12,7 @@ import Tabsection1 from './Tabsection1'
 import Tabsection2 from './Tabsection2'
 import Tabsection3 from './Tabsection3'
 import Tabsection4 from './Tabsection4'
+import Tabsection5 from './Tabsection5'
 import firestore from '@react-native-firebase/firestore';
 
 import {
@@ -157,7 +158,7 @@ export class HomeMain extends Component {
                     />
                     <Tab.Screen
                         name="Section5"
-                        component={Tabsection3}
+                        component={Tabsection5}
                         options={{
                         tabBarLabel: 'Events',
                         tabBarIcon: ({color}) => (
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
         paddingTop:hp2dp('2%'),
         // paddingHorizontal: wp2dp('2%'),
         // marginLeft:wp2dp('-20%'),
-
+        // marginBottom:hp2dp('1%'),
         paddingBottom:hp2dp('1%'),
         marginHorizontal: wp2dp('2%'),
         width:wp2dp('20%'),
@@ -230,7 +231,10 @@ const styles = StyleSheet.create({
       },
       Hlist:{
         backgroundColor: 'white',
-        elevation:2
+        // elevation:2,
+        // marginBottom:hp2dp('1%'),
+        borderWidth:0.2
+
         // borderWidth:1
       }
 });

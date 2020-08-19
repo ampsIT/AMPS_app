@@ -2,7 +2,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,Dimensions,
-    ImageBackground, Alert,TouchableOpacity,SafeAreaView, StatusBar, FlatList,Image} from 'react-native';
+    ImageBackground, Alert,TouchableOpacity,SafeAreaView, StatusBar, FlatList,Image, ScrollView} from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
     import firestore from '@react-native-firebase/firestore';
@@ -19,19 +19,12 @@ import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
                 <Image
                 resizeMode='cover'
                 style={styles.CardImage}
-                source={{uri: image}}
-                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                // source={{uri: image}}
+                source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
                 />
                 </View>
-              <View style={styles.contentContianer}>
-              <View
-              style={styles.TView}
-              >
-                <Text style={styles.timestamp}>
-                  {timestamp}
-                </Text>
-              </View>
 
+              <View style={styles.contentContianer}>
               <View
               style={styles.HView}
               >
@@ -40,6 +33,17 @@ import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
                   {/* THIS IS THE LONG HEADING */}
                 </Text>
               </View>
+
+
+              <View
+              style={styles.TView}
+              >
+                <Text style={styles.timestamp}>
+                  {timestamp}
+                </Text>
+              </View>
+
+              
 
               <View
               style={styles.CView}
@@ -100,7 +104,8 @@ import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
                   keyExtractor={item => item.postId}
                   showsVerticalScrollIndicator={false}
                 />
-               
+                
+
               </SafeAreaView>
             )
         }    
@@ -118,60 +123,65 @@ import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
           backgroundColor:'white',
           // padding: wp2dp('4%'),
           // marginVertical: hp2dp('1%'),
+          marginTop:hp2dp('1%'),
           marginBottom:hp2dp('0.5%'),
-          // marginHorizontal: wp2dp('3%'),
-          width:wp2dp('100%'),
+          marginHorizontal: wp2dp('1%'),
+          width:wp2dp('98%'),
           elevation:1,
+          // alignItems: 'center'
           // borderBottomWidth:0.8
           // borderWidth:0.8
 
-          // borderRadius:8
+          borderRadius:5
         },
         title: {
-          fontSize: 30,
-          fontWeight:'700'
+          fontSize: 24,
+          fontWeight:'600'
         },
         CardImage: {
-          width: wp2dp('100%'),
+          width: wp2dp('98%'),
           height:hp2dp('35%'),
           // marginBottom:hp2dp('1%'),
           // marginTop:hp2dp('-2.3%'),
 
           // backgroundColor:'black',
-          // borderTopRightRadius:8,
-          // borderTopLeftRadius:8
+          borderTopRightRadius:5,
+          borderTopLeftRadius:5
         },
         paragraph: {
-          fontSize: 16
+          fontSize: 14,
+          lineHeight: 20,
         },
         timestamp:{
-          fontSize:14,
-          marginVertical:hp2dp('1%'),
+          fontSize:12,
           color:'grey'
         },
         IView:{
-          alignItems: 'center',
+          // alignItems: 'center',
           // borderBottomWidth:1,
           // backgroundColor:'black',
-          width:wp2dp('100%'),
+          // width:wp2dp('100%'),
           borderBottomWidth:1,
           borderColor:'rgba(128,128,128,0.2)'
         },
         HView:{
           marginTop:hp2dp('-0.5%'),
           // backgroundColor:'red',
+          // alignItems: 'flex-end',
           alignItems:'flex-start'
         },
         TView: {
-          // backgroundColor:'red',
+          // backgroundColor:'yellow',
+          marginTop:hp2dp('0.5%'),
         },
         CView:{
-          // backgroundColor:'red',
-          
+          // backgroundColor:'blue',
+          marginTop: hp2dp('2%'),
+          // marginVertical: hp2dp('0.5%'),
         },
         contentContianer: {
           paddingHorizontal:wp2dp('4%'),
-          paddingVertical:hp2dp('1%')
+          paddingVertical:hp2dp('2%')
         }
         
       });

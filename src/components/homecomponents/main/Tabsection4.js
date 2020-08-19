@@ -93,12 +93,11 @@ export default class Tabsection4 extends Component{
    return(
        <SafeAreaView style={styles.container}>
            <ScrollView 
-           showsVerticalScrollIndicator={false}
-           style={styles.scrollView}      
+           showsVerticalScrollIndicator={false}  
            >
 
-           {this.state.category.map((item)=>(
-               <View style={styles.listContainer}>
+           {this.state.category.map((item,index)=>(
+               <View style={styles.listContainer} key={index}>
                <TouchableOpacity onPress={()=>{this.onPressCategory(item)}} >
                    <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
                    <View style={styles.HView}>
@@ -114,11 +113,6 @@ export default class Tabsection4 extends Component{
                                 />
                         </View>
                    </View>
-                   
-                            
-                        
-                    
-                   
                </TouchableOpacity>
                
                <View style={styles.listView}>
@@ -126,7 +120,6 @@ export default class Tabsection4 extends Component{
                        horizontal
                        data={DATA}
                        renderItem={renderItem}
-                       keyExtractor={(item) => item.id}
                        showsHorizontalScrollIndicator={false}
                    />
                </View>
@@ -151,8 +144,7 @@ cardContainer:{
     marginLeft:wp2dp('1%')
 
 },
-scrollView:{
-    },
+
 card:{
     // backgroundColor: 'blue',
     height:hp2dp('25%'),

@@ -12,25 +12,25 @@ import Icon from 'react-native-vector-icons/Entypo';
       const DATA = [
         {
           id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-          title: "First Item",
+          title: "First Video",
           src:'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-thriller-book-cover-design-template-3675ae3e3ac7ee095fc793ab61b812cc_screen.jpg?ts=1588152105',
           yop:'2010'
         },
         {
           id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-          title: "Second Item",
+          title: "Second Video",
           src:'https://images.penguinrandomhouse.com/cover/9781524744922',
           yop:'2000'
         },
         {
           id: "58694a0f-3da1-471f-bd96-145571e29d72",
-          title: "Third Item",
+          title: "Third Video",
           src:'https://m.media-amazon.com/images/I/41qMDxyi00L.SX316.SY316.jpg',
           yop:'2012'
         },
         {
             id: "58694a12f-3da1-471f-bd96-145571e29d72",
-            title: "Fouth Item",
+            title: "Fouth Video",
             src:'https://images.squarespace-cdn.com/content/v1/5202d1b3e4b099a0812c51a3/1483134080936-K240V6OPPWM2J7NY8SE8/ke17ZwdGBToddI8pDm48kFjiq_0Ek1NItql1dLmsgNNZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGQiKALUW-YxfFfP4p0PvHcTla7NnOOvQwSGt9YLKLGBhEym7bB5Y8EAaW-uC2HxJQ/Blood-Stained.jpg',
             yop:'2014'
           },
@@ -105,7 +105,6 @@ import Icon from 'react-native-vector-icons/Entypo';
             </Text>
           </View> */}
           </View>
-          
         </View>
       );
 

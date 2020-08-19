@@ -50,43 +50,6 @@ export class Register extends Component {
         
 
     }
-
-    // SignUp = (name,email,password) =>{
-
-    //     try{
-    //         auth().createUserWithEmailAndPassword(email,password)
-    //         .then((data)=>{
-    //             console.log('user',data.user)
-    //             if(data.user.uid){
-    //                 const user = {
-    //                     uid:data.user.uid,
-    //                     email:email,
-    //                     name:name
-    //                 }
-    //                 firestore()
-    //                 .collection('user')
-    //                 .doc(data.user.uid)
-    //                 .set(user)
-    //                 .then(() => {
-    //                     console.log('User added!');
-    //                 });
-    //             }
-    //         })
-            
-    //         }
-    //     catch(error){
-    //         if (error.code === 'auth/email-already-in-use') {
-    //             console.log('That email address is already in use!');
-    //             }
-    
-    //             if (error.code === 'auth/invalid-email') {
-    //             console.log('That email address is invalid!');
-    //             }
-    
-    //             console.error(error);
-
-    //     }
-    // }
     render() {
         return (
             <SafeAreaView style={styles.container}>
