@@ -12,15 +12,41 @@ import {
     widthPercentageToDP as wp2dp,
     heightPercentageToDP as hp2dp,
   } from 'react-native-responsive-screen';
+import auth, { firebase } from "@react-native-firebase/auth";
+import firestore from '@react-native-firebase/firestore';
+
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {MaterialCommunityIcons}from 'react-native-vector-icons/MaterialCommunityIcons';
-import Login from '../../../screens/Login'
+import backend from '../../../backend/Backend'
 import AppColors from '../../../lib/AppColors'
+
+
 export class NavigationDrawer extends Component{
     constructor(props){
         super(props)
-        // LoginObj = new Login
-        // this.navigate = this.props.navigation.navigate;
+        this.navigate = this.props.navigation.navigate;
+        this.state={user:{}}
+                                 
+    }
+    async componentDidMount (){
+        const uid = auth().currentUser.uid
+         await firestore()
+             .collection('user')
+            .doc(uid)
+            .get()
+            .then(res=> {
+                this.setState(prevstate=>{
+                    let user = Object.assign(prevstate.user,res._data)
+                    return {user}
+                })
+            });   
+
+    }
+    onClickSignOut = async ()=>{
+        let res = await backend.signOut()
+        if (res){
+            this.navigate('Login')
+        }
     }
    render(){
    return(
@@ -36,7 +62,7 @@ export class NavigationDrawer extends Component{
                 size="xlarge"
             />
                 <Text style={styles.nameText}>
-                    Welcome, User
+                    Welcome, {this.state.user.name}
                  </Text>
             </View>
 
@@ -136,7 +162,7 @@ export class NavigationDrawer extends Component{
                 />)}
                 label="SignOut"
                 labelStyle={[styles.labelStyle,{marginLeft:wp2dp('-5%')}]}
-                // onPress={() => { LoginObj.signOut()}}
+                onPress={() => {this.onClickSignOut()}}
             />
             
            

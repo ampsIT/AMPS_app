@@ -15,6 +15,7 @@ export class Home extends Component {
 
         this.state = {}
         this.navigate = this.props.navigation.navigate;
+
     }
 
     render() {

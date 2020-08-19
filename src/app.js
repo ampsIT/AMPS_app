@@ -82,8 +82,10 @@ const DrawerNavigator = () => (
     screenOptions={{
         headerShown: false
       }}
-    drawerContent={() => <NavigationDrawer />}
-      >
+    drawerContent={(props) => (<NavigationDrawer
+                            {...props}
+                        // navigation={this.props.navigation}
+                        />)}>
        <Drawer.Screen name="Home" component={HomeScreen} />
     </Drawer.Navigator>
 )
@@ -103,10 +105,13 @@ screenOptions={{
 )
 
 export default class App extends Component {
+    constructor(props){
+        super(props)
+    }
     render() {
         return (
             <NavigationContainer>
-            <AppContainer/>
+            <AppContainer  />
             </NavigationContainer>
         );
       }

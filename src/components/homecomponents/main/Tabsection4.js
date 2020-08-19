@@ -100,18 +100,24 @@ export default class Tabsection4 extends Component{
            {this.state.category.map((item)=>(
                <View style={styles.listContainer}>
                <TouchableOpacity onPress={()=>{this.onPressCategory(item)}} >
-                    <View style={styles.HView}>
+                   <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+                   <View style={styles.HView}>
                         <Text style={styles.heading}>
                             {item}
                         </Text>
-                        
+                        </View>
+                        <View style={{justifyContent:'center',marginRight:wp2dp('2%')}}>
                             <Icon
-                            name={'arrow-right'}
-                            size={20}
-                            style={styles.arrow}
-                            />
+                                name={'arrow-right'}
+                                size={20}
+                                // style={styles.arrow}
+                                />
+                        </View>
+                   </View>
+                   
+                            
                         
-                    </View>
+                    
                    
                </TouchableOpacity>
                

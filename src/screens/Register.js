@@ -40,13 +40,13 @@ export class Register extends Component {
         }
     }
     SignUpFunction = async () =>{
-        let response = await backend.SignUp(this.state.name,this.state.email,this.state.password)
-        // console.log(response)
-        console.log(this.state)
-        // if(response){
-        //     Alert.alert(response);
-        //     // this.navigate('Drawer')
-        // }
+        let response = await backend.SignUp(this.state.user)
+        console.log(response)
+        // console.log(this.state.user)
+        if(response){
+            Alert.alert(response);
+            // this.navigate('Drawer')
+        }
         
 
     }
@@ -108,7 +108,12 @@ export class Register extends Component {
                     <TextInput
                     placeholder={'Name'}
                     style={styles.textInput}
-                    onChangeText={(text)=>{this.setState({name:text})}}
+                    onChangeText={(text)=>{
+                        this.setState(prevstate=>
+                            ({user:{...prevstate.user, 
+                                name:text}})
+                            )
+                        }}
                     />
             </View>
 
@@ -120,7 +125,12 @@ export class Register extends Component {
                 <TextInput
                 placeholder={'Email address'}
                 style={styles.textInput}
-                onChangeText={(text)=>{this.setState({email:text})}}
+                onChangeText={(text)=>{
+                    this.setState(prevstate=>
+                        ({user:{...prevstate.user, 
+                            email:text}})
+                        )
+                    }}
                 />
             </View>
 
@@ -132,7 +142,12 @@ export class Register extends Component {
                 <TextInput
                 placeholder={'Password'}
                 style={styles.textInput}
-                onChangeText={(pass)=>{this.setState({password:pass})}}
+                onChangeText={(text)=>{
+                    this.setState(prevstate=>
+                        ({user:{...prevstate.user, 
+                            password:text}})
+                        )
+                    }}
                 secureTextEntry={this.state.passVisible}
                 />
                 <TouchableOpacity
@@ -153,7 +168,12 @@ export class Register extends Component {
                     <TextInput
                         placeholder={'Contact No.'}
                         style={styles.textInput}
-                        onChangeText={(text)=>{this.setState({contactno:text})}}
+                        onChangeText={(text)=>{
+                            this.setState(prevstate=>
+                                ({user:{...prevstate.user, 
+                                    contactno:text}})
+                                )
+                            }}
                         keyboardType={'number-pad'}
                     />
                 
@@ -164,12 +184,16 @@ export class Register extends Component {
                 style={styles.genderIcon}
                 />
                 <Picker
-                    selectedValue={this.state.gender}
+                    selectedValue={this.state.user.gender}
                     style={styles.genderPicker}
                     mode={'dropdown'}
                     onValueChange={(itemValue, itemIndex) =>{
                         if(itemValue!='Select Gender'){
-                            this.setState({gender: itemValue})
+                                this.setState(prevstate=>
+                                    ({user:{...prevstate.user, 
+                                        gender:itemValue}})
+                                    )
+                            
                             // console.log(this.state.gender)
                         }
                     }
@@ -187,12 +211,15 @@ export class Register extends Component {
                 style={styles.categoryIcon}
                 />
                 <Picker
-                    selectedValue={this.state.category}
+                    selectedValue={this.state.user.category}
                     style={styles.genderPicker}
                     mode={'dropdown'}
                     onValueChange={(itemValue, itemIndex) =>{
                         if(itemValue!='Select User Category'){
-                            this.setState({category: itemValue})
+                            this.setState(prevstate=>
+                                ({user:{...prevstate.user, 
+                                    category:itemValue}})
+                                )
                             // console.log(this.state.category)
                         }
                     }

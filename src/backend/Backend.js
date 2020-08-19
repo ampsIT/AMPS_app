@@ -7,7 +7,7 @@ import firestore from '@react-native-firebase/firestore';
 class backend{
     uid = "";
    
-    constructor(){
+    constructor(props){
        
     }
     SignIn= async (email,password)=>{
@@ -29,25 +29,28 @@ class backend{
 
     }
 
-    SignUp = async (name,email,password) =>{
-
+        SignUp = async (user) =>{
+            let message
         try{
-            let data = await auth().createUserWithEmailAndPassword(email,password)
+            let data = await auth().createUserWithEmailAndPassword(user.email,user.password)
             if(data.user.uid){
-                const user = {
+                const newuser = {
                     uid:data.user.uid,
-                    email:email,
-                    name:name
+                    email:user.email,
+                    name:user.name,
+                    contactno:user.contactno,
+                    gender:user.gender,
+                    category:user.category
                 }
                 //how to display message from here
-                 firestore()
-                 .collection('user')
-                 .doc(data.user.uid)
-                 .set(user)
-                 .then(()=>{
-                    //  console.log('user added')
-                     return "SignUp Successfully"
-                 })
+                             await firestore()
+                            .collection('user')
+                            .doc(data.user.uid)
+                            .set(newuser)
+                            .then(() =>{
+                                console.log('sucessfully added user')
+                            })
+                
             }
             }
         catch(e){
@@ -63,6 +66,22 @@ class backend{
             }
         }
     }
+    signOut = async () => {
+        try {
+        //   await GoogleSignin.revokeAccess();
+        //   await GoogleSignin.signOut();
+          const res= await auth()
+            .signOut()
+            .then(() => alert('Your are signed out!'));
+            //   setloggedIn(false);
+            // this.setState({ loggedIn: false,user:[]})
+            // setuserInfo([]);
+            return res
+            
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
 }
 

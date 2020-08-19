@@ -18,6 +18,12 @@ export class Loading extends Component {
     }
    onAuthStateChanged=(user)=> {
         this.setState({user:user})
+        if (user) {
+            this.navigate('Drawer');
+            // console.log(this.state.user)
+        } else {
+            this.navigate('Login');
+        }
         if(this.state.initializing){
             this.setState({initializing:false})
         }
@@ -33,8 +39,11 @@ export class Loading extends Component {
         //         self.navigate('Drawer')
         //     }
         setTimeout(() => {
-            self.navigate('Drawer')
+            // self.navigate('Drawer')
+            // self.navigate('Login')
+            
         }, 3000);
+        
         
         return subscriber; 
     }
