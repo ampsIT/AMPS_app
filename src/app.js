@@ -1,6 +1,6 @@
 // @ts-nocheck
 /* eslint-disable */
-import React, { Component } from 'react';
+import React, { Component,Animated  } from 'react';
 import 'react-native-gesture-handler';
 // import { createSwitchNavigator, createAppContainer} from 'react-navigation';
 // import { createStackNavigator } from 'react-navigation-stack';
@@ -13,6 +13,9 @@ import {Login} from './screens/Login'
 import {Register} from './screens/Register'
 import {NavigationDrawer} from '../src/components/homecomponents/main/NavigationDrawer'
 import {Department} from './screens/Department'
+import {VideoDetails} from './screens/VideoDetails'
+import { CardStyleInterpolators } from '@react-navigation/stack';
+
 // const Authnavigator = createStackNavigator({
 //     Login:{screen: Login},
 //     Register:{screen: Register},
@@ -48,18 +51,32 @@ import {Department} from './screens/Department'
 //         );
 //       }
 // }
-
+// const trasitions = {
+//     // gestureDirection: 'horizontal',
+//     // transitionSpec: {
+//     //   open: TransitionSpecs.TransitionIOSSpec,
+//     //   close: TransitionSpecs.TransitionIOSSpec,
+//     // },
+//     cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+// }
 
 
 const Homenavigator = createStackNavigator();
 const HomeScreen = () =>(
     <Homenavigator.Navigator
         screenOptions={{
-            headerShown: false
+            headerShown: false,
+            // navigationOptions: {
+            //     gestureDirection: "horizontal",
+            //     cardStyleInterpolator: forHorizontalModal
+            //   }
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
+    
         >
             <Homenavigator.Screen name='homeScreen' component={Home}/>
             <Homenavigator.Screen name='DeptScreen' component={Department}/>
+            <Homenavigator.Screen name='VideoScreen' component={VideoDetails}/>
     </Homenavigator.Navigator>
 )
 const Authnavigator = createStackNavigator();

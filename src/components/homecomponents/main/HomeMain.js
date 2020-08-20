@@ -74,8 +74,8 @@ export class HomeMain extends Component {
       }
 
       onPressDept=(item)=>{
-        console.log(item)
-        this.navigate('DeptScreen')
+        // console.log(item)
+        this.navigate('DeptScreen',{item:item})
       }
     render() {
         const Tab = createMaterialBottomTabNavigator();

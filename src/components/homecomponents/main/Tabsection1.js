@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,Dimensions,
     ImageBackground, Alert,TouchableOpacity,SafeAreaView, StatusBar, FlatList,Image, ScrollView} from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { material } from 'react-native-typography'
 
     import firestore from '@react-native-firebase/firestore';
     import {
@@ -23,18 +23,18 @@ import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
                 source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
                 />
                 </View>
-
               <View style={styles.contentContianer}>
               <View
               style={styles.HView}
               >
-                <Text style={styles.title}>
+                <Text 
+                // style={styles.title}
+                style={material.headline}
+                >
                   {postTitle}
                   {/* THIS IS THE LONG HEADING */}
                 </Text>
               </View>
-
-
               <View
               style={styles.TView}
               >

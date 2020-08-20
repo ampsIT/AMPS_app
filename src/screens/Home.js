@@ -23,6 +23,10 @@ export class Home extends Component {
                 <View style={styles.container}>
                    <HomeToolbar 
                     navigation={this.props.navigation}
+                    title={"AMPS"}
+                    showDrawer={true}
+                    onIconPress={()=>{this.props.navigation.openDrawer()}}
+
                     />
                     <HomeMain style={styles.mainContainer}
                     navigation={this.props.navigation}

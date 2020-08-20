@@ -11,10 +11,13 @@ import AppColors from './../../../lib/AppColors';
 
 import backend from "./../../../backend/Backend";
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-
+import {
+  widthPercentageToDP as wp2dp,
+  heightPercentageToDP as hp2dp,
+} from 'react-native-responsive-screen';   
 
 import Svg,{
   Circle,
@@ -64,19 +67,33 @@ export class HomeToolbar extends Component{
     }
 
   componentDidMount(){
+  
     let self = this;
    
   }
 
    
   render(){
-  
+  const {title,onIconPress,showDrawer} = this.props
     return(
       <View style={styles.toolbarcontainer}>
         <View style={styles.logocontainer}>	
-            <Text style={styles.toolbarheadertext}>
-              AMPS
+
+          <View style={styles.iconView}>
+              <TouchableOpacity onPress={onIconPress}>
+              <Icon
+              name={showDrawer ? "menu":"arrow-back"}
+              size={30}
+              color={'white'}
+              />
+              </TouchableOpacity>
+          </View>
+          
+          <View style={styles.textView}>
+          <Text style={styles.toolbarheadertext}>
+              {title}
             </Text>
+          </View>
         </View>
       </View>
     );
@@ -101,21 +118,24 @@ const styles = StyleSheet.create({
           // elevation: 5
     },
     logocontainer: {
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'flex-start',
         flexDirection: "row",
         height: "100%",
-        width: "100%"
+        width: "100%",
         // marginLeft: 12
       },
       toolbarheadertext: {
         color: AppColors.white,
-        fontSize: 20,
+        fontSize: 24,
         fontFamily: "Montserrat-Bold",
         alignSelf: 'center',
         justifyContent: "flex-start"
         // fontWeight: 'bold',
         // marginStart: 1
+      },
+      textView:{
+        marginLeft:wp2dp('1%')
       }
   });
   

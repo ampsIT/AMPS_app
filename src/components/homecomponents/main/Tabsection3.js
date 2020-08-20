@@ -38,15 +38,22 @@ import Icon from 'react-native-vector-icons/Entypo';
 
     const Item = ({item,onPress}) => (
         <View style={styles.item}>
+          
           <View
            style={styles.IView}
           >
+            <TouchableOpacity 
+            onPress ={onPress}
+            >
             <Image
             resizeMode='cover'
             style={styles.CardImage}
             source={{uri: item.src}}
             // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
             />
+            </TouchableOpacity>
+            
+
             </View>
 
           <View style={styles.contentContianer}>
@@ -113,7 +120,7 @@ import Icon from 'react-native-vector-icons/Entypo';
             super(props)
     
             this.state = {}
-            
+            this.navigate = this.props.navigation.navigate
         }
     
         render() {
@@ -121,7 +128,7 @@ import Icon from 'react-native-vector-icons/Entypo';
                 return (
                   <Item
                     item={item}
-                    onPress ={()=>{this.onItemPress(item)}}
+                    onPress ={()=>{this.navigate('VideoScreen',{item:item})}}
                   />
                 );
               };
