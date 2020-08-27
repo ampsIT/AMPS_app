@@ -9,6 +9,10 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
       } from 'react-native-responsive-screen';   
 import Icon from 'react-native-vector-icons/Entypo';
 
+import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
+import firestore from '@react-native-firebase/firestore';
+
       const DATA = [
         {
           id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -35,8 +39,10 @@ import Icon from 'react-native-vector-icons/Entypo';
             yop:'2014'
           },
       ];
+      
 
     const Item = ({item,onPress}) => (
+      
         <View style={styles.item}>
           
           <View
@@ -70,8 +76,8 @@ import Icon from 'react-native-vector-icons/Entypo';
             <View style={{ width:wp2dp('75%')}}>
               <Text style={styles.title}>
                 {/* {postTitle} */}
-                THIS IS THE LONG HEADING
-                {/* {item.title} */}
+                {/* THIS IS THE LONG HEADING */}
+                {item.title}
               </Text>
             </View>
 
@@ -85,25 +91,24 @@ import Icon from 'react-native-vector-icons/Entypo';
             </View>
             </View>
 
-            <View style={{flexDirection: 'row'}}>
-            <View
-            style={styles.UploaderView}
-            >
-              <Text style={styles.timestamp}>
-                {/* {timestamp} */}
-                50,000 Views
-              </Text>
+            <View style={{flexDirection: 'row', justifyContent: "space-between"}}>
+              <View
+              style={styles.UploaderView}
+              >
+                <Text style={styles.timestamp}>
+                  {/* {timestamp} */}
+                  {item.total_views} Views
+                </Text>
+              </View> 
+              <View
+              style={styles.TView}
+              >
+                <Text style={styles.timestamp}>
+                  {/* {timestamp} */}
+                  {item.publishing_date.toDate().toLocaleString('en-US')}
+                </Text>
+              </View> 
             </View>
-
-            <View
-            style={styles.TView}
-            >
-            <Text style={styles.timestamp}>
-              {/* {timestamp} */}
-              19 Aug 2020
-            </Text>
-            </View>  
-          </View>
           </View>
 
         </View>
@@ -113,8 +118,34 @@ import Icon from 'react-native-vector-icons/Entypo';
         constructor(props){
             super(props)
     
-            this.state = {}
+            this.state = {
+              videoData: []
+            }
             this.navigate = this.props.navigation.navigate
+            // this.options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        }
+
+        componentDidMount(){
+          let self = this;
+          firestore().collection('publish_video').get()
+          .then(querysnapshot => {
+            let data = [];
+            querysnapshot.forEach(doc => {
+              data.push({
+                id: doc.id,
+                title: doc.data().title,
+                src: doc.data().src_thumbnails,
+                yop: doc.data().yop,
+                publishing_date: doc.data().publishing_date,
+                published_by: doc.data().published_by,
+                total_views: doc.data().total_views
+              })
+            })
+
+            self.setState({
+              videoData: data
+            })
+          })
         }
     
         render() {
@@ -130,7 +161,7 @@ import Icon from 'react-native-vector-icons/Entypo';
             return (
                     <SafeAreaView style={styles.container}>
                         <FlatList
-                       data={DATA}
+                       data={this.state.videoData}
                        renderItem={renderItem}
                        keyExtractor={(item) => item.id}
                        showsVerticalScrollIndicator={false}

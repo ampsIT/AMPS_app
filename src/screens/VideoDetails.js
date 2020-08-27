@@ -28,7 +28,9 @@ export class VideoDetails extends Component{
            {/* <Text>
            {this.props.route.params.item.title}
            </Text> */}
-           <VideoComponent/>
+           <VideoComponent
+             items = {this.props.route.params.item}
+           />
            <View style={styles.detailsContainer}>
                 <View style={styles.headingContainer}>
                     <Text style={styles.titleText}>
@@ -37,7 +39,7 @@ export class VideoDetails extends Component{
                 </View>
                 <View>
                     <Text>
-                      120000 Views
+                    {this.props.route.params.item.total_views} Views
                     </Text>
                 </View>
                 {/* <View style={contentContianer}> 
