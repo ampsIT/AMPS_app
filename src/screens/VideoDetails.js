@@ -17,7 +17,7 @@ export class VideoDetails extends Component{
     }
    render(){
    return(
-       <View style={styles.container}>
+       <SafeAreaView style={styles.container}>
            <HomeToolbar 
             navigation={this.props.navigation}
             title={this.props.route.params.item.title}
@@ -25,24 +25,49 @@ export class VideoDetails extends Component{
             onIconPress={()=>{this.props.navigation.dispatch(CommonActions.goBack());
             }}
            />
-           <Text>
+           {/* <Text>
            {this.props.route.params.item.title}
-           </Text>
+           </Text> */}
            <VideoComponent/>
+           <View style={styles.detailsContainer}>
+                <View style={styles.headingContainer}>
+                    <Text style={styles.titleText}>
+                      {this.props.route.params.item.title}
+                    </Text>
+                </View>
+                <View>
+                    <Text>
+                      120000 Views
+                    </Text>
+                </View>
+                {/* <View style={contentContianer}> 
+                    <Text style={styles.content}>
+                    
+                    </Text>
+                </View> */}
            </View>
+           </SafeAreaView>
    )}
 }
 const styles = StyleSheet.create({
       container:{
           flex:1
-},
-backgroundVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  },
+      },
+      detailsContainer:{
+        paddingTop:hp2dp('2%'),
+        paddingLeft:wp2dp('4%')
+      },
+      headingContainer:{
+
+      },
+      titleText:{
+        fontSize: 20,
+      },
+      content:{
+        fontSize: 16,
+      }
+
+
 })
 
 export default VideoDetails

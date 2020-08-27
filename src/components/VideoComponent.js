@@ -90,9 +90,7 @@ export class VideoComponent extends Component{
           ref={videoPlayer => (this.videoPlayer = videoPlayer)}
           resizeMode={this.state.screenType}
           onFullScreen={this.state.isFullScreen}
-        //   source={{ uri: '' }}
-          source={require('../lib/Video.mp4')}
-
+          source={{ uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' }}
           style={styles.mediaPlayer}
           volume={10}
         />

@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Entypo';
         {
           id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
           title: "First Video",
-          src:'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-thriller-book-cover-design-template-3675ae3e3ac7ee095fc793ab61b812cc_screen.jpg?ts=1588152105',
+          src:'https://media.npr.org/assets/img/2014/01/07/mindfulness_wide-b20c3525971d5796eba9ad993463fffe8faf2bcb-s800-c85.jpg',
           yop:'2010'
         },
         {
@@ -42,52 +42,57 @@ import Icon from 'react-native-vector-icons/Entypo';
           <View
            style={styles.IView}
           >
-            <TouchableOpacity 
-            onPress ={onPress}
-            >
-            <Image
-            resizeMode='cover'
-            style={styles.CardImage}
-            source={{uri: item.src}}
-            // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-            />
-            </TouchableOpacity>
-            
-
+              <TouchableOpacity 
+              onPress ={onPress}
+              >
+                <Image
+                // resizeMode='cover'
+                style={styles.CardImage}
+                source={{uri: item.src}}
+                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                />
+                <View style={styles.overlay} />
+                <Icon
+                name={'controller-play'}
+                size={80}
+                color={"white"}
+                style={styles.playIcon}
+                />
+              </TouchableOpacity>
+              
             </View>
-
+            
           <View style={styles.contentContianer}>
 
           <View
           style={styles.HView}
           >
-            
-            <View>
-            <Text style={styles.title}>
-              {/* {postTitle} */}
-              {/* THIS IS THE LONG HEADING */}
-              {item.title}
-            </Text>
+            <View style={{ width:wp2dp('75%')}}>
+              <Text style={styles.title}>
+                {/* {postTitle} */}
+                THIS IS THE LONG HEADING
+                {/* {item.title} */}
+              </Text>
             </View>
+
             <View style={{justifyContent:'center'}}>
-            <TouchableOpacity onPress={()=>{console.log('video Menu')}}>
-                <Icon
-                name={'dots-three-vertical'}
-                size={20}
-                />
-            </TouchableOpacity>
-            
+              <TouchableOpacity onPress={()=>{console.log('video Menu')}}>
+                  <Icon
+                  name={'dots-three-vertical'}
+                  size={20}
+                  />
+              </TouchableOpacity>
             </View>
             </View>
 
-            <View style={{justifyContent:'space-between',flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row'}}>
             <View
             style={styles.UploaderView}
             >
-            <Text style={styles.timestamp}>
-              {/* {timestamp} */}
-              ADMIN
-            </Text>
+              <Text style={styles.timestamp}>
+                {/* {timestamp} */}
+                50,000 Views
+              </Text>
             </View>
 
             <View
@@ -97,21 +102,10 @@ import Icon from 'react-native-vector-icons/Entypo';
               {/* {timestamp} */}
               19 Aug 2020
             </Text>
-            </View>
-
-            
-           
+            </View>  
+          </View>
           </View>
 
-          {/* <View
-          style={styles.CView}
-          >
-            <Text style={styles.paragraph}>
-              {content}
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-            </Text>
-          </View> */}
-          </View>
         </View>
       );
 
@@ -148,59 +142,76 @@ import Icon from 'react-native-vector-icons/Entypo';
 
     const styles = StyleSheet.create({
         container:{
-            flex:1
+            flex:1,
+          alignItems: 'center',
+          // backgroundColor:'yellow'
         },
         item: {
             backgroundColor:'white',
             // padding: wp2dp('4%'),
-            // marginVertical: hp2dp('1%'),
+            marginVertical: hp2dp('1%'),
             marginBottom:hp2dp('0.5%'),
-            // marginHorizontal: wp2dp('3%'),
-            width:wp2dp('100%'),
+            // marginHorizontal: wp2dp('2%'),
+            width:wp2dp('95%'),
             elevation:1,
             // borderBottomWidth:0.8
             // borderWidth:0.8
-  
-            // borderRadius:8
+            borderRadius:10,
+            paddingBottom:hp2dp('1%')
           },
           title: {
-            fontSize: 28,
-            fontWeight:'700'
+            fontSize: 24,
+            // fontWeight:'700',
+            // color:'white'
           },
           CardImage: {
-            width: wp2dp('100%'),
+            width: wp2dp('95%'),
             height:hp2dp('35%'),
             // marginBottom:hp2dp('1%'),
             // marginTop:hp2dp('-2.3%'),
-  
+            // borderRadius:10,
             // backgroundColor:'black',
-            // borderTopRightRadius:8,
-            // borderTopLeftRadius:8
+            borderTopRightRadius:10,
+            borderTopLeftRadius:10
+          },
+          overlay: {
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: 'black',
+            opacity: 0.2,
+            borderRadius:10,
+
           },
           paragraph: {
             fontSize: 16
+            
           },
           timestamp:{
             fontSize:14,
-            marginVertical:hp2dp('1%'),
-            color:'grey'
+            // marginVertical:hp2dp('1%'),
+            // color:'white'
           },
           IView:{
-            alignItems: 'center',
+            // alignItems: 'center',
             // borderBottomWidth:1,
-            // backgroundColor:'black',
-            width:wp2dp('100%'),
-            borderBottomWidth:1,
-            borderColor:'rgba(128,128,128,0.2)'
+            // backgroundColor:"rgba(0,0,0,0.8)",
+
+            // width:wp2dp('90%'),
+            // borderBottomWidth:1,
+            // borderColor:'rgba(128,128,128,0.2)'
           },
           HView:{
-            marginTop:hp2dp('-0.5%'),
+            // marginTop:hp2dp('-0.5%'),
             // backgroundColor:'green',
             justifyContent:'space-between',
             flexDirection: 'row'
           },
           TView: {
             // backgroundColor:'red',
+            marginLeft:wp2dp('3%'),
             justifyContent:'flex-start'
           },
           CView:{
@@ -210,9 +221,20 @@ import Icon from 'react-native-vector-icons/Entypo';
           contentContianer: {
             paddingHorizontal:wp2dp('4%'),
             paddingVertical:hp2dp('1%'),
+            // position: 'absolute',
+            // bottom:hp2dp('0.5%'),
+            // width:wp2dp('95%'),
             // backgroundColor:'yellow'
           },
           UploaderView: {
+
+          },
+          playIcon:{
+            position: 'absolute',
+            bottom:hp2dp('12%'),
+            left:wp2dp('40%'),
+            // alignItems:'center'
+
 
           }
 
