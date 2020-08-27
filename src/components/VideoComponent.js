@@ -9,6 +9,10 @@ import {
   } from 'react-native-responsive-screen';
 import Video from 'react-native-video';
 import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
+import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
+import firestore from '@react-native-firebase/firestore';
+
 
 export class VideoComponent extends Component{
     constructor(props) {
@@ -21,8 +25,32 @@ export class VideoComponent extends Component{
           paused: false,
           playerState: PLAYER_STATES.PLAYING,
           screenType: 'contain',
-          
+          video_url: "" 
         };
+        this.items = this.props.items
+      }
+
+      componentDidMount(){
+        // Alert.alert("video: ", this.items.title)
+        this.loadVideoData();
+      }
+
+      loadVideoData(){
+        let self = this;
+        let id = this.items.id;
+        if(id){
+          firestore().collection('publish_video').doc(id).collection("video_details").doc("all_info").get()
+          .then(documentSnapshot => {
+            if(documentSnapshot.exists){
+              let urlVideo = documentSnapshot.data().url_video;
+              if(urlVideo){
+                self.setState({
+                  video_url: urlVideo
+                })
+              }
+            }
+          });
+        }
       }
     
       onSeek = seek => {
@@ -78,10 +106,47 @@ export class VideoComponent extends Component{
       );
       onSeeking = currentTime => this.setState({ currentTime });
 
+  _loadVideoDetails(){
+    if(this.state.video_url !== ""){
+      console.log("url: ", this.state.video_url)
+      return(
+        <View style={{ flex: 1}}>
+            <Video
+              onEnd={this.onEnd}
+              onLoad={this.onLoad}
+              onLoadStart={this.onLoadStart}
+              onProgress={this.onProgress}
+              paused={this.state.paused}
+              ref={videoPlayer => (this.videoPlayer = videoPlayer)}
+              resizeMode={this.state.screenType}
+              onFullScreen={this.state.isFullScreen}
+              source={{ uri: this.state.video_url}}
+              style={styles.mediaPlayer}
+              volume={10}
+            />
+             <MediaControls
+                duration={this.state.duration}
+                isLoading={this.state.isLoading}
+                mainColor="#333"
+                onFullScreen={this.onFullScreen}
+                onPaused={this.onPaused}
+                onReplay={this.onReplay}
+                onSeek={this.onSeek}
+                onSeeking={this.onSeeking}
+                playerState={this.state.playerState}
+                progress={this.state.currentTime}
+                toolbar={this.renderToolbar()}
+              />
+        </View>
+      )
+    }
+  }
+
    render(){
    return(
        <View style={styles.container}>
-           <Video
+       {this._loadVideoDetails()}
+           {/* <Video
           onEnd={this.onEnd}
           onLoad={this.onLoad}
           onLoadStart={this.onLoadStart}
@@ -106,7 +171,7 @@ export class VideoComponent extends Component{
           playerState={this.state.playerState}
           progress={this.state.currentTime}
           toolbar={this.renderToolbar()}
-        />
+        /> */}
            </View>
    )}
 }
