@@ -59,7 +59,7 @@ export class HomeMain extends Component {
         
     }
     componentDidMount(){
-        this.getHlist()
+        // this.getHlist()
       }
       getHlist=()=>{
         firestore()
@@ -93,7 +93,7 @@ export class HomeMain extends Component {
                     {/* <Text style={styles.txtContainer}>
                         This is Home Page...
                     </Text> */}
-                    <View
+                    {/* <View
                     style={styles.Hlist}
                     >
                       <FlatList
@@ -103,7 +103,7 @@ export class HomeMain extends Component {
                       showsHorizontalScrollIndicator={false}
                       // stickyHeaderIndices={[1]}
                       />
-                    </View>
+                    </View> */}
                  
 
                     {/* <View

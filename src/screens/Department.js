@@ -4,6 +4,7 @@ import React,{ Component } from 'react'
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
 ImageBackground, Image, Alert,TouchableOpacity,FlatList,SafeAreaView } from 'react-native' 
 import HomeToolbar from './../components/homecomponents/toolbar/ToolBarHome';
+import DepartmentDetails from './../components/departmentdetailscomponent/MainDepartmentDetails';
 import { CommonActions } from '@react-navigation/native';
 
 export class Department extends Component{
@@ -24,14 +25,16 @@ export class Department extends Component{
             onIconPress={()=>{this.props.navigation.dispatch(CommonActions.goBack());
             }}
            />
-           <Text>
-            {this.route.params.item.name}
-           </Text>
+          <DepartmentDetails 
+            navigation={this.props.navigation}
+            item={this.route.params.item}
+          />
        </View>
    )}
 }
 const styles = StyleSheet.create({
       container:{
-}
+          flex: 1
+    }
 })
 export default Department 
