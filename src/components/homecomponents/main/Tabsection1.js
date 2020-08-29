@@ -5,11 +5,11 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
     ImageBackground, Alert,TouchableOpacity,SafeAreaView, StatusBar, FlatList,Image, ScrollView} from 'react-native';
 import { material } from 'react-native-typography'
 
-    import firestore from '@react-native-firebase/firestore';
-    import {
-      widthPercentageToDP as wp2dp,
-      heightPercentageToDP as hp2dp,
-    } from 'react-native-responsive-screen';   
+import firestore from '@react-native-firebase/firestore';
+import {
+  widthPercentageToDP as wp2dp,
+  heightPercentageToDP as hp2dp,
+} from 'react-native-responsive-screen';   
 
     const Item = ({postTitle,content,image,timestamp}) => (
             <View style={styles.item}>
@@ -57,19 +57,53 @@ import { material } from 'react-native-typography'
               
             </View>
           );
+
+
+    const HItem = ({name,icon,onPress}) => (
+
+      <TouchableOpacity onPress={onPress}>
+            <View 
+        style={styles.Hitem}
+        >
+            <View 
+            style={styles.IView}
+            >
+              <Image
+            //   source={require('../../../lib/order.png')}
+              source={{uri:icon}}
+              style={styles.Himage}
+              />
+            </View>
+    
+            <View
+            style={styles.TView}
+            >
+            <Text
+              style={styles.Htext}
+              >
+                {name}
+              </Text>
+            </View>
+        </View>
+      </TouchableOpacity>
+        
+            
+          );
      
     export default class TabSection1 extends Component {
         constructor(props){
             super(props)
             this.state = {Newlist:[],
-                          // Hlist:[]
+                          Hlist:[]
                           }
+
+            this.navigate = this.props.navigation.navigate
         }
         componentDidMount(){
 
           this.getNews()
           
-          
+          this.getHlist()
           
         }
         getNews=()=>{
@@ -83,6 +117,34 @@ import { material } from 'react-native-typography'
           });
 
         }
+
+        getHlist=()=>{
+          let self = this;
+          firestore()
+          .collection('departmentsName')
+          .get()
+          .then(querySnapshot => {
+            let data = []
+            querySnapshot.forEach(documentSnapshot => {
+              // this.setState({Hlist:[...this.state.Hlist,documentSnapshot.data()]})
+              data.push({
+                id: documentSnapshot.id,
+                icon: documentSnapshot.data().icon,
+                name: documentSnapshot.data().name
+              })
+            });
+
+            self.setState({
+              Hlist: data
+            })
+          });
+  
+        }
+
+        onPressDept=(item)=>{
+          // console.log(item)
+          this.navigate('DeptScreen',{item:item})
+        }
         
 
         render() {
@@ -94,16 +156,38 @@ import { material } from 'react-native-typography'
                 timestamp={item.timestamp.toDate().toLocaleString()}
                 />
               );
+
+              const hrenderItem = ({item}) => (
+             
+                <HItem 
+                name={item.name}
+                icon={item.icon}
+                onPress={() => {this.onPressDept(item)}} 
+                />
+              
+            )
             
             return (
                 <SafeAreaView style={styles.container}>
+                  <View
+                    style={styles.Hlist}
+                    >
+                    <FlatList
+                    horizontal
+                    data={this.state.Hlist}
+                    renderItem={hrenderItem}
+                    showsHorizontalScrollIndicator={false}
+                    // stickyHeaderIndices={[1]}
+                    />
+                  </View>
                 
-                <FlatList
-                  data={this.state.Newlist}
-                  renderItem={renderItem}
-                  keyExtractor={item => item.postId}
-                  showsVerticalScrollIndicator={false}
-                />
+                  <FlatList
+                  style={{flex: 1}}
+                    data={this.state.Newlist}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.postId}
+                    showsVerticalScrollIndicator={false}
+                  />
                 
 
               </SafeAreaView>
@@ -182,7 +266,47 @@ import { material } from 'react-native-typography'
         contentContianer: {
           paddingHorizontal:wp2dp('4%'),
           paddingVertical:hp2dp('2%')
-        }
+        },
+        Hlist:{
+          backgroundColor: 'white',
+          // elevation:2,
+          // marginBottom:hp2dp('1%'),
+          borderWidth:0.2,
+          // height: hp2dp('10%')
+  
+          // borderWidth:1
+        },
+        Hitem:{
+          // backgroundColor: 'white',
+          // padding: wp2dp('3%'),
+          paddingTop:hp2dp('1%'),
+          // paddingHorizontal: wp2dp('2%'),
+          // marginLeft:wp2dp('-20%'),
+          // marginBottom:hp2dp('1%'),
+          paddingBottom:hp2dp('1%'),
+          marginHorizontal: wp2dp('2%'),
+          width:wp2dp('20%'),
+          // marginRight:wp2dp('2%'),
+          // marginLeft:wp2dp('5%'),
+  
+          // marginBottom:hp2dp('1%'),
+          // flex:1,
+          // justifyContent: 'center',
+          // alignItems: 'center',
+          // justifyContent:''
+        },
+        Himage:{
+          width: 50,
+          height: 50,
+          alignSelf: "center"
+          // marginHorizontal:hp2dp('1%')
+          // alignItems: 'center',
+  
+        },
+        Htext:{
+          fontSize:14,
+          textAlign: 'center'
+        },
         
       });
       
