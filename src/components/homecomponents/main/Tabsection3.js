@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
+import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput, Picker,
     ImageBackground, Image, Alert,TouchableOpacity, FlatList,SafeAreaView  } from 'react-native';
     import {
         widthPercentageToDP as wp2dp,
@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import firestore from '@react-native-firebase/firestore';
+import AppColors from '../../../lib/AppColors';
 
       const DATA = [
         {
@@ -119,13 +120,42 @@ import firestore from '@react-native-firebase/firestore';
             super(props)
     
             this.state = {
-              videoData: []
+              videoData: [],
+              allPrimeType: [],
+              selectedFilter: ""
             }
             this.navigate = this.props.navigation.navigate
             // this.options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         }
 
         componentDidMount(){
+          this._loadInitialData();
+          this._loadPrimeType();
+        }
+
+        _loadPrimeType(){
+          let self = this;
+          firestore().collection('prime_type').get()
+          .then(querysnapshot => {
+            let data = [];
+            querysnapshot.forEach(doc => {
+              data.push({
+                id: doc.id,
+                name: doc.data().name
+              })
+            })
+
+            if(data.length > 0){
+              data = [{id: "all", name: "Show All"}, ...data];
+              // console.log("primedata: ", data)
+              self.setState({
+                allPrimeType: data
+              })
+            }
+          });
+        }
+
+        _loadInitialData(){
           let self = this;
           firestore().collection('publish_video').get()
           .then(querysnapshot => {
@@ -147,6 +177,79 @@ import firestore from '@react-native-firebase/firestore';
             })
           })
         }
+
+        _changeFilterVideo(itemValue){
+          // console.log("pickeritem: ", itemValue)
+          let selectedFilterprev = this.state.selectedFilter;
+          if(selectedFilterprev === itemValue){
+            // console.log("pickeritem: ", "itemValue")
+            return;
+          }
+
+          // console.log("pickeritem: ", itemValue)
+          this.setState({
+            selectedFilter: itemValue
+          });
+          if(itemValue === "all"){
+            this. _loadInitialData();
+          }
+          else{
+            this._loadVideoDataWithPrimeType(itemValue);
+          }
+        }
+
+        _loadVideoDataWithPrimeType(itemValue){
+          let self = this;
+          // let primetype = "/prime_type/" + itemValue;
+          let primetype = firestore().collection("prime_type").doc(itemValue);
+          // console.log("ref: ", primetype);
+          firestore().collection('publish_video').where('primeType', '==', primetype).get()
+          .then(querysnapshot => {
+            let data = [];
+            
+            querysnapshot.forEach(doc => {
+              console.log("get filter data: ", doc.id)
+              data.push({
+                id: doc.id,
+                title: doc.data().title,
+                src: doc.data().src_thumbnails,
+                yop: doc.data().yop,
+                publishing_date: doc.data().publishing_date,
+                published_by: doc.data().published_by,
+                total_views: doc.data().total_views
+              })
+            })
+
+            self.setState({
+              videoData: data
+            })
+          })
+        }
+
+        showPrimeTypePicker(){
+          if(this.state.allPrimeType.length > 0){
+            return(
+              <View style={styles.topPanel}>
+                <Text style={styles.selectpickertxt}>
+                    Filter Your Video
+                </Text>
+                <Picker
+                  selectedValue={this.state.selectedFilter}
+                  style={{ height: 50, width: 150, color: AppColors.primary }}
+                  onValueChange={(itemValue, itemIndex) => this._changeFilterVideo(itemValue)}
+                >
+                {this.state.allPrimeType !== "" ? (
+                      this.state.allPrimeType.map(allPrimeType => {
+                          return <Picker.Item label={allPrimeType.name} value={allPrimeType.id} />;
+                      })
+                  ) : (
+                      <Picker.Item label="Loading..." value="0" />
+                  )}
+                </Picker>
+              </View>
+            )
+          }
+        }
     
         render() {
             const renderItem = ({ item }) => {    
@@ -160,12 +263,14 @@ import firestore from '@react-native-firebase/firestore';
 
             return (
                     <SafeAreaView style={styles.container}>
-                        <FlatList
-                       data={this.state.videoData}
-                       renderItem={renderItem}
-                       keyExtractor={(item) => item.id}
-                       showsVerticalScrollIndicator={false}
-                        />
+                      {this.showPrimeTypePicker()}
+                      <FlatList
+                        style={{ flex: 1}}
+                        data={this.state.videoData}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        showsVerticalScrollIndicator={false}
+                      />
                     </SafeAreaView>
             )
         }    
@@ -265,8 +370,16 @@ import firestore from '@react-native-firebase/firestore';
             bottom:hp2dp('12%'),
             left:wp2dp('40%'),
             // alignItems:'center'
-
-
+          },
+          topPanel: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: 'center',
+            margin: 6,
+          },
+          selectpickertxt: {
+            fontSize: 16,
+            paddingHorizontal: 6,
           }
 
     })
