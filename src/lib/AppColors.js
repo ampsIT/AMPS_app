@@ -8,8 +8,8 @@ export default {
 
     accent: "#B3191D",
 
-    white: "#fff"
-
-    
+    white: "#fff",
+    lightWhite: "#eee",
+    deepblue: "#19025e"
 }
 
