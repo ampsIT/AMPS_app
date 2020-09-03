@@ -10,6 +10,7 @@ export default {
 
     white: "#fff",
     lightWhite: "#eee",
+    lightWhitemore: "#ccc",
     deepblue: "#19025e"
 }
 

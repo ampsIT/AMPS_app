@@ -14,6 +14,7 @@ import {Register} from './screens/Register'
 import {NavigationDrawer} from '../src/components/homecomponents/main/NavigationDrawer'
 import {Department} from './screens/Department'
 import {VideoDetails} from './screens/VideoDetails'
+import {NewsDetails} from './screens/NewsDetails'
 import { CardStyleInterpolators } from '@react-navigation/stack';
 
 // const Authnavigator = createStackNavigator({
@@ -77,6 +78,7 @@ const HomeScreen = () =>(
             <Homenavigator.Screen name='homeScreen' component={Home}/>
             <Homenavigator.Screen name='DeptScreen' component={Department}/>
             <Homenavigator.Screen name='VideoScreen' component={VideoDetails}/>
+            <Homenavigator.Screen name='NewsScreen' component={NewsDetails}/>
     </Homenavigator.Navigator>
 )
 const Authnavigator = createStackNavigator();

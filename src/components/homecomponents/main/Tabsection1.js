@@ -10,51 +10,40 @@ import {
   widthPercentageToDP as wp2dp,
   heightPercentageToDP as hp2dp,
 } from 'react-native-responsive-screen';   
+import AppColors from '../../../lib/AppColors';
 
     const Item = ({postTitle,content,image,timestamp}) => (
             <View style={styles.item}>
-              <View
-               style={styles.IView}
-              >
-                <Image
-                resizeMode='cover'
-                style={styles.CardImage}
-                // source={{uri: image}}
-                source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                />
-                </View>
-              <View style={styles.contentContianer}>
-              <View
-              style={styles.HView}
-              >
+                <View style={styles.HView}>
                 <Text 
-                // style={styles.title}
-                style={material.headline}
-                >
-                  {postTitle}
-                  {/* THIS IS THE LONG HEADING */}
-                </Text>
+                  // style={styles.title}
+                  style={material.headline}
+                  >
+                    {postTitle}
+                    {/* THIS IS THE LONG HEADING */}
+                  </Text>
               </View>
-              <View
-              style={styles.TView}
-              >
+                <View
+                style={styles.CView}
+                >
+                  <Text style={styles.paragraph}>
+                    {content}
+                    {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  */}
+                  </Text>
+              </View>
+                <View
+                style={styles.TView22}
+                >
                 <Text style={styles.timestamp}>
                   {timestamp}
                 </Text>
               </View>
-
-              
-
-              <View
-              style={styles.CView}
-              >
-                <Text style={styles.paragraph}>
-                  {content}
-                  {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  */}
-                </Text>
-              </View>
-              </View>
-              
+              <Image
+                resizeMode='cover'
+                style={styles.CardImage}
+                source={{uri: image}}
+                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                />
             </View>
           );
 
@@ -107,13 +96,26 @@ import {
           
         }
         getNews=()=>{
+          let self = this;
           firestore()
-          .collection('news')
+          .collection('broadcast_news')
           .get()
           .then(querySnapshot => {
+            data = [];
             querySnapshot.forEach(documentSnapshot => {
-              this.setState({Newlist:[...this.state.Newlist,documentSnapshot.data()]})
+              // this.setState({Newlist:[...this.state.Newlist,documentSnapshot.data()]})
+              data.push({
+                id: documentSnapshot.id,
+                postTitle: documentSnapshot.data().news_title,
+                content: documentSnapshot.data().news_short_des,
+                images: documentSnapshot.data().news_img_url,
+                timestamp: documentSnapshot.data().publish_date
+              })
             });
+
+            self.setState({
+              Newlist: data
+            })
           });
 
         }
@@ -145,6 +147,10 @@ import {
           // console.log(item)
           this.navigate('DeptScreen',{item:item})
         }
+
+        onPressNews = (item) => {
+          this.navigate('NewsScreen',{item:item})
+        }
         
 
         render() {
@@ -154,6 +160,7 @@ import {
                 content={item.content}
                 image={item.images}
                 timestamp={item.timestamp.toDate().toLocaleString()}
+                onPress={() => {this.onPressNews(item)}}
                 />
               );
 
@@ -198,6 +205,7 @@ import {
     const styles = StyleSheet.create({
         container: {
           flex: 1,
+          backgroundColor: AppColors.lightWhitemore
           // marginTop: StatusBar.currentHeight || 0,
           // marginTop: HW'',
           // marginTop:hp2dp('0.5%')
@@ -207,11 +215,12 @@ import {
           backgroundColor:'white',
           // padding: wp2dp('4%'),
           // marginVertical: hp2dp('1%'),
-          marginTop:hp2dp('1%'),
-          marginBottom:hp2dp('0.5%'),
-          marginHorizontal: wp2dp('1%'),
+          marginTop: 10,
+          marginBottom: 8,
+          // marginHorizontal: wp2dp('2%'),
           width:wp2dp('98%'),
-          elevation:1,
+          elevation:5,
+          alignSelf: "center",
           // alignItems: 'center'
           // borderBottomWidth:0.8
           // borderWidth:0.8
@@ -229,8 +238,8 @@ import {
           // marginTop:hp2dp('-2.3%'),
 
           // backgroundColor:'black',
-          borderTopRightRadius:5,
-          borderTopLeftRadius:5
+          borderBottomRightRadius:5,
+          borderBottomLeftRadius:5
         },
         paragraph: {
           fontSize: 14,
@@ -249,7 +258,10 @@ import {
           borderColor:'rgba(128,128,128,0.2)'
         },
         HView:{
-          marginTop:hp2dp('-0.5%'),
+          marginBottom: 3,
+          marginEnd: 10,
+          marginLeft: 6,
+          marginTop: 12,
           // backgroundColor:'red',
           // alignItems: 'flex-end',
           alignItems:'flex-start'
@@ -258,9 +270,16 @@ import {
           // backgroundColor:'yellow',
           marginTop:hp2dp('0.5%'),
         },
+        TView22: {
+          marginBottom: 12,
+          marginEnd: 10,
+          marginLeft: 6,
+        },
         CView:{
           // backgroundColor:'blue',
-          marginTop: hp2dp('2%'),
+          marginBottom: 3,
+          marginEnd: 10,
+          marginLeft: 6,
           // marginVertical: hp2dp('0.5%'),
         },
         contentContianer: {
