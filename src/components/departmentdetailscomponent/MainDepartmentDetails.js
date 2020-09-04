@@ -18,12 +18,21 @@ import { CommonActions } from '@react-navigation/native';
 import AppColors from './../../lib/AppColors';
 import backend from './../../backend/Backend';
 import { ScrollView } from 'react-native-gesture-handler';
+import Collapsible from 'react-native-collapsible';
 
 export class DepartmentDetails extends Component{
     constructor(props){
        super(props)
         this.state = {
             allImgUrl: [],
+            collapseAboutUs: true,
+            collapseVisionMision: true,
+            collapsePrinciples: true,
+            collapseBackground: true,
+            collapseServiceSol: true,
+            collapseArticlesreserch: true,
+            collapseOldProjects: true,
+            collapseLiveProjects: true
             // images: [
             //     "https://source.unsplash.com/1024x768/?nature",
             //     "https://source.unsplash.com/1024x768/?water",
@@ -67,90 +76,184 @@ export class DepartmentDetails extends Component{
             )
         }
     }
-   
-    render(){
-        return(
-            <View style={styles.container}>
-                <ScrollView style={{ flex:1, paddingBottom: 16, }}>
-                    <View style={{ flex:1 }}>
-                        {this._showImage()}
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                                Name And Logo:
-                            </Text>
-                        </View>
-                        <View style={styles.infoCardView}>
-                            <View style={styles.infoCardinnermain}>
-                                <Image
-                                    resizeMode='cover'
-                                    style={styles.cardImage}
-                                    source={{uri: this.item.icon}}
-                                    // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                                    />
 
-                                <Text style={styles.cardTitle}>
-                                    {this.item.name}
-                                </Text>
-                            </View>
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                                About Us:
+    pressAboutUs(){
+        let val = this.state.collapseAboutUs;
+        this.setState({
+            collapseAboutUs: !val
+        })
+    }
+
+    pressVisionMision(){
+        let val = this.state.collapseVisionMision;
+        this.setState({
+            collapseVisionMision: !val
+        })
+    }
+
+    pressPrinciples(){
+        let val = this.state.collapsePrinciples;
+        this.setState({
+            collapsePrinciples: !val
+        })
+    }
+
+    pressBackground(){
+        let val = this.state.collapseBackground;
+        this.setState({
+            collapseBackground: !val
+        })
+    }
+
+    pressServiceSol(){
+        let val = this.state.collapseServiceSol;
+        this.setState({
+            collapseServiceSol: !val
+        })
+    }
+
+    pressArticlesReserch(){
+        let val = this.state.collapseArticlesreserch;
+        this.setState({
+            collapseArticlesreserch: !val
+        })
+    }
+
+    pressOldProjects(){
+        let val = this.state.collapseOldProjects;
+        this.setState({
+            collapseOldProjects: !val
+        })
+    }
+
+    pressLiveProjects(){
+        let val = this.state.collapseLiveProjects;
+        this.setState({
+            collapseLiveProjects: !val
+        })
+    }
+
+    _showAboutUs(){
+        return(
+           <View>
+                <TouchableOpacity style={styles.headerCardView1}
+                onPress={() => this.pressAboutUs()}>
+                    <Text style={styles.heading}>
+                        About Us:
+                    </Text>
+                    <View>
+                        {
+                        (!this.state.collapseAboutUs)?
+                        <Image source={require('./../../lib/up.png')}/>:
+                        <Image source={require('./../../lib/down.png')}/>
+                        }
+                    </View>
+                </TouchableOpacity>
+                <Collapsible collapsed={this.state.collapseAboutUs}>
+                    <View style={styles.infoView}>
+                        {/* <View style={styles.infoCardinnermain}> */}
+                            <Text style={styles.cardtxt}>
+                            The philosophy of Ananda Marga is a synthetic outlook, recognizing a theistic singularity or 'Supreme Consciousness',[15] which is claimed to be both transcendental and manifested in all.
+                            It covers both the spiritual and the social combining the two in a unique synthesis of universal vision.[note 13] To this end Ananda Marga suggests a practical, rational, and systematic way 
+                            of life for the balanced development of all human potentialities: physical, psychic and spiritual. This system incorporate practices that range from hygiene and diet, yoga postures, to a scientific 
+                            technique of meditation based on moral rules and directed to the inner fulfillment.
                             </Text>
-                        </View>
-                        <View style={styles.infoCardView}>
-                            {/* <View style={styles.infoCardinnermain}> */}
-                                <Text style={styles.cardtxt}>
-                                The philosophy of Ananda Marga is a synthetic outlook, recognizing a theistic singularity or 'Supreme Consciousness',[15] which is claimed to be both transcendental and manifested in all.
-                                It covers both the spiritual and the social combining the two in a unique synthesis of universal vision.[note 13] To this end Ananda Marga suggests a practical, rational, and systematic way 
-                                of life for the balanced development of all human potentialities: physical, psychic and spiritual. This system incorporate practices that range from hygiene and diet, yoga postures, to a scientific 
-                                technique of meditation based on moral rules and directed to the inner fulfillment.
-                                </Text>
-                            {/* </View> */}
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                                Vision & Mission:
-                            </Text>
-                        </View>
-                        <View style={styles.infoCardView}>
-                            {/* <View style={styles.infoCardinnermain}> */}
-                                <Text style={styles.cardtxt}>
-                                In the tantric tradition of Ananda Marga the spiritual aspirant 
-                                (sadhaka) practices sadhana. Sadhana (a Sanskrit word) signifies the effort 
-                                through which a person becomes completely realized. In Tantra the spiritual master, 
-                                the guru,[note 2] plays a special role. The guru guides and leads students on the spiritual path. 
-                                The aspirant learns meditation by a qualified acarya. An acarya is most commonly a monk or nun, 
-                                but in the Ananda Marga tradition there are also "family acaryas". In the initiation the aspirant 
-                                makes a commitment to practice meditation and to live in harmony with the universal balance, 
-                                and is then taught the technique itself. The aspirant is then required to keep the individual 
-                                lessons personal. In addition, he also taught Kapalika meditation to many sanyásins.
-                                </Text>
-                            {/* </View> */}
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                                Principles:
-                            </Text>
-                        </View>
-                        <View style={styles.infoCardView}>
-                            {/* <View style={styles.infoCardinnermain}> */}
-                                <Text style={styles.cardtxt}>
+                        {/* </View> */}
+                    </View>
+                </Collapsible>
+           </View>
+        )
+    }
+
+    _showVisionMision(){
+        return(
+            <View>
+                 <TouchableOpacity style={styles.headerCardView}
+                 onPress={() => this.pressVisionMision()}>
+                     <Text style={styles.heading}>
+                     Vision & Mission:
+                     </Text>
+                     <View>
+                         {
+                         (!this.state.collapseVisionMision)?
+                         <Image source={require('./../../lib/up.png')}/>:
+                         <Image source={require('./../../lib/down.png')}/>
+                         }
+                     </View>
+                 </TouchableOpacity>
+                 <Collapsible collapsed={this.state.collapseVisionMision}>
+                     <View style={styles.infoView}>
+                         {/* <View style={styles.infoCardinnermain}> */}
+                             <Text style={styles.cardtxt}>
+                             In the tantric tradition of Ananda Marga the spiritual aspirant 
+                            (sadhaka) practices sadhana. Sadhana (a Sanskrit word) signifies the effort 
+                            through which a person becomes completely realized. In Tantra the spiritual master, 
+                            the guru,[note 2] plays a special role. The guru guides and leads students on the spiritual path. 
+                            The aspirant learns meditation by a qualified acarya. An acarya is most commonly a monk or nun, 
+                            but in the Ananda Marga tradition there are also "family acaryas". In the initiation the aspirant 
+                            makes a commitment to practice meditation and to live in harmony with the universal balance, 
+                            and is then taught the technique itself. The aspirant is then required to keep the individual 
+                            lessons personal. In addition, he also taught Kapalika meditation to many sanyásins.
+                             </Text>
+                         {/* </View> */}
+                     </View>
+                 </Collapsible>
+            </View>
+         )
+    }
+
+    _showPrinciples(){
+        return(
+            <View>
+                 <TouchableOpacity style={styles.headerCardView}
+                 onPress={() => this.pressPrinciples()}>
+                     <Text style={styles.heading}>
+                     Principles:
+                     </Text>
+                     <View>
+                         {
+                         (!this.state.collapsePrinciples)?
+                         <Image source={require('./../../lib/up.png')}/>:
+                         <Image source={require('./../../lib/down.png')}/>
+                         }
+                     </View>
+                 </TouchableOpacity>
+                 <Collapsible collapsed={this.state.collapsePrinciples}>
+                     <View style={styles.infoView}>
+                         {/* <View style={styles.infoCardinnermain}> */}
+                             <Text style={styles.cardtxt}>
                                 His system of yoga can be termed as Rájadhirája Yoga, Tantra Yoga, 
                                 or simply Ánanda Márga Yoga. The basic Ánanda Márga meditation system is 
                                 called Sahaja Yoga ('simple yoga'). The sahaja system consists of 6 meditation 
                                 techniques or lessons taught one by one, on a personal basis
-                                </Text>
-                            {/* </View> */}
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                                Background:
-                            </Text>
-                        </View>
-                        <View style={styles.infoCardView}>
-                            {/* <View style={styles.infoCardinnermain}> */}
-                                <Text style={styles.cardtxt}>
+                             </Text>
+                         {/* </View> */}
+                     </View>
+                 </Collapsible>
+            </View>
+         )
+    }
+
+    _showBackground(){
+        return(
+            <View>
+                 <TouchableOpacity style={styles.headerCardView}
+                 onPress={() => this.pressBackground()}>
+                     <Text style={styles.heading}>
+                     Background:
+                     </Text>
+                     <View>
+                         {
+                         (!this.state.collapseBackground)?
+                         <Image source={require('./../../lib/up.png')}/>:
+                         <Image source={require('./../../lib/down.png')}/>
+                         }
+                     </View>
+                 </TouchableOpacity>
+                 <Collapsible collapsed={this.state.collapseBackground}>
+                     <View style={styles.infoView}>
+                         {/* <View style={styles.infoCardinnermain}> */}
+                             <Text style={styles.cardtxt}>
                                 During the 1960s, the organisation expanded rapidly in India, 
                                 sending Acharyas as missionaries to other continents. Ananda Marga's 
                                 popularity in India put it in direct confrontation with the Communist 
@@ -161,17 +264,34 @@ export class DepartmentDetails extends Component{
                                 In 1971, Sarkar was imprisoned in India for the alleged murder of Ananda 
                                 Marga members. In February 1973, Sarkar was poisoned in prison, allegedly 
                                 by the jail doctor on orders from the higher echelons of government.
-                                </Text>
-                            {/* </View> */}
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                                Services and Solutions:
-                            </Text>
-                        </View>
-                        <View style={styles.infoCardView}>
-                            {/* <View style={styles.infoCardinnermain}> */}
-                                <Text style={styles.cardtxt}>
+                             </Text>
+                         {/* </View> */}
+                     </View>
+                 </Collapsible>
+            </View>
+         )
+    }
+
+    _showServiceAndSolution(){
+        return(
+            <View>
+                 <TouchableOpacity style={styles.headerCardView}
+                 onPress={() => this.pressServiceSol()}>
+                     <Text style={styles.heading}>
+                     Services and Solutions:
+                     </Text>
+                     <View>
+                         {
+                         (!this.state.collapseServiceSol)?
+                         <Image source={require('./../../lib/up.png')}/>:
+                         <Image source={require('./../../lib/down.png')}/>
+                         }
+                     </View>
+                 </TouchableOpacity>
+                 <Collapsible collapsed={this.state.collapseServiceSol}>
+                     <View style={styles.infoView}>
+                         {/* <View style={styles.infoCardinnermain}> */}
+                             <Text style={styles.cardtxt}>
                                 * Diet and fasting: Lacto-vegetarian diet of Ananda Marga avoids meat, fish, 
                                 eggs and some substances which are 
                                 claimed to have a negative effect on the mind, particularly if "mucus-producing."
@@ -183,103 +303,173 @@ export class DepartmentDetails extends Component{
                                 {"\n"}{"\n"} * Tandava or Tāṇḍava: is a vigorous dance.[note 10] The name tandava is derived 
                                 from the Sanskrit word tandu, which means 'to jump'. This dance is only performed by male 
                                 followers in Ananda Marga.
-                                </Text>
-                            {/* </View> */}
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                            Articles and Research:
-                            </Text>
-                        </View>
-                        <View style={styles.infoCardView}>
-                            {/* <View style={styles.infoCardinnermain}> */}
-                                <Text style={styles.cardtxt}>
+                             </Text>
+                         {/* </View> */}
+                     </View>
+                 </Collapsible>
+            </View>
+         )
+    }
+
+    _showArticlesReserch(){
+        return(
+            <View>
+                 <TouchableOpacity style={styles.headerCardView}
+                 onPress={() => this.pressArticlesReserch()}>
+                     <Text style={styles.heading}>
+                     Articles and Research:
+                     </Text>
+                     <View>
+                         {
+                         (!this.state.collapseArticlesreserch)?
+                         <Image source={require('./../../lib/up.png')}/>:
+                         <Image source={require('./../../lib/down.png')}/>
+                         }
+                     </View>
+                 </TouchableOpacity>
+                 <Collapsible collapsed={this.state.collapseArticlesreserch}>
+                     <View style={styles.infoView}>
+                         {/* <View style={styles.infoCardinnermain}> */}
+                             <Text style={styles.cardtxt}>
                                 The spiritual philosophy of Ananda Marga covers a vast range 
                                 of topics and can be learned from P.R. Sarkar's publications. 
                                 Ananda Marga philosophy recognizes that the universe is the creation 
                                 of the mental thought waves of the 'Supreme consciousness'.  
-                                </Text>
-                            {/* </View> */}
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                                Vision & Mission:
+                             </Text>
+                         {/* </View> */}
+                     </View>
+                 </Collapsible>
+            </View>
+         )
+    }
+
+    _showOldProjects(){
+        return(
+            <View>
+                 <TouchableOpacity style={styles.headerCardView}
+                 onPress={() => this.pressOldProjects()}>
+                     <Text style={styles.heading}>
+                     Old Projects:
+                     </Text>
+                     <View>
+                         {
+                         (!this.state.collapseOldProjects)?
+                         <Image source={require('./../../lib/up.png')}/>:
+                         <Image source={require('./../../lib/down.png')}/>
+                         }
+                     </View>
+                 </TouchableOpacity>
+                 <Collapsible collapsed={this.state.collapseOldProjects}>
+                     <View style={styles.infoView}>
+                        <View style={styles.infoCardinnermain2}>
+                            <Image
+                                resizeMode='cover'
+                                style={styles.cardImage}
+                                source={{uri: 'https://crimsondawn.net/wp-content/uploads/2018/03/yogaclublogo.jpg'}}
+                                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                                />
+
+                            <Text style={styles.cardTitle}>
+                                Old Project 1
                             </Text>
                         </View>
-                        <View style={styles.infoCardView}>
-                            <View style={styles.infoCardinnermain2}>
-                                <Image
-                                    resizeMode='cover'
-                                    style={styles.cardImage}
-                                    source={{uri: 'https://crimsondawn.net/wp-content/uploads/2018/03/yogaclublogo.jpg'}}
-                                    // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                                    />
+                        <View style={styles.infoCardinnermain2}>
+                            <Image
+                                resizeMode='cover'
+                                style={styles.cardImage}
+                                source={{uri: 'https://sarkarverse.org/images/thumb/c/c7/Am_image.png/300px-Am_image.png'}}
+                                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                                />
 
-                                <Text style={styles.cardTitle}>
-                                    Old Project 1
-                                </Text>
-                            </View>
-                            <View style={styles.infoCardinnermain2}>
-                                <Image
-                                    resizeMode='cover'
-                                    style={styles.cardImage}
-                                    source={{uri: 'https://sarkarverse.org/images/thumb/c/c7/Am_image.png/300px-Am_image.png'}}
-                                    // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                                    />
-
-                                <Text style={styles.cardTitle}>
-                                    Old Project 2
-                                </Text>
-                            </View>
-                            <View style={styles.infoCardinnermain2}>
-                                <Image
-                                    resizeMode='cover'
-                                    style={styles.cardImage}
-                                    source={{uri: 'https://www.edarabia.com/wp-content/uploads/2018/07/ananda-marga-river-school-queensland-australia.jpg'}}
-                                    // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                                    />
-
-                                <Text style={styles.cardTitle}>
-                                    Old Project 3
-                                </Text>
-                            </View>
-                        </View>
-                        <View style={styles.headerCardView}>
-                            <Text style={styles.heading}>
-                            Live projects Details:
+                            <Text style={styles.cardTitle}>
+                                Old Project 2
                             </Text>
                         </View>
-                        <View style={styles.infoCardView}>
-                            <View style={styles.infoCardinnermain2}>
-                                <Image
-                                    resizeMode='cover'
-                                    style={styles.cardImage2}
-                                    source={{uri: 'https://i.pinimg.com/236x/d9/89/12/d989120065475b965e940d83fee8eb7e.jpg'}}
-                                    // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                                    />
-                                 <Image
-                                    resizeMode='cover'
-                                    style={styles.cardImage2}
-                                    source={{uri: 'https://c.yell.com/t_bigRect,f_auto/141c1b11-ba3d-4751-a2a0-e25026344c66_image_png.png'}}
-                                    // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                                    />
-                                 <Image
-                                    resizeMode='cover'
-                                    style={styles.cardImage2}
-                                    source={{uri: 'https://i.pinimg.com/280x280_RS/be/24/26/be2426c896ab05a60f5bd6e5d0d3022b.jpg'}}
-                                    // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                                    />
-                            </View>
-                            <Text style={styles.cardtxt}>
-                            according to the Ananda Marga system "Education is for Liberation." 
-                            Education means the simultaneous development in the physical, mental and spiritual 
-                            realms of human existence. By this, dormant human potentialities will be awakened and 
-                            put to proper use. Sarkar said that real education leads to a pervasive sense of love and 
-                            compassion for all creation; in the Ananda Marga's education system, special emphasis is given 
-                            to moral education and the inculcation of idealism together with a "psycho-pedagogical approach" 
-                            and a blending of occidental extroversional science and oriental introversional philosophy.    
+                        <View style={styles.infoCardinnermain2}>
+                            <Image
+                                resizeMode='cover'
+                                style={styles.cardImage}
+                                source={{uri: 'https://www.edarabia.com/wp-content/uploads/2018/07/ananda-marga-river-school-queensland-australia.jpg'}}
+                                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                                />
+
+                            <Text style={styles.cardTitle}>
+                                Old Project 3
                             </Text>
                         </View>
+                     </View>
+                 </Collapsible>
+            </View>
+         )
+    }
+
+    _showLiveProjects(){
+        return(
+            <View>
+                 <TouchableOpacity style={styles.headerCardView}
+                 onPress={() => this.pressLiveProjects()}>
+                     <Text style={styles.heading}>
+                     Live projects Details:
+                     </Text>
+                     <View>
+                         {
+                         (!this.state.collapseLiveProjects)?
+                         <Image source={require('./../../lib/up.png')}/>:
+                         <Image source={require('./../../lib/down.png')}/>
+                         }
+                     </View>
+                 </TouchableOpacity>
+                 <Collapsible collapsed={this.state.collapseLiveProjects}>
+                     <View style={styles.infoView}>
+                        <View style={styles.infoCardinnermain2}>
+                            <Image
+                                resizeMode='cover'
+                                style={styles.cardImage2}
+                                source={{uri: 'https://i.pinimg.com/236x/d9/89/12/d989120065475b965e940d83fee8eb7e.jpg'}}
+                                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                                />
+                            <Image
+                                resizeMode='cover'
+                                style={styles.cardImage2}
+                                source={{uri: 'https://c.yell.com/t_bigRect,f_auto/141c1b11-ba3d-4751-a2a0-e25026344c66_image_png.png'}}
+                                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                                />
+                            <Image
+                                resizeMode='cover'
+                                style={styles.cardImage2}
+                                source={{uri: 'https://i.pinimg.com/280x280_RS/be/24/26/be2426c896ab05a60f5bd6e5d0d3022b.jpg'}}
+                                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+                                />
+                        </View>
+                        <Text style={styles.cardtxt}>
+                        according to the Ananda Marga system "Education is for Liberation." 
+                        Education means the simultaneous development in the physical, mental and spiritual 
+                        realms of human existence. By this, dormant human potentialities will be awakened and 
+                        put to proper use. Sarkar said that real education leads to a pervasive sense of love and 
+                        compassion for all creation; in the Ananda Marga's education system, special emphasis is given 
+                        to moral education and the inculcation of idealism together with a "psycho-pedagogical approach" 
+                        and a blending of occidental extroversional science and oriental introversional philosophy.    
+                        </Text>
+                     </View>
+                 </Collapsible>
+            </View>
+         )
+    }
+   
+    render(){
+        return(
+            <View style={styles.container}>
+                <ScrollView style={{ flex:1, paddingBottom: 16, }}>
+                    <View style={{ flex:1 }}>
+                        {this._showImage()}
+                        {this._showAboutUs()}
+                        {this._showVisionMision()}
+                        {this._showPrinciples()}
+                        {this._showBackground()}
+                        {this._showServiceAndSolution()}
+                        {this._showArticlesReserch()}
+                        {this._showOldProjects()}
+                        {this._showLiveProjects()}
                     </View>
                 </ScrollView>
             </View>
@@ -292,12 +482,29 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.lightWhite,
     },
     headerCardView: {
-        paddingLeft: 8,
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingTop: 6,
+        paddingRight: 16,
+        paddingBottom: 6,
         flexDirection:'row',
         // backgroundColor:'blue',
-        alignItems:'center'
+        alignItems:'center',
+        justifyContent: 'space-between',
+        marginVertical: 4,
+        backgroundColor: AppColors.white
+    },
+    headerCardView1: {
+        paddingLeft: 10,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingRight: 16,
+        flexDirection:'row',
+        // backgroundColor:'blue',
+        alignItems:'center',
+        justifyContent: 'space-between',
+        marginTop: 12,
+        marginBottom: 4,
+        backgroundColor: AppColors.white
     },
     heading: {
         fontSize:20,
@@ -314,6 +521,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         elevation: 5,
         zIndex: 5
+    },
+    infoView: {
+        paddingLeft: 6,
+        paddingTop: 5,
+        paddingBottom: 5,
+    },
+    infoView1: {
+
     },
     infoCardinnermain: {
         flex: 1,
