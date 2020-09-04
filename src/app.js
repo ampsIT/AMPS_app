@@ -15,7 +15,8 @@ import {NavigationDrawer} from '../src/components/homecomponents/main/Navigation
 import {Department} from './screens/Department'
 import {VideoDetails} from './screens/VideoDetails'
 import { CardStyleInterpolators } from '@react-navigation/stack';
-
+import AppColors from './lib/AppColors';
+import AmpsNavigation from './screens/AmpsNavigation.js'
 // const Authnavigator = createStackNavigator({
 //     Login:{screen: Login},
 //     Register:{screen: Register},
@@ -75,8 +76,6 @@ const HomeScreen = () =>(
     
         >
             <Homenavigator.Screen name='homeScreen' component={Home}/>
-            <Homenavigator.Screen name='DeptScreen' component={Department}/>
-            <Homenavigator.Screen name='VideoScreen' component={VideoDetails}/>
     </Homenavigator.Navigator>
 )
 const Authnavigator = createStackNavigator();
@@ -97,13 +96,21 @@ const DrawerNavigator = () => (
     <Drawer.Navigator 
     initialRouteName='Home' 
     screenOptions={{
-        headerShown: false
+        headerShown: false,
       }}
     drawerContent={(props) => (<NavigationDrawer
                             {...props}
+                            
                         // navigation={this.props.navigation}
-                        />)}>
+                        />)}
+                        drawerContentOptions={{
+                            activeTintColor: '#e91e63',
+                            inactiveTintColor:AppColors.primary
+                          }}   
+
+    >
        <Drawer.Screen name="Home" component={HomeScreen} />
+
     </Drawer.Navigator>
 )
 
@@ -111,13 +118,16 @@ const Appnavigator = createStackNavigator();
 const AppContainer = () =>(
 <Appnavigator.Navigator
 screenOptions={{
-    headerShown: false
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
 }}
     >
-        <Appnavigator.Screen name='Auth' component={Auth}/>
+        {/* <Appnavigator.Screen name='Auth' component={Auth}/> */}
         {/* <Appnavigator.Screen name='Drawer' component={HomeScreen}/> */}
         <Appnavigator.Screen name ='Drawer' component={DrawerNavigator}/>
-
+        <Appnavigator.Screen name ='Navigation' component={AmpsNavigation}/>
+        <Appnavigator.Screen name='DeptScreen' component={Department}/>
+        <Appnavigator.Screen name='VideoScreen' component={VideoDetails}/>
 </Appnavigator.Navigator>
 )
 

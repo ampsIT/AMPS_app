@@ -115,6 +115,7 @@ export class HomeMain extends Component {
                     activeColor={AppColors.primary}
                     inactiveColor={"grey"}
                     barStyle={{ backgroundColor: "white" }}
+                    backBehavior={"none"}
                     >
                     <Tab.Screen
                         name="Section1"
