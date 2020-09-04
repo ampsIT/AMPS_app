@@ -82,6 +82,8 @@ export default class Tabsection4 extends Component{
                 {title:'meditation', data: []}],
             
         }
+
+        this.navigate = this.props.navigation.navigate
     }
 
     componentDidMount(){

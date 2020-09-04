@@ -11,8 +11,8 @@ import {
     heightPercentageToDP as hp2dp,
   } from 'react-native-responsive-screen';   
 
-import AppColors from './../../../../lib/AppColors';
-import backend from './../../../../backend/Backend';
+  import AppColors from './../../lib/AppColors';
+  import backend from './../../backend/Backend';
 
 export class PublicationMain extends Component{
     constructor(props){

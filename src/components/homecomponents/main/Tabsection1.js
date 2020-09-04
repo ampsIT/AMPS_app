@@ -12,7 +12,8 @@ import {
 } from 'react-native-responsive-screen';   
 import AppColors from '../../../lib/AppColors';
 
-    const Item = ({postTitle,content,image,timestamp}) => (
+    const Item = ({postTitle,content,image,timestamp, onPress}) => (
+      <TouchableOpacity onPress={onPress}>
             <View style={styles.item}>
                 <View style={styles.HView}>
                 <Text 
@@ -45,6 +46,7 @@ import AppColors from '../../../lib/AppColors';
                 // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
                 />
             </View>
+        </TouchableOpacity>
           );
 
 
@@ -148,7 +150,8 @@ import AppColors from '../../../lib/AppColors';
           this.navigate('DeptScreen',{item:item})
         }
 
-        onPressNews = (item) => {
+        onPressNews=(item)=>{
+          // console.log("newspress")
           this.navigate('NewsScreen',{item:item})
         }
         
@@ -189,7 +192,7 @@ import AppColors from '../../../lib/AppColors';
                   </View>
                 
                   <FlatList
-                  style={{flex: 1}}
+                    style={{flex: 1}}
                     data={this.state.Newlist}
                     renderItem={renderItem}
                     keyExtractor={item => item.postId}

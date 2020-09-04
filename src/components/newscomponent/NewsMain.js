@@ -11,8 +11,10 @@ import {
     heightPercentageToDP as hp2dp,
   } from 'react-native-responsive-screen';   
 
-import AppColors from './../../../../lib/AppColors';
-import backend from './../../../../backend/Backend';
+import { material } from 'react-native-typography'
+
+import AppColors from './../../lib/AppColors';
+import backend from './../../backend/Backend';
 
 import Video from 'react-native-video';
 import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
@@ -20,6 +22,7 @@ import { SliderBox } from "react-native-image-slider-box";
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import firestore from '@react-native-firebase/firestore';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export class NewsMain extends Component{
     constructor(props){
@@ -188,6 +191,32 @@ export class NewsMain extends Component{
         return(
             <SafeAreaView style={styles.container}>
                 {this._loadMedia()}
+                <ScrollView style={{flex: 1}}>
+                    <View style={styles.scrollmain}>
+                        <View style={styles.txtmainView}>
+                            <Text 
+                            // style={styles.title}
+                            style={material.headline}
+                            >
+                               {this.state.itemTitle}
+                            </Text>
+                        </View>
+                        <View
+                            style={styles.timestampview}
+                            >
+                            <Text style={styles.timestamp}>
+                                {this.item.timestamp.toDate().toLocaleString()}
+                            </Text>
+                        </View>
+                        <View
+                            style={styles.contentview}
+                            >
+                            <Text style={styles.content}>
+                                {this.state.itemDesc}
+                            </Text>
+                        </View>
+                    </View>
+                </ScrollView>
             </SafeAreaView>
         );
     }
@@ -211,6 +240,39 @@ const styles = StyleSheet.create({
     imgplayer: {
         height: 200,
         width: "100%"
+    },
+    scrollmain: {
+        flex: 1,
+        paddingBottom: 10,
+    },
+    txtmainView: {
+        marginBottom: 3,
+        marginEnd: 6,
+        marginLeft: 6,
+        marginTop: 12,
+        // backgroundColor:'red',
+        // alignItems: 'flex-end',
+        alignItems:'flex-start'
+    },
+    timestampview: {
+        marginBottom: 3,
+        marginEnd: 6,
+        marginLeft: 6,
+        marginTop: 3,
+    },
+    timestamp: {
+        fontSize: 12,
+        color: AppColors.semiblack
+    },
+    contentview: {
+        marginBottom: 3,
+        marginEnd: 6,
+        marginLeft: 6,
+        marginTop: 6,
+    },
+    content: {
+        fontSize: 16,
+        color: AppColors.semiblack
     }
 })
 
