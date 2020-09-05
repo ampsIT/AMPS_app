@@ -157,8 +157,7 @@ import AppColors from '../../../lib/AppColors';
 
         _loadInitialData(){
           let self = this;
-          firestore().collection('publish_video').get()
-          .then(querysnapshot => {
+          firestore().collection('publish_video').onSnapshot(querysnapshot => {
             let data = [];
             querysnapshot.forEach(doc => {
               data.push({
@@ -168,7 +167,8 @@ import AppColors from '../../../lib/AppColors';
                 yop: doc.data().yop,
                 publishing_date: doc.data().publishing_date,
                 published_by: doc.data().published_by,
-                total_views: doc.data().total_views
+                total_views: doc.data().total_views,
+                description:doc.data().description
               })
             })
 
@@ -176,6 +176,7 @@ import AppColors from '../../../lib/AppColors';
               videoData: data
             })
           })
+          // .then()
         }
 
         _changeFilterVideo(itemValue){
@@ -208,7 +209,7 @@ import AppColors from '../../../lib/AppColors';
             let data = [];
             
             querysnapshot.forEach(doc => {
-              console.log("get filter data: ", doc.id)
+              // console.log("get filter data: ", doc.id)
               data.push({
                 id: doc.id,
                 title: doc.data().title,

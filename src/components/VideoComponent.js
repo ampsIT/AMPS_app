@@ -108,7 +108,7 @@ export class VideoComponent extends Component{
 
   _loadVideoDetails(){
     if(this.state.video_url !== ""){
-      console.log("url: ", this.state.video_url)
+      // console.log("url: ", this.state.video_url)
       return(
         <View style={{ flex: 1}}>
             <Video
