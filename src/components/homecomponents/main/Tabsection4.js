@@ -82,6 +82,8 @@ export default class Tabsection4 extends Component{
                 {title:'meditation', data: []}],
             
         }
+
+        this.navigate = this.props.navigation.navigate
     }
 
     componentDidMount(){
@@ -183,7 +185,8 @@ export default class Tabsection4 extends Component{
         console.log(category)
     }
     onItemPress = (item)=>{
-        console.log(item)
+        // console.log(item);
+        this.navigate('PublicationScreen',{item:item})
     }
    render(){
     const renderItem = ({ item }) => {    

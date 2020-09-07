@@ -10,6 +10,12 @@ export default {
 
     white: "#fff",
     lightWhite: "#eee",
-    deepblue: "#19025e"
+    lightWhitemore: "#ccc",
+    deepblue: "#19025e",
+
+    semiblack: "#222",
+    black: "#000",
+    grey: "#aaa",
+    lightgrey: "#ccc"
 }
 
