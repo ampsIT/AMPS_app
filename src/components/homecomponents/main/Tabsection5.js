@@ -73,7 +73,7 @@ export class Tabsection5 extends Component{
                             {item.title}
                         </Text>
                         <Text style={styles.eventdate}>
-                            On {item.data}
+                            On {item.date}
                         </Text>
                     </View>
 
