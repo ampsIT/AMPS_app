@@ -13,6 +13,9 @@ export default {
     lightWhitemore: "#ccc",
     deepblue: "#19025e",
 
-    semiblack: "#222"
+    semiblack: "#222",
+    black: "#000",
+    grey: "#aaa",
+    lightgrey: "#ccc"
 }
 

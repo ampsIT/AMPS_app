@@ -57,7 +57,8 @@ export class Tabsection5 extends Component{
         this.navigate('EventScreen',{item:item})
     }
 
-    renderItem = (item) => {
+    renderItem(item){
+        console.log("item: ", item)
         return(
             <TouchableOpacity style={styles.cardevent}
             onPress={() => this.pressEventcard(item)}>
@@ -88,7 +89,11 @@ export class Tabsection5 extends Component{
             <FlatList
                 style={{flex: 1}}
                 data={this.state.eventData}
-                renderItem={this.renderItem}
+                renderItem={(item) => {
+                    return(
+                        this.renderItem(item.item)
+                    )
+                }}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
             />
@@ -107,7 +112,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         // marginHorizontal: wp2dp('2%'),
         width:wp2dp('98%'),
-        height: 180,
+        height: 200,
         elevation:7,
         alignSelf: "center",
         // alignItems: 'center'
@@ -124,19 +129,19 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.black,  
         // opacity: 15.00,
         width: "100%",
-        height: 50,
+        height: 60,
         position: "absolute",
         bottom: 0
     },
     bottomlayertextCategory: {
         width: "100%",
-        height: 50,
+        height: 60,
         position: "absolute",
         bottom: 0
     },
     eventtitlee: {
         color: AppColors.white,
-        fontSize: 14,
+        fontSize: 18,
         fontWeight: 'bold',
         // paddingStart: 6,
         alignSelf: "center",
@@ -145,7 +150,7 @@ const styles = StyleSheet.create({
     },
     eventdate: {
         color: AppColors.white,
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: 'bold',
         // paddingStart: 6,
         alignSelf: "center",
@@ -159,7 +164,7 @@ const styles = StyleSheet.create({
         // marginTop:hp2dp('-2.3%'),
 
         // backgroundColor:'black',
-        borderBottomTopRightRadius:5,
+        borderTopRightRadius:5,
         borderTopLeftRadius:5
     },
     HView:{
