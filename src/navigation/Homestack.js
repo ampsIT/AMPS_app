@@ -28,14 +28,30 @@ const HomeScreen = () =>(
     
         >
             <Homenavigator.Screen name='homeScreen' component={Home}/>
-            <Homenavigator.Screen name='DeptScreen' component={Department}/>
-            <Homenavigator.Screen name='VideoScreen' component={VideoDetails}/>
-            <Homenavigator.Screen name='NewsScreen' component={NewsDetails}/>
-            <Homenavigator.Screen name='PublicationScreen' component={PublicationDetails}/>
-            <Homenavigator.Screen name='EventScreen' component={EventDetails}/>
-
     </Homenavigator.Navigator>
 )
+const detialNavigator = createStackNavigator();
+const DetailScreen = () =>(
+    <detialNavigator.Navigator
+        screenOptions={{
+            headerShown: false,
+            // navigationOptions: {
+            //     gestureDirection: "horizontal",
+            //     cardStyleInterpolator: forHorizontalModal
+            //   }
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+    
+        >
+            <detialNavigator.Screen name='DeptScreen' component={Department}/>
+            <detialNavigator.Screen name='VideoScreen' component={VideoDetails}/>
+            <detialNavigator.Screen name='NewsScreen' component={NewsDetails}/>
+            <detialNavigator.Screen name='PublicationScreen' component={PublicationDetails}/>
+            <detialNavigator.Screen name='EventScreen' component={EventDetails}/>
+
+    </detialNavigator.Navigator>
+)
+
 const Drawer = createDrawerNavigator()
 const DrawerNavigator = () => (
     <Drawer.Navigator 
@@ -55,12 +71,32 @@ const DrawerNavigator = () => (
 
     >
        <Drawer.Screen name="Home" component={HomeScreen} />
-
+       {/* <DetailScreen /> */}
     </Drawer.Navigator>
+)
+
+const HNavigator = createStackNavigator();
+const HNav = () =>(
+    < HNavigator.Navigator
+    screenOptions={{
+        headerShown: false,
+      }}
+        >
+            < HNavigator.Screen name="draw" component={ DrawerNavigator} />
+            < HNavigator.Screen name='DeptScreen' component={Department}/>
+            < HNavigator.Screen name='VideoScreen' component={VideoDetails}/>
+            < HNavigator.Screen name='NewsScreen' component={NewsDetails}/>
+            < HNavigator.Screen name='PublicationScreen' component={PublicationDetails}/>
+            < HNavigator.Screen name='EventScreen' component={EventDetails}/>
+
+    </ HNavigator.Navigator>
 )
 
 export default function HomeStack() {
   return (
-        <DrawerNavigator />
+      
+    //   <DrawerNavigator />
+      <HNav/>
+        
   );
 }

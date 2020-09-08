@@ -79,9 +79,9 @@ export class VideoDetails extends Component{
                 <View style={styles.contentContianer}> 
                 <View>
                   <Text>
-                    {/* Published on {this.props.route.params.item.publishing_date.toDate().toLocaleDateString('en-US', options)} */}
+                    Published on {this.props.route.params.item.publishing_date.toDate().toLocaleDateString('en-US', options)}
                     {/* Published on {this.props.route.params.item.publishing_date.toDate().toLocaleString('en-US')} */}
-                    Published on {this.formatDate(this.props.route.params.item.publishing_date.toDate())}
+                    {/* Published on {this.formatDate(this.props.route.params.item.publishing_date.toDate())} */}
 
                     {/* Published on {this.props.route.params.item.publishing_date.toDate().toDateString()} */}
 

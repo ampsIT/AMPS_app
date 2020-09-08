@@ -7,15 +7,33 @@ import AuthStack from './Authstack';
 import HomeStack from './Homestack';
 import { AuthContext } from './AuthProvider';
 import Loading from './../screens/Loading';
+import messaging from '@react-native-firebase/messaging';
+import firestore from '@react-native-firebase/firestore';
+import { Platform } from 'react-native';
 
+async function saveTokenToDatabase(token) {
+  // Assume user is already signed in
+  const userId = auth().currentUser.uid;
+
+  // Add the token to the users datastore
+  await firestore()
+    .collection('user')
+    .doc(userId)
+    .update({
+      tokens: firestore.FieldValue.arrayUnion(token),
+    });
+}
 export default function Routes() {
   const { user, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
-
+ 
   // Handle user state changes
-  function onAuthStateChanged(user) {
+  function onAuthStateChanged(user){
     setUser(user);
+    // if(!user){
+    //   getToken()
+    // }
     if (initializing) setInitializing(false);
     setLoading(false);
   }
@@ -25,6 +43,24 @@ export default function Routes() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  useEffect(() => {
+    // Get the device token
+    messaging()
+      .getToken()
+      .then(token => {
+        return saveTokenToDatabase(token);
+      });
+      
+    // If using other push notification providers (ie Amazon SNS, etc)
+    // you may need to get the APNs token instead for iOS:
+    // if(Platform.OS == 'ios') { messaging().getAPNSToken().then(token => { return saveTokenToDatabase(token); }); }
+
+    // Listen to whether the token changes
+    return messaging().onTokenRefresh(token => {
+      saveTokenToDatabase(token);
+    });
+  }, []);
+  
   if (loading) {
     return <Loading />;
   }
