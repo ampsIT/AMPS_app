@@ -10,6 +10,7 @@ import Loading from './../screens/Loading';
 import messaging from '@react-native-firebase/messaging';
 import firestore from '@react-native-firebase/firestore';
 import { Platform } from 'react-native';
+import database from '@react-native-firebase/database';
 
 async function saveTokenToDatabase(token) {
   // Assume user is already signed in
@@ -21,7 +22,32 @@ async function saveTokenToDatabase(token) {
     .doc(userId)
     .update({
       tokens: firestore.FieldValue.arrayUnion(token),
-    });
+    })
+    .then(()=>{
+      console.log("token added")
+    }).catch(e=>{console.log(e)})
+    ;
+
+    database()
+  .ref(`/users/${userId}`)
+  .set({
+    token: token,
+  })
+  .then(() => console.log('Data set.'))
+  .catch(e=>{console.log(e)})
+  ;
+
+    // await firebase
+    // .database()
+    // .ref("/users/" + Math.floor(Math.random() * Math.floor(1000)))
+    // .set({
+    //   email: "instaman@gmail.com",
+    //   notification_token: token,
+    //   created_at: Date.now(),
+    // })
+    // .then(res => {
+    //   console.log(res);
+    // });  
 }
 export default function Routes() {
   const { user, setUser } = useContext(AuthContext);
