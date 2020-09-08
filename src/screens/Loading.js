@@ -11,43 +11,24 @@ export class Loading extends Component {
     constructor(props){
         super(props)
 
-        this.state = {initializing:true,
-                        user:[]
-                    }
-        this.navigate = this.props.navigation.navigate;
+        // this.state = {initializing:true,
+        //                 user:[]
+        //             }
+        // this.navigate = this.props.navigation.navigate;
     }
-   onAuthStateChanged=(user)=> {
-        this.setState({user:user})
-        if (user) {
-            this.navigate('Drawer');
-            // console.log(this.state.user)
-        } else {
-            this.navigate('Login');
-        }
-        if(this.state.initializing){
-            this.setState({initializing:false})
-        }
-      }
-    componentDidMount(){
-        let self = this;
-        const subscriber = auth().onAuthStateChanged(self.onAuthStateChanged);
-        // unsubscribe on unmount
-        console.log(this.state.user)
-        // if(this.state.user===[]){
-        //         self.navigate('Login')
-        //     }else{
-        //         self.navigate('Drawer')
-        //     }
-        setTimeout(() => {
-            // self.navigate('Drawer')
-            // self.navigate('Login')
-            
-        }, 3000);
-        
-        
-        return subscriber; 
-    }
-
+//    onAuthStateChanged=(user)=> {
+//         this.setState({user:user})
+//         if (user) {
+//             this.navigate('Drawer');
+//             // console.log(this.state.user)
+//         } else {
+//             this.navigate('Login');
+//         }
+//         if(this.state.initializing){
+//             this.setState({initializing:false})
+//         }
+//       }
+    
     render() {
         return (
                 <View style={styles.container}>

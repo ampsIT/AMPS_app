@@ -1,58 +1,94 @@
 // @ts-nocheck
 /* eslint-disable */
-import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
+import React, { useEffect, useState, useContext } from 'react';
+import { validateAll } from 'indicative/validator';
+import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput, Button,
     ImageBackground, Image, Alert,TouchableOpacity,SafeAreaView  } from 'react-native';
 import {Picker} from '@react-native-community/picker';
+// import {
+//     Input,
+//     Card,
+//     FormValidationMessage,
+//     Button
+// } from 'react-native-elements';
 
-import auth, { firebase } from "@react-native-firebase/auth";
-import firestore from '@react-native-firebase/firestore';
 import backend from '../backend/Backend'
 import AppColors from '../lib/AppColors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-    widthPercentageToDP as wp2dp,
-    heightPercentageToDP as hp2dp,
-  } from 'react-native-responsive-screen'; 
-export class Register extends Component {
-    constructor(props){
-        super(props)
+widthPercentageToDP as wp2dp,
+heightPercentageToDP as hp2dp,
+} from 'react-native-responsive-screen'; 
 
-        this.state = {passVisible:true,
-                      press:false,
-                      user:{
-                        name:'',
-                        email:'',
-                        password:'',
-                        contactno:null,
-                        gender:'Select Gender',
-                        category:'Select User Category'
-                      },
-                     }
-        this.navigate = this.props.navigation.navigate;
-    }
-    setVisible = () =>{
-        if(this.state.press==false){
-        this.setState({passVisible:false,press:true})
-        }
-        else{
-            this.setState({passVisible:true,press:false})
-        }
-    }
-    SignUpFunction = async () =>{
-        let response = await backend.SignUp(this.state.user)
-        console.log(response)
-        // console.log(this.state.user)
-        if(response){
-            Alert.alert(response);
-            // this.navigate('Drawer')
-        }
-        
+import { AuthContext } from './../navigation/AuthProvider';
 
+export default function Register({ navigation }){
+    const [name, seteName] = useState('');
+    const [emailAddress, setemailAddress] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [contactno, setContactno] = useState('');
+    const [gender, setGender] = useState('Select Gender');
+    const [category, setCategory] = useState('Select User Category');
+    const [passVisible, setpassVisible] = useState(false);
+    const [confirmpassVisible, setconfirmpassVisible] = useState(false);
+    const [SignUpErrors, setSignUpErrors] = useState({});
+
+    const { register } = useContext(AuthContext); // should be signUp
+
+    // setVisible = () => {
+
+    // }
+
+    const goTosignIn = () => {
+        navigation.navigate('Login')
     }
-    render() {
-        return (
-            <SafeAreaView style={styles.container}>
+
+    const handleSignUp = () => {
+        const rules = {
+            email: 'required|email',
+            password: 'required|string|min:6|max:40|confirmed',
+            username: 'required|alpha',
+            gender: 'required|string',
+            category: 'required|string'
+        };
+
+        const data = {
+            email: emailAddress,
+            password: password,
+            password_confirmation: passwordConfirm,
+            username: name,
+            gender: gender,
+            category: category
+        };
+
+        const messages = {
+            required: field => `${field} is required`,
+            'username.alpha': 'Username contains unallowed characters',
+            'email.email': 'Please enter a valid email address',
+            'password.min':
+                'Password is too short. Must be greater than 6 characters',
+            'password.confirmed': 'Passwords do not match'
+        };
+
+        validateAll(data, rules, messages)
+            .then(() => {
+                console.log('success sign in');
+                register(emailAddress, password, name, gender, category, contactno);
+            })
+            .catch(err => {
+                const formatError = {};
+                err.forEach(err => {
+                    formatError[err.field] = err.message;
+                });
+                setSignUpErrors(formatError);
+            });
+    }
+
+    useEffect(() => {}, [SignUpErrors]);
+
+    return(
+        <SafeAreaView style={styles.container}>
             <View style={styles.logoContainer} >
                 <Image
                     source={require('../lib/computer.png')}
@@ -61,158 +97,135 @@ export class Register extends Component {
                 <Text style={styles.logoText}>
                     AMPS
                 </Text>
-
+            </View>
             <View style={styles.inputContainer}>
-
-            <View style={styles.InputandIcon}>
-                <Icon name="user" color={'grey'} size={20}
-                style={styles.inputIcon}
-                />
-                    <TextInput
-                    placeholder={'Name'}
-                    style={styles.textInput}
-                    onChangeText={(text)=>{
-                        this.setState(prevstate=>
-                            ({user:{...prevstate.user, 
-                                name:text}})
-                            )
-                        }}
-                    />
-            </View>
-
-            <View style={styles.InputandIcon}>
-                    <Icon name="envelope" color={'grey'} size={20}
-                    style={styles.inputIcon}
-                    />
-            
-                <TextInput
-                placeholder={'Email address'}
-                style={styles.textInput}
-                onChangeText={(text)=>{
-                    this.setState(prevstate=>
-                        ({user:{...prevstate.user, 
-                            email:text}})
-                        )
-                    }}
-                />
-            </View>
-
-            <View style={styles.InputandIcon}>
-                <Icon name="lock" color={'grey'} size={23}
-                style={styles.inputIcon}
-                />
-            
-                <TextInput
-                placeholder={'Password'}
-                style={styles.textInput}
-                onChangeText={(text)=>{
-                    this.setState(prevstate=>
-                        ({user:{...prevstate.user, 
-                            password:text}})
-                        )
-                    }}
-                secureTextEntry={this.state.passVisible}
-                />
-                <TouchableOpacity
-                style={styles.eyeIcon}
-                onPress={this.setVisible}
-                >
-                    <Icon name={this.state.press==false? 'eye':'eye-slash'}
-                    
-                        color={'grey'} size={20}
-                        />
-                </TouchableOpacity>
-            </View>
-                
                 <View style={styles.InputandIcon}>
-                    <Icon name="phone" color={'grey'} size={23}
-                    style={styles.inputIcon}
+                    <Icon name="user" color={'grey'} size={20}
+                        style={styles.inputIcon}
                     />
                     <TextInput
-                        placeholder={'Contact No.'}
+                        placeholder={'Name'}
                         style={styles.textInput}
-                        onChangeText={(text)=>{
-                            this.setState(prevstate=>
-                                ({user:{...prevstate.user, 
-                                    contactno:text}})
-                                )
-                            }}
+                        value={name}
+                        onChangeText={seteName}
+                    />
+                </View>
+                <View style={styles.InputandIcon}>
+                    <Icon name="envelope" color={'grey'} size={20}
+                        style={styles.inputIcon}
+                    />
+                    <TextInput
+                        placeholder={'Email address'}
+                        style={styles.textInput}
+                        value={emailAddress}
+                        onChangeText={setemailAddress}
+                    />
+                </View>
+                <View style={styles.InputandIcon}>
+                    <Icon name="lock" color={'grey'} size={20}
+                        style={styles.inputIcon}
+                    />
+                    <TextInput
+                        placeholder={'Password'}
+                        style={styles.textInput}
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
+                     {/* <TouchableOpacity
+                        style={styles.eyeIcon}
+                        onPress={this.setVisible}
+                        >
+                            <Icon name={passVisible==false? 'eye':'eye-slash'}
+                            
+                                color={'grey'} size={20}
+                                />
+                    </TouchableOpacity> */}
+                </View>
+                <View style={styles.InputandIcon}>
+                    <Icon name="lock" color={'grey'} size={20}
+                        style={styles.inputIcon}
+                    />
+                    <TextInput
+                        placeholder={'Confirm Password'}
+                        style={styles.textInput}
+                        value={passwordConfirm}
+                        onChangeText={setPasswordConfirm}
+                        secureTextEntry
+                    />
+                     {/* <TouchableOpacity
+                        style={styles.eyeIcon}
+                        onPress={this.setVisible}
+                        >
+                            <Icon name={passVisible==false? 'eye':'eye-slash'}
+                            
+                                color={'grey'} size={20}
+                                />
+                    </TouchableOpacity> */}
+                </View>
+                <View style={styles.InputandIcon}>
+                    <Icon name="phone" color={'grey'} size={20}
+                        style={styles.inputIcon}
+                    />
+                    <TextInput
+                        placeholder={'Contact No'}
+                        style={styles.textInput}
+                        value={contactno}
+                        onChangeText={setContactno}
                         keyboardType={'number-pad'}
                     />
-                
                 </View>
-            
                 <View style={styles.genderPView}>
-                <Icon name='users' color={'grey'} size={20}
-                style={styles.genderIcon}
-                />
-                <Picker
-                    selectedValue={this.state.user.gender}
-                    style={styles.genderPicker}
-                    mode={'dropdown'}
-                    onValueChange={(itemValue, itemIndex) =>{
-                        if(itemValue!='Select Gender'){
-                                this.setState(prevstate=>
-                                    ({user:{...prevstate.user, 
-                                        gender:itemValue}})
-                                    )
-                            
-                            // console.log(this.state.gender)
-                        }
-                    }
-                    }>
-                    <Picker.Item label="Select Gender" value="Select Gender" />
-                    <Picker.Item label="Male" value="male" />
-                    <Picker.Item label="Female" value="female" />
-                    <Picker.Item label="Other" value="other" />
-                </Picker>
+                    <Icon name='users' color={'grey'} size={20}
+                    style={styles.genderIcon}
+                    />
+                     <Picker
+                        selectedValue={gender}
+                        style={styles.genderPicker}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue, itemIndex) =>{
+                            if(itemValue!='Select Gender'){
+                                setGender(itemValue)
+                            }
+                        }}>
+                        <Picker.Item label="Select Gender" value="Select Gender" />
+                        <Picker.Item label="Male" value="male" />
+                        <Picker.Item label="Female" value="female" />
+                        <Picker.Item label="Other" value="other" />
+                    </Picker>
                 </View>
-
-                
                 <View style={styles.genderPView}>
-                <Icon name='user-circle' color={'grey'} size={20}
-                style={styles.categoryIcon}
-                />
-                <Picker
-                    selectedValue={this.state.user.category}
-                    style={styles.genderPicker}
-                    mode={'dropdown'}
-                    onValueChange={(itemValue, itemIndex) =>{
-                        if(itemValue!='Select User Category'){
-                            this.setState(prevstate=>
-                                ({user:{...prevstate.user, 
-                                    category:itemValue}})
-                                )
-                            // console.log(this.state.category)
-                        }
-                    }
-                    }>
-                    <Picker.Item label="Select User Category" value="Select User Category" />
-                    <Picker.Item label="Margii" value="margii" />
-                    <Picker.Item label="Non-Margii" value="non-margii" />
-                    <Picker.Item label="Acarya" value="acarya" />
-                </Picker>
+                    <Icon name='user-circle' color={'grey'} size={20}
+                    style={styles.categoryIcon}
+                    />
+                     <Picker
+                        selectedValue={category}
+                        style={styles.genderPicker}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue, itemIndex) =>{
+                            if(itemValue!='Select User Category'){
+                                setCategory(itemValue)
+                            }
+                        }}>
+                        <Picker.Item label="Select User Category" value="Select User Category" />
+                        <Picker.Item label="Margii" value="margii" />
+                        <Picker.Item label="Non-Margii" value="non-margii" />
+                        <Picker.Item label="Acarya" value="acarya" />
+                    </Picker>
                 </View>
-            </View>
-            </View>
-            {/* <Button
-            title="Login"
-            color="orange"
-            style={styles.loginButton}
-            /> */}
-            <TouchableOpacity style={styles.loginButton}
-            onPress={this.SignUpFunction}
-            >
-                <Text style={styles.buttonText}>
-                    SignUp
+                <Button
+                    buttonStyle={{ marginTop: 50 }}
+                    backgroundColor="#03A9F4"
+                    title="SIGN UP"
+                    onPress={() => handleSignUp()}
+                    />
+                <Text style={{ marginLeft: 80 }} onPress={() => goTosignIn()}>
+                    Already Signed Up? Sign In
                 </Text>
-            </TouchableOpacity>
+            </View>
         </SafeAreaView>
-            );
-    }
-}
-
-export default Register;
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
