@@ -23,9 +23,22 @@ export const AuthProvider = ({ children }) => {
         login: async (email, password) => {
           try { 
             console.log('success sign: ', email + "_" + password);
-            await auth().signInWithEmailAndPassword(email, password);
+            let res = await auth().signInWithEmailAndPassword(email, password);
+            if(!res){
+              return res
+            }
           } catch (e) {
             console.log(e);
+            switch(e.code){
+              case "auth/invalid-email":
+                  return "Enter a valid Email Address"
+              case "auth/user-disabled":
+                  return "User has been disabled"
+              case "auth/user-not-found":
+                  return "User Does Not exists"
+              case "auth/wrong-password":
+                  return "Please Enter a vaild password"            
+          }       
           }
         },
         register: async (email, password, name, gender, category, contactno) => {

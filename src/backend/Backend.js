@@ -72,7 +72,7 @@ class backend{
         //   await GoogleSignin.signOut();
           const res= await auth()
             .signOut()
-            .then(() => alert('Your are signed out!'));
+            .then(() =>  Alert.alert("Success", "Your are signed out!"));
             //   setloggedIn(false);
             // this.setState({ loggedIn: false,user:[]})
             // setuserInfo([]);

@@ -25,7 +25,7 @@ export default function LogIn({ navigation }){
     const [emailAddress, setemailAddress] = useState('');
     const [password, setPassword] = useState('');
     const [SignUpErrors, setSignUpErrors] = useState({});
-
+    const [isLoading, setLoading] = useState(false)
     const { login } = useContext(AuthContext);
 
 
@@ -34,6 +34,12 @@ export default function LogIn({ navigation }){
     }
 
     const handleSignIn = () => {
+        // setSignUpErrors(null)
+
+        // console.log(emailAddress,password)
+        // console.log("error console 1",SignUpErrors)
+        // setSignUpErrors({})
+        // console.log("error console",SignUpErrors)
         const rules = {
             email: 'required|email',
             password: 'required|string|min:6|max:40'
@@ -48,27 +54,66 @@ export default function LogIn({ navigation }){
             required: field => `${field} is required`,
             // 'username.alpha': 'Username contains unallowed characters',
             'email.email': 'Please enter a valid email address',
-            'password.min': 'Wrong Password?'
+            'password.min': 'Wrong Password is too short',
         };
 
+        const changeState = ()=>{setLoading(true)}
         validateAll(data, rules, messages)
             .then(() => {
+                // setLoading(isLoading=>!isLoading)
+                changeState()
+                console.log(isLoading)
                 // let email = emailAddress.toString();
                 // let pass = password.toString();
                 console.log('success sign in now: ', emailAddress + "_" + password);
-                login(emailAddress, password);
+                let response = login(emailAddress, password);
+                if (response && response.user) {
+                        Alert.alert("Success ✅", "Logged successfully");
+                      }
+                else{                
+                    setLoading(false)
+                    setSignUpErrors({'error':response})
+                    Object.values(SignUpErrors).forEach((item)=>{
+                        Alert.alert('error',item)
+                    })
+                    setSignUpErrors({});
+                }
+                // consoe.log(res)
+                // return res
             })
             .catch(err => {
+                setLoading(false)
                 const formatError = {};
                 err.forEach(err => {
                     formatError[err.field] = err.message;
+                    // console.log("error",err.message)
                 });
                 setSignUpErrors(formatError);
+                console.log("state",SignUpErrors)
+                Object.values(SignUpErrors).forEach((item)=>{
+                    Alert.alert('error',item)
+                })
+                setSignUpErrors({});
+
             });
     };
+   function showActivity(){
+       return(
+        <View style = {styles.overlayLoadingContainer}>
+       
+            <ActivityIndicator 
+                        size={50} color={"red"} />
+        </View>
+        
+         )
+   }
 
     return(
-        <SafeAreaView style={styles.container}>
+        <>
+        {isLoading ?
+            showActivity()
+            :null}
+            <SafeAreaView style={styles.container}>
             <View style={styles.logoContainer} >
                 <Image
                     source={require('../lib/computer.png')}
@@ -110,6 +155,9 @@ export default function LogIn({ navigation }){
                             />
                 </TouchableOpacity> */}
             </View>
+            {/* <View style={styles.errorTextView}> 
+            
+            </View> */}
             <Button
                 Style={{ marginTop: 50 }}
                 title="Sign in"
@@ -122,6 +170,8 @@ export default function LogIn({ navigation }){
                 <Text style={styles.navButtonText}>New user? Join here</Text>
             </TouchableOpacity>
         </SafeAreaView>
+        </>
+        
     )
 };
 
@@ -245,5 +295,33 @@ const styles = StyleSheet.create({
       navButtonText: {
         fontSize: 20,
         color: '#6646ee'
-      }
+      },
+        errorText: {
+            fontSize: 20,
+        },
+        errorTextView:{
+            backgroundColor:'red',
+            // flex:1
+        },
+        overlay: {
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: 'black',
+            opacity: 0.4,
+          },
+          overlayLoadingContainer:{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            right: 0,
+            left: 0,
+            justifyContent:'center',
+            alignItems:'center',
+            zIndex: 1,
+            opacity: 0.4,
+            backgroundColor: 'black'
+         },
 }) 
