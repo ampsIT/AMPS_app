@@ -2,11 +2,11 @@
 // // https://htmlcolorcodes.com/color-chart/material-design-color-chart/
 export default {
     // primary: "#005b96",
-    primary: "#EA7773",
+    primary: "#fc4c02",//"#EA7773",
     // lightprimary: "#03396c",
-    Secondary: "#00cccd",
+    secondary: "#162525",//"#00cccd",
 
-    accent: "#B3191D",
+    accent: "#487a7b",//"#B3191D",
 
     white: "#fff",
     lightWhite: "#eee",

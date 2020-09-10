@@ -65,9 +65,13 @@ export default function Routes() {
   }
 
   useEffect(() => {
+    setTimeout(returnSubscriber, 5000);
+  }, []);
+
+  const returnSubscriber = () => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
-  }, []);
+  }
 
   useEffect(() => {
     // Get the device token
