@@ -170,6 +170,7 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
           }
           const options = {
             title: item.postTitle,
+            message: item.content,
             url: item.images,
             failOnCancel: false
           };
