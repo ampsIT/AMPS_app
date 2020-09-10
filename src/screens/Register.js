@@ -90,16 +90,17 @@ export default function Register({ navigation }){
 
     return(
         <SafeAreaView style={styles.container}>
-            <ScrollView style={{flex: 1}}>
-                <View style={{flex: 1}}>
+            <ScrollView style={{flex: 1, width: '100%', }}>
+                <View style={{flex: 1, width: '100%', paddingBottom: 24,}}>
                     <View style={styles.logoContainer} >
                         <Image
-                            source={require('../lib/computer.png')}
+                            source={require('../lib/logo_small.png')}
                             style={styles.logo}
+                            resizeMode="contain"
                         />
-                        <Text style={styles.logoText}>
+                        {/* <Text style={styles.logoText}>
                             AMPS
-                        </Text>
+                        </Text> */}
                     </View>
                     <View style={styles.inputContainer}>
                         <View style={styles.InputandIcon}>
@@ -216,16 +217,23 @@ export default function Register({ navigation }){
                                         <Picker.Item label="Acarya" value="acarya" />
                                     </Picker>
                                 </View>
-                                    <Button
-                                        buttonStyle={{ marginTop: 50 }}
-                                        backgroundColor="#03A9F4"
-                                        title="SIGN UP"
-                                        onPress={() => handleSignUp()}
-                                        />
-                                    {/* <Text style={{ marginLeft: 80 }} onPress={() => goTosignIn()}>
-                                        Already Signed Up? Sign In
-                                    </Text> */}
-                                </View>
+                                <TouchableOpacity
+                                    style={styles.loginButton}
+                                    onPress={() => handleSignUp()}
+                                >
+                                    <Text style={styles.loginButtonText}>SIGN UP</Text>
+                                </TouchableOpacity>
+
+                                {/* <Button
+                                    buttonStyle={{ marginTop: 50 }}
+                                    backgroundColor="#03A9F4"
+                                    title="SIGN UP"
+                                    onPress={() => handleSignUp()}
+                                    /> */}
+                                {/* <Text style={{ marginLeft: 80 }} onPress={() => goTosignIn()}>
+                                    Already Signed Up? Sign In
+                                </Text> */}
+                            </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -235,13 +243,12 @@ export default function Register({ navigation }){
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor:'rgba(128,128,128,0.1)',
+        backgroundColor:'#162525',
         justifyContent:'center',
         alignItems:'center'
-
     },
     logo:{
-        
+        width: 240,
         // backgroundColor:'black'
     },
     logoContainer:{
@@ -254,12 +261,22 @@ const styles = StyleSheet.create({
         marginTop:hp2dp('1%')
     },
     inputContainer: {
-        
+        // width: '100%',
+        flex: 1,
+        backgroundColor: 'rgba(255,255,255,0.4)',
+        alignItems: 'center',
+        // justifyContent: 'center',
+        paddingTop: 12,
+        paddingBottom: 24,
+        // borderTopStartRadius: 36,
+        // borderTopEndRadius: 36,
+        borderRadius: 36,
+        marginHorizontal: 12
     },
     InputandIcon:{
         backgroundColor:'rgba(128,128,128,0.1)',
-        width:wp2dp('80%'),
-        flexDirection: 'row',
+        width:wp2dp('84%'),
+        // flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius:25,
@@ -267,11 +284,22 @@ const styles = StyleSheet.create({
     },
     textInput:{
         // backgroundColor:'rgba(128,128,128,0.1)',
-        width:wp2dp('80%'),
-        paddingLeft:wp2dp('2%'),
+        // width:wp2dp('80%'),
+        // paddingLeft:wp2dp('2%'),
+        backgroundColor:'#fff',
+        width:wp2dp('84%'),
+        borderRadius:25,
+        paddingLeft:wp2dp('12%'),
+        marginTop:hp2dp('1%'),
+        zIndex: 5,
+        elevation: 4
     },
     inputIcon:{       
-         marginLeft:wp2dp('12%')
+        position: 'absolute',
+        top:hp2dp('3%'),
+        left:wp2dp('5%'),
+        zIndex: 9,
+        elevation: 5
         },
     eyeIcon: {
         position: 'absolute',
@@ -279,28 +307,43 @@ const styles = StyleSheet.create({
         bottom:hp2dp('2%')
     },
     genderPicker:{
-        width:wp2dp('70%'),
+        width:wp2dp('72%'),
         borderTopLeftRadius: 30,
-        // marginLeft:wp2dp('8%')
+        // marginLeft:wp2dp('8%'),
     },
     genderPView:{
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop:hp2dp('1%'),
-        width:wp2dp('80%'),
+        width:wp2dp('84%'),
         borderRadius:30,
-        backgroundColor:'rgba(128,128,128,0.1)',
+        // backgroundColor:'rgba(128,128,128,0.1)',
+        backgroundColor:'#fff',
     },
     loginButton: {
-        marginTop:hp2dp('1%'),
-        borderRadius:25,
-        backgroundColor:AppColors.primary,
-        width:wp2dp('80%'),
-        height:hp2dp('7%'),
+        // marginTop:hp2dp('1%'),
+        // borderRadius:25,
+        // backgroundColor:AppColors.primary,
+        // width:wp2dp('80%'),
+        // height:hp2dp('7%'),
+        // alignItems:'center',
+        // justifyContent:'center',
+        // elevation:4
+        marginTop: 12,
+        borderRadius: 25,
+        backgroundColor: AppColors.secondary,
+        width: wp2dp('84%'),
+        height: 48,
         alignItems:'center',
         justifyContent:'center',
-        elevation:4
+        zIndex: 9,
+        elevation: 5
+    },
+    loginButtonText: {
+        fontSize: 16,
+        color: '#fff',
+        fontWeight: 'bold',
     },
     buttonText:{
         fontSize: 25,

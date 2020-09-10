@@ -20,6 +20,7 @@ heightPercentageToDP as hp2dp,
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { AuthContext } from './../navigation/AuthProvider';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function LogIn({ navigation }){
     const [emailAddress, setemailAddress] = useState('');
@@ -114,6 +115,7 @@ export default function LogIn({ navigation }){
             showActivity()
             :null}
             <SafeAreaView style={styles.container}>
+            <ScrollView style={{flex: 1, width: '100%', }}>
             <View style={styles.logoContainer} >
                 <Image
                     source={require('../lib/logo_small.png')}
@@ -125,57 +127,57 @@ export default function LogIn({ navigation }){
                 </Text> */}
             </View>
             <View style={styles.inputContainer}>
-            <View style={styles.InputandIcon}>
-                <Icon name="envelope" color={'grey'} size={20} style={styles.inputIcon} />
-                <TextInput
-                    placeholder={'Email address'}
-                    style={styles.textInput}
-                    value={emailAddress}
-                    onChangeText={setemailAddress}
-                />
+                <View style={styles.InputandIcon}>
+                    <Icon name="envelope" color={'grey'} size={20} style={styles.inputIcon} />
+                    <TextInput
+                        placeholder={'Email address'}
+                        style={styles.textInput}
+                        value={emailAddress}
+                        onChangeText={setemailAddress}
+                    />
+                </View>
+                <View style={styles.InputandIcon}>
+                    <Icon name="lock" color={'grey'} size={24}
+                        style={styles.inputIcon}
+                    />
+                    <TextInput
+                        placeholder={'Password'}
+                        style={styles.textInput}
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
+                        {/* <TouchableOpacity
+                        style={styles.eyeIcon}
+                        onPress={this.setVisible}
+                        >
+                            <Icon name={passVisible==false? 'eye':'eye-slash'}
+                            
+                                color={'grey'} size={20}
+                                />
+                    </TouchableOpacity> */}
+                </View>
+                {/* <View style={styles.errorTextView}> 
+                
+                </View> */}
+                <TouchableOpacity
+                    style={styles.loginButton}
+                    // buttonStyle={styles.loginButton}
+                    // title="Log In"
+                    onPress={() => handleSignIn()}
+                >
+                    <Text style={styles.loginButtonText}>Log In</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.navButton}
+                    onPress={() => navigation.navigate('Signup')}
+                >
+                    <Text style={styles.navButtonText}>New to Ananda Marga?{'\n'}Join and Be a Part of Our Family</Text>
+                </TouchableOpacity>
             </View>
-            <View style={styles.InputandIcon}>
-                <Icon name="lock" color={'grey'} size={24}
-                    style={styles.inputIcon}
-                />
-                <TextInput
-                    placeholder={'Password'}
-                    style={styles.textInput}
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                />
-                    {/* <TouchableOpacity
-                    style={styles.eyeIcon}
-                    onPress={this.setVisible}
-                    >
-                        <Icon name={passVisible==false? 'eye':'eye-slash'}
-                        
-                            color={'grey'} size={20}
-                            />
-                </TouchableOpacity> */}
-            </View>
-            {/* <View style={styles.errorTextView}> 
-            
-            </View> */}
-            <TouchableOpacity
-                style={styles.loginButton}
-                // buttonStyle={styles.loginButton}
-                // title="Log In"
-                onPress={() => handleSignIn()}
-            >
-                <Text style={styles.loginButtonText}>Log In</Text>
-            </TouchableOpacity>
-           <TouchableOpacity
-                style={styles.navButton}
-                onPress={() => navigation.navigate('Signup')}
-            >
-                <Text style={styles.navButtonText}>New to Ananda Marga?{'\n'}Join and Be a Part of Our Family</Text>
-            </TouchableOpacity>
-            </View>
+            </ScrollView>
         </SafeAreaView>
         </>
-        
     )
 };
 
@@ -185,8 +187,8 @@ const styles = StyleSheet.create({
         // backgroundColor:'rgba(128,128,128,0.1)',
         backgroundColor: '#162525',
         justifyContent: 'center',
-        alignItems: 'center'
-
+        alignItems: 'center',
+        paddingTop: 24,
     },
     logo:{
         width: 240,
@@ -202,14 +204,17 @@ const styles = StyleSheet.create({
         marginTop:hp2dp('1%')
     },
     inputContainer: {
-        width: '100%',
+        // width: '100%',
         flex: 1,
         backgroundColor: 'rgba(255,255,255,0.4)',
         alignItems: 'center',
         // justifyContent: 'center',
         paddingTop: 24,
-        borderTopStartRadius: 36,
-        borderTopEndRadius: 36,
+        paddingBottom: 24,
+        // borderTopStartRadius: 36,
+        // borderTopEndRadius: 36,
+        borderRadius: 36,
+        marginHorizontal: 12
     },
     InputandIcon: {
         marginVertical: 4,
@@ -217,12 +222,12 @@ const styles = StyleSheet.create({
     textInput:{
         // backgroundColor:'rgba(128,128,128,0.1)',
         backgroundColor:'#fff',
-        width:wp2dp('80%'),
+        width:wp2dp('84%'),
         borderRadius:25,
         paddingLeft:wp2dp('12%'),
         marginTop:hp2dp('1%'),
-        zIndex: 9,
-        elevation: 5
+        zIndex: 5,
+        elevation: 4
     },
     inputIcon: {
         position: 'absolute',
@@ -247,7 +252,7 @@ const styles = StyleSheet.create({
         marginTop: 12,
         borderRadius: 25,
         backgroundColor: AppColors.secondary,
-        width: wp2dp('80%'),
+        width: wp2dp('84%'),
         height: 48,
         alignItems:'center',
         justifyContent:'center',
@@ -318,7 +323,7 @@ const styles = StyleSheet.create({
         marginTop: 15
       },
       navButtonText: {
-        width:wp2dp('80%'),
+        width:wp2dp('84%'),
         textAlign: 'center',
         backgroundColor: AppColors.primary,
         paddingHorizontal: 16,
