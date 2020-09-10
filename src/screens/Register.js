@@ -21,6 +21,7 @@ heightPercentageToDP as hp2dp,
 } from 'react-native-responsive-screen'; 
 
 import { AuthContext } from './../navigation/AuthProvider';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function Register({ navigation }){
     const [name, seteName] = useState('');
@@ -89,140 +90,144 @@ export default function Register({ navigation }){
 
     return(
         <SafeAreaView style={styles.container}>
-            <View style={styles.logoContainer} >
-                <Image
-                    source={require('../lib/computer.png')}
-                    style={styles.logo}
-                />
-                <Text style={styles.logoText}>
-                    AMPS
-                </Text>
-            </View>
-            <View style={styles.inputContainer}>
-                <View style={styles.InputandIcon}>
-                    <Icon name="user" color={'grey'} size={20}
-                        style={styles.inputIcon}
-                    />
-                    <TextInput
-                        placeholder={'Name'}
-                        style={styles.textInput}
-                        value={name}
-                        onChangeText={seteName}
-                    />
-                </View>
-                <View style={styles.InputandIcon}>
-                    <Icon name="envelope" color={'grey'} size={20}
-                        style={styles.inputIcon}
-                    />
-                    <TextInput
-                        placeholder={'Email address'}
-                        style={styles.textInput}
-                        value={emailAddress}
-                        onChangeText={setemailAddress}
-                    />
-                </View>
-                <View style={styles.InputandIcon}>
-                    <Icon name="lock" color={'grey'} size={20}
-                        style={styles.inputIcon}
-                    />
-                    <TextInput
-                        placeholder={'Password'}
-                        style={styles.textInput}
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                    />
-                     {/* <TouchableOpacity
-                        style={styles.eyeIcon}
-                        onPress={this.setVisible}
-                        >
-                            <Icon name={passVisible==false? 'eye':'eye-slash'}
-                            
-                                color={'grey'} size={20}
+            <ScrollView style={{flex: 1}}>
+                <View style={{flex: 1}}>
+                    <View style={styles.logoContainer} >
+                        <Image
+                            source={require('../lib/computer.png')}
+                            style={styles.logo}
+                        />
+                        <Text style={styles.logoText}>
+                            AMPS
+                        </Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <View style={styles.InputandIcon}>
+                            <Icon name="user" color={'grey'} size={20}
+                                style={styles.inputIcon}
+                            />
+                            <TextInput
+                                placeholder={'Name'}
+                                style={styles.textInput}
+                                value={name}
+                                onChangeText={seteName}
+                            />
+                        </View>
+                        <View style={styles.InputandIcon}>
+                            <Icon name="envelope" color={'grey'} size={20}
+                                style={styles.inputIcon}
+                            />
+                            <TextInput
+                                placeholder={'Email address'}
+                                style={styles.textInput}
+                                value={emailAddress}
+                                onChangeText={setemailAddress}
+                            />
+                        </View>
+                        <View style={styles.InputandIcon}>
+                            <Icon name="lock" color={'grey'} size={20}
+                                style={styles.inputIcon}
+                            />
+                            <TextInput
+                                placeholder={'Password'}
+                                style={styles.textInput}
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry
+                            />
+                                {/* <TouchableOpacity
+                                    style={styles.eyeIcon}
+                                    onPress={this.setVisible}
+                                    >
+                                        <Icon name={passVisible==false? 'eye':'eye-slash'}
+                                        
+                                            color={'grey'} size={20}
+                                            />
+                                </TouchableOpacity> */}
+                            </View> 
+                            <View style={styles.InputandIcon}>
+                                <Icon name="lock" color={'grey'} size={20}
+                                    style={styles.inputIcon}
                                 />
-                    </TouchableOpacity> */}
-                </View>
-                <View style={styles.InputandIcon}>
-                    <Icon name="lock" color={'grey'} size={20}
-                        style={styles.inputIcon}
-                    />
-                    <TextInput
-                        placeholder={'Confirm Password'}
-                        style={styles.textInput}
-                        value={passwordConfirm}
-                        onChangeText={setPasswordConfirm}
-                        secureTextEntry
-                    />
-                     {/* <TouchableOpacity
-                        style={styles.eyeIcon}
-                        onPress={this.setVisible}
-                        >
-                            <Icon name={passVisible==false? 'eye':'eye-slash'}
-                            
-                                color={'grey'} size={20}
+                                <TextInput
+                                    placeholder={'Confirm Password'}
+                                    style={styles.textInput}
+                                    value={passwordConfirm}
+                                    onChangeText={setPasswordConfirm}
+                                    secureTextEntry
                                 />
-                    </TouchableOpacity> */}
+                                {/* <TouchableOpacity
+                                    style={styles.eyeIcon}
+                                    onPress={this.setVisible}
+                                    >
+                                        <Icon name={passVisible==false? 'eye':'eye-slash'}
+                                        
+                                            color={'grey'} size={20}
+                                            />
+                                </TouchableOpacity> */}
+                            </View>
+                            <View style={styles.InputandIcon}>
+                                <Icon name="phone" color={'grey'} size={20}
+                                    style={styles.inputIcon}
+                                />
+                                <TextInput
+                                    placeholder={'Contact No'}
+                                    style={styles.textInput}
+                                    value={contactno}
+                                    onChangeText={setContactno}
+                                    keyboardType={'number-pad'}
+                                />
+                            </View>
+                            <View style={styles.genderPView}>
+                                <Icon name='users' color={'grey'} size={20}
+                                style={styles.genderIcon}
+                                />
+                                <Picker
+                                    selectedValue={gender}
+                                    style={styles.genderPicker}
+                                    mode={'dropdown'}
+                                    onValueChange={(itemValue, itemIndex) =>{
+                                        if(itemValue!='Select Gender'){
+                                            setGender(itemValue)
+                                        }
+                                    }}>
+                                    <Picker.Item label="Select Gender" value="Select Gender" />
+                                    <Picker.Item label="Male" value="male" />
+                                    <Picker.Item label="Female" value="female" />
+                                    <Picker.Item label="Other" value="other" />
+                                </Picker>
+                                </View>
+                                <View style={styles.genderPView}>
+                                    <Icon name='user-circle' color={'grey'} size={20}
+                                    style={styles.categoryIcon}
+                                    />
+                                    <Picker
+                                        selectedValue={category}
+                                        style={styles.genderPicker}
+                                        mode={'dropdown'}
+                                        onValueChange={(itemValue, itemIndex) =>{
+                                            if(itemValue!='Select User Category'){
+                                                setCategory(itemValue)
+                                            }
+                                        }}>
+                                        <Picker.Item label="Select User Category" value="Select User Category" />
+                                        <Picker.Item label="Margii" value="margii" />
+                                        <Picker.Item label="Non-Margii" value="non-margii" />
+                                        <Picker.Item label="Acarya" value="acarya" />
+                                    </Picker>
+                                </View>
+                                    <Button
+                                        buttonStyle={{ marginTop: 50 }}
+                                        backgroundColor="#03A9F4"
+                                        title="SIGN UP"
+                                        onPress={() => handleSignUp()}
+                                        />
+                                    {/* <Text style={{ marginLeft: 80 }} onPress={() => goTosignIn()}>
+                                        Already Signed Up? Sign In
+                                    </Text> */}
+                                </View>
                 </View>
-                <View style={styles.InputandIcon}>
-                    <Icon name="phone" color={'grey'} size={20}
-                        style={styles.inputIcon}
-                    />
-                    <TextInput
-                        placeholder={'Contact No'}
-                        style={styles.textInput}
-                        value={contactno}
-                        onChangeText={setContactno}
-                        keyboardType={'number-pad'}
-                    />
-                </View>
-                <View style={styles.genderPView}>
-                    <Icon name='users' color={'grey'} size={20}
-                    style={styles.genderIcon}
-                    />
-                     <Picker
-                        selectedValue={gender}
-                        style={styles.genderPicker}
-                        mode={'dropdown'}
-                        onValueChange={(itemValue, itemIndex) =>{
-                            if(itemValue!='Select Gender'){
-                                setGender(itemValue)
-                            }
-                        }}>
-                        <Picker.Item label="Select Gender" value="Select Gender" />
-                        <Picker.Item label="Male" value="male" />
-                        <Picker.Item label="Female" value="female" />
-                        <Picker.Item label="Other" value="other" />
-                    </Picker>
-                </View>
-                <View style={styles.genderPView}>
-                    <Icon name='user-circle' color={'grey'} size={20}
-                    style={styles.categoryIcon}
-                    />
-                     <Picker
-                        selectedValue={category}
-                        style={styles.genderPicker}
-                        mode={'dropdown'}
-                        onValueChange={(itemValue, itemIndex) =>{
-                            if(itemValue!='Select User Category'){
-                                setCategory(itemValue)
-                            }
-                        }}>
-                        <Picker.Item label="Select User Category" value="Select User Category" />
-                        <Picker.Item label="Margii" value="margii" />
-                        <Picker.Item label="Non-Margii" value="non-margii" />
-                        <Picker.Item label="Acarya" value="acarya" />
-                    </Picker>
-                </View>
-                <Button
-                    buttonStyle={{ marginTop: 50 }}
-                    backgroundColor="#03A9F4"
-                    title="SIGN UP"
-                    onPress={() => handleSignUp()}
-                    />
-                <Text style={{ marginLeft: 80 }} onPress={() => goTosignIn()}>
-                    Already Signed Up? Sign In
-                </Text>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 };
