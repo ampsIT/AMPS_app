@@ -11,8 +11,12 @@ import {
   heightPercentageToDP as hp2dp,
 } from 'react-native-responsive-screen';   
 import AppColors from '../../../lib/AppColors';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import Share from "react-native-share";
 
-    const Item = ({postTitle,content,image,timestamp, onPress}) => (
+const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
+
+    const Item = ({postTitle,content,image,timestamp, onPress, onSharePress}) => (
       <TouchableOpacity onPress={onPress}>
             <View style={styles.item}>
                 <View style={styles.HView}>
@@ -46,6 +50,10 @@ import AppColors from '../../../lib/AppColors';
                 // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
                 />
             </View>
+            <TouchableOpacity style={styles.shareicon}
+            onPress={onSharePress}>
+              {shareIcon}
+            </TouchableOpacity>
         </TouchableOpacity>
           );
 
@@ -154,6 +162,21 @@ import AppColors from '../../../lib/AppColors';
           // console.log("newspress")
           this.navigate('NewsScreen',{item:item})
         }
+
+        onSharePressitem=(item)=> {
+          // console.log("sharepress: ", item)
+          if(item.postTitle === "" || item.content === "" || item.images === "" ){
+            return;
+          }
+          const options = {
+            title: item.postTitle,
+            url: item.images,
+            failOnCancel: false
+          };
+          Share.open(options)
+          .then((res) => { console.log(res) })
+          .catch((err) => { err && console.log(err); });
+        }
         
 
         render() {
@@ -162,8 +185,9 @@ import AppColors from '../../../lib/AppColors';
                 postTitle={item.postTitle} 
                 content={item.content}
                 image={item.images}
-                timestamp={item.timestamp.toDate().toLocaleString()}
+                timestamp={item.timestamp.toDate().toDateString()}
                 onPress={() => {this.onPressNews(item)}}
+                onSharePress={() => {this.onSharePressitem(item)}} 
                 />
               );
 
@@ -329,6 +353,14 @@ import AppColors from '../../../lib/AppColors';
           fontSize:14,
           textAlign: 'center'
         },
+        shareicon: {
+          position: 'absolute',
+          right: 12,
+          top: 16,
+          elevation: 5,
+          zIndex: 5,
+          padding: 3,
+        }
         
       });
       
