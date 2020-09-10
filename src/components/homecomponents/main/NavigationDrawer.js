@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingBottom: hp2dp('2%'),
         borderBottomWidth:0.2,
-        backgroundColor:AppColors.Secondary,
+        backgroundColor:AppColors.secondary,
     },
     nameText:{
         fontSize:25
