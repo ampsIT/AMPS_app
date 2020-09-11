@@ -60,6 +60,13 @@ export default function Routes() {
     // if(!user){
     //   getToken()
     // }
+    messaging()
+      .getToken()
+      .then(token => {
+        return saveTokenToDatabase(token);
+      });
+
+    
     if (initializing) setInitializing(false);
     setLoading(false);
   }
@@ -75,11 +82,11 @@ export default function Routes() {
 
   useEffect(() => {
     // Get the device token
-    messaging()
-      .getToken()
-      .then(token => {
-        return saveTokenToDatabase(token);
-      });
+    // messaging()
+    //   .getToken()
+    //   .then(token => {
+    //     return saveTokenToDatabase(token);
+    //   });
       
     // If using other push notification providers (ie Amazon SNS, etc)
     // you may need to get the APNs token instead for iOS:
