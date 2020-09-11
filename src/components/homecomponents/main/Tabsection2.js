@@ -16,8 +16,8 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
         render() {
             return (
                     <View>
-                        <Text>
-                            This is section 2
+                        <Text style={{ alignSelf: "center", fontSize: 22}}>
+                            IdioLogy Section Coming Soon
                         </Text>
                     </View>
             )

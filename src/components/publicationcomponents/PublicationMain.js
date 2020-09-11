@@ -29,12 +29,14 @@ export class PublicationMain extends Component{
             aboutWriter: "",
             aboutBook: "",
             imgurl: [],
+            book_url: "",
 
             collapseAboutBook: true,
             collapseAboutWriter: true
         }
 
         this.item = this.props.item;
+        this.navigate = this.props.navigation.navigate
     }
 
     componentDidMount(){
@@ -48,10 +50,15 @@ export class PublicationMain extends Component{
             firestore().collection('all_publication_books').doc(id).collection("details_book").doc("all_details").get()
             .then(documentSnapshot => {
                 if(documentSnapshot.exists){
+                    let book_url = "no_url";
+                    if(documentSnapshot.data().book_doc_pdf){
+                        book_url = documentSnapshot.data().book_doc_pdf
+                    }
                     self.setState({
                         aboutWriter: documentSnapshot.data().about_writer,
                         aboutBook: documentSnapshot.data().about_book,
-                        imgurl: documentSnapshot.data().img_url
+                        imgurl: documentSnapshot.data().img_url,
+                        book_url: book_url
                     })
                 }
             })
@@ -83,6 +90,21 @@ export class PublicationMain extends Component{
         this.setState({
             collapseAboutWriter: !val
         })
+    }
+
+    pressReadBook(){
+        if(this.state.book_url === "" || this.state.book_url === "no_url"){
+            Alert.alert("No Book Details Found");
+            return;
+        }
+        else{
+            this.navigate("ReadBookScreen", {
+                // screen: "ReadBook",
+                // params: {
+                pdf_url: this.state.book_url
+                // }
+            })
+        }
     }
 
     _showAboutBook(){
@@ -151,6 +173,12 @@ export class PublicationMain extends Component{
                     <View style={styles.scrollmain}>
                         {this._showAboutBook()}
                         {this._showAboutWriter()}
+                        <TouchableOpacity style={styles.headerCardView5}
+                        onPress={() => this.pressReadBook()}>
+                            <Text style={styles.heading1}>
+                                To read book please press here
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </SafeAreaView>
@@ -182,10 +210,28 @@ const styles = StyleSheet.create({
         marginBottom: 4,
         backgroundColor: AppColors.white
     },
+    headerCardView5:{
+        paddingLeft: 10,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingRight: 16,
+        // flexDirection:'row',
+        // backgroundColor:'blue',
+        alignItems:'center',
+        // justifyContent: 'space-between',
+        marginTop: 12,
+        marginBottom: 4,
+    },
     heading: {
         fontSize:20,
         fontWeight: 'bold',
         color: AppColors.deepblue
+    },
+    heading1: {
+        fontSize:20,
+        fontWeight: 'bold',
+        color: AppColors.deepblue,
+        textDecorationLine: 'underline',
     },
     infoView: {
         paddingLeft: 6,

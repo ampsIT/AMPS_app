@@ -12,6 +12,7 @@ import {NewsDetails} from '../screens/NewsDetails'
 import {PublicationDetails} from '../screens/PublicationDetails';
 import {EventDetails} from './../screens/EventDetails';
 import { CardStyleInterpolators } from '@react-navigation/stack';
+import { ReadBookpdf } from './../components/publicationcomponents/ReadBookPdf';
 import AppColors from './../lib/AppColors';
 
 const Homenavigator = createStackNavigator();
@@ -28,29 +29,29 @@ const HomeScreen = () =>(
     
         >
             <Homenavigator.Screen name='homeScreen' component={Home}/>
+            {/* <Homenavigator.Screen name='details' component={DetailScreen}/> */}
     </Homenavigator.Navigator>
 )
-const detialNavigator = createStackNavigator();
-const DetailScreen = () =>(
-    <detialNavigator.Navigator
-        screenOptions={{
-            headerShown: false,
-            // navigationOptions: {
-            //     gestureDirection: "horizontal",
-            //     cardStyleInterpolator: forHorizontalModal
-            //   }
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        }}
+// const detialNavigator = createStackNavigator();
+// const DetailScreen = () =>(
+//     <detialNavigator.Navigator
+//         screenOptions={{
+//             headerShown: false,
+//             // navigationOptions: {
+//             //     gestureDirection: "horizontal",
+//             //     cardStyleInterpolator: forHorizontalModal
+//             //   }
+//             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+//         }}
     
-        >
-            <detialNavigator.Screen name='DeptScreen' component={Department}/>
-            <detialNavigator.Screen name='VideoScreen' component={VideoDetails}/>
-            <detialNavigator.Screen name='NewsScreen' component={NewsDetails}/>
-            <detialNavigator.Screen name='PublicationScreen' component={PublicationDetails}/>
-            <detialNavigator.Screen name='EventScreen' component={EventDetails}/>
-
-    </detialNavigator.Navigator>
-)
+//         >
+//             <detialNavigator.Screen name='DeptScreen' component={Department}/>
+//             <detialNavigator.Screen name='VideoScreen' component={VideoDetails}/>
+//             <detialNavigator.Screen name='NewsScreen' component={NewsDetails}/>
+//             <detialNavigator.Screen name='PublicationScreen' component={PublicationDetails}/>
+//             <detialNavigator.Screen name='EventScreen' component={EventDetails}/>
+//     </detialNavigator.Navigator>
+// )
 
 const Drawer = createDrawerNavigator()
 const DrawerNavigator = () => (
@@ -71,6 +72,7 @@ const DrawerNavigator = () => (
 
     >
        <Drawer.Screen name="Home" component={HomeScreen} />
+       {/* <Drawer.Screen name='ReadBookScreen' component={ReadBookpdf}/> */}
        {/* <DetailScreen /> */}
     </Drawer.Navigator>
 )
@@ -88,6 +90,7 @@ const HNav = () =>(
             < HNavigator.Screen name='NewsScreen' component={NewsDetails}/>
             < HNavigator.Screen name='PublicationScreen' component={PublicationDetails}/>
             < HNavigator.Screen name='EventScreen' component={EventDetails}/>
+            < HNavigator.Screen name='ReadBookScreen' component={ReadBookpdf}/>
 
     </ HNavigator.Navigator>
 )

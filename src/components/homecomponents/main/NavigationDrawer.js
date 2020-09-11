@@ -25,23 +25,50 @@ export class NavigationDrawer extends Component{
     constructor(props){
         super(props)
         this.navigate = this.props.navigation.navigate;
-        this.state={user:{}}
+        this.state={
+            user:{},
+            userLetter: "",
+            userId: "",
+            username: ""
+        }
                                  
     }
     async componentDidMount (){
+        let self = this;
         const uid = auth().currentUser.uid
          await firestore()
              .collection('user')
             .doc(uid)
             .get()
-            .then(res=> {
-                this.setState(prevstate=>{
-                    let user = Object.assign(prevstate.user,res._data)
-                    return {user}
-                })
-            });   
+            .then(querysnap => {
+                if(querysnap.empty){
+                    console.log('No matching documents.');
+                    return;
+                }
+                else{
+                    console.log("username: ", querysnap.data().name)
+                    var letter = self.capitalisedString(querysnap.data().name)
+                    self.setState({
+                        userLetter: letter,
+                        username: querysnap.data().name
+                    })
+                    console.log("username: ", self.state.userLetter)
+                }
+            })
+            // .then(res=> {
+            //     this.setState(prevstate=>{
+            //         let user = Object.assign(prevstate.user,res._data) 
+            //         // let userLetter = self.capitalisedString(res._data.name)
+            //         return {user}
+            //     })
+            // });   
 
     }
+
+    capitalisedString(name){
+        return name.charAt(0).toUpperCase();
+    }
+
     onClickSignOut = async ()=>{
         let res = await backend.signOut()
         if (res){
@@ -49,6 +76,7 @@ export class NavigationDrawer extends Component{
         }
     }
    render(){
+      
    return(
     <DrawerContentScrollView
     >
@@ -61,12 +89,12 @@ export class NavigationDrawer extends Component{
                 // }}
                 overlayContainerStyle={{backgroundColor: AppColors.primary}}
                 color={AppColors.primary}
-                title="U"
+                title={this.state.userLetter}
                 size="xlarge"
                 // activeOpacity={0.3}
             />
                 <Text style={styles.nameText}>
-                    Welcome, {this.state.user.name}
+                    Welcome, {this.state.username}
                  </Text>
             </View>
 
@@ -212,7 +240,8 @@ const styles = StyleSheet.create({
         backgroundColor:AppColors.secondary,
     },
     nameText:{
-        fontSize:25
+        fontSize:25,
+        color: AppColors.white
     },
     drawerItems: {
         // paddingBottom: hp2dp('1%'),
