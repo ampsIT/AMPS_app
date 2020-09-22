@@ -122,7 +122,7 @@ import AppColors from '../../../lib/AppColors';
             this.state = {
               videoData: [],
               allPrimeType: [],
-              selectedFilter: ""
+              selectedFilter: "all"
             }
             this.navigate = this.props.navigation.navigate
             // this.options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -173,7 +173,8 @@ import AppColors from '../../../lib/AppColors';
             })
 
             self.setState({
-              videoData: data
+              videoData: data,
+              selectedFilter: "all"
             })
           })
           // .then()
@@ -202,29 +203,35 @@ import AppColors from '../../../lib/AppColors';
         _loadVideoDataWithPrimeType(itemValue){
           let self = this;
           // let primetype = "/prime_type/" + itemValue;
-          let primetype = firestore().collection("prime_type").doc(itemValue);
-          // console.log("ref: ", primetype);
-          firestore().collection('publish_video').where('primeType', '==', primetype).get()
-          .then(querysnapshot => {
-            let data = [];
-            
-            querysnapshot.forEach(doc => {
-              // console.log("get filter data: ", doc.id)
-              data.push({
-                id: doc.id,
-                title: doc.data().title,
-                src: doc.data().src_thumbnails,
-                yop: doc.data().yop,
-                publishing_date: doc.data().publishing_date,
-                published_by: doc.data().published_by,
-                total_views: doc.data().total_views
+          if(itemValue === "all"){
+            this. _loadInitialData();
+          }
+          else{
+            let primetype = firestore().collection("prime_type").doc(itemValue);
+            // console.log("ref: ", primetype);
+            firestore().collection('publish_video').where('primeType', '==', primetype).get()
+            .then(querysnapshot => {
+              let data = [];
+              
+              querysnapshot.forEach(doc => {
+                // console.log("get filter data: ", doc.id)
+                data.push({
+                  id: doc.id,
+                  title: doc.data().title,
+                  src: doc.data().src_thumbnails,
+                  yop: doc.data().yop,
+                  publishing_date: doc.data().publishing_date,
+                  published_by: doc.data().published_by,
+                  total_views: doc.data().total_views
+                })
+              })
+
+              self.setState({
+                videoData: data,
+                selectedFilter: itemValue
               })
             })
-
-            self.setState({
-              videoData: data
-            })
-          })
+          }
         }
 
         showPrimeTypePicker(){
@@ -251,6 +258,46 @@ import AppColors from '../../../lib/AppColors';
             )
           }
         }
+
+        renderPrimeTypeItem(item){
+          if(item.id === this.state.selectedFilter){
+            return(
+              <View style={styles.selectedprimetypechip}>
+                <Text style={styles.selectedprimetypechiptxt}>
+                  {item.name}
+                </Text>
+              </View>
+            )
+          }
+          else{
+            return(
+              <TouchableOpacity style={styles.primetypechip}
+              onPress={() => this._loadVideoDataWithPrimeType(item.id)}>
+                <Text style={styles.primetypechiptxt}>
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+            )
+          }
+        }
+
+        showPrimeTypeChip(){
+          return(
+            <View style={{ paddingVertical: 3, marginVertical: 3}}>
+               <FlatList
+                  data={this.state.allPrimeType}
+                  horizontal
+                  renderItem={(item) => {
+                        return(
+                            this.renderPrimeTypeItem(item.item)
+                        )
+                  }}
+                  keyExtractor={(item) => item.id}
+                  showsHorizontalScrollIndicator={false}
+                />
+            </View>
+          )
+        }
     
         render() {
             const renderItem = ({ item }) => {    
@@ -264,7 +311,8 @@ import AppColors from '../../../lib/AppColors';
 
             return (
                     <SafeAreaView style={styles.container}>
-                      {this.showPrimeTypePicker()}
+                      {/* {this.showPrimeTypePicker()} */}
+                      {this.showPrimeTypeChip()}
                       <FlatList
                         style={{ flex: 1}}
                         data={this.state.videoData}
@@ -280,7 +328,7 @@ import AppColors from '../../../lib/AppColors';
     const styles = StyleSheet.create({
         container:{
             flex:1,
-          alignItems: 'center',
+          // alignItems: 'center',
           // backgroundColor:'yellow'
         },
         item: {
@@ -381,6 +429,37 @@ import AppColors from '../../../lib/AppColors';
           selectpickertxt: {
             fontSize: 16,
             paddingHorizontal: 6,
+          },
+          primetypechip: {
+            borderRadius: 7,
+            borderWidth: 1,
+            borderColor: AppColors.black,
+            backgroundColor: AppColors.grey,
+            marginHorizontal: 4,
+            // height: 20
+          },
+          selectedprimetypechip: {
+            borderRadius: 7,
+            borderWidth: 1,
+            borderColor: AppColors.white,
+            backgroundColor: AppColors.deepblue,
+            marginHorizontal: 4,
+            // height: 20
+          },
+          selectedprimetypechiptxt: {
+            color: AppColors.white,
+            fontSize: 18,
+            fontWeight: "bold",
+            paddingVertical: 5,
+            paddingHorizontal: 15
+          },
+          primetypechiptxt: {
+            color: AppColors.black,
+            fontSize: 18,
+            fontWeight: "bold",
+            paddingVertical: 5,
+            paddingHorizontal: 15
           }
+
 
     })

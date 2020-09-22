@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 import React,{ Component } from 'react'
-import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
+import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput, Dimensions,
 ImageBackground, Image, Alert,TouchableOpacity,FlatList,SafeAreaView } from 'react-native';
 
 import { material } from 'react-native-typography'
@@ -14,6 +14,10 @@ import {
 import AppColors from '../../../lib/AppColors';
 import backend from './../../../backend/Backend';
 import FastImageBackground from './../../../lib/FastimageBack';
+import FastImage from 'react-native-fast-image';
+
+const { width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 export class Tabsection5 extends Component{
     constructor(props){
@@ -44,6 +48,8 @@ export class Tabsection5 extends Component{
                     imgurl: doc.data().img_url,
                     date: doc.data().date.toDate().toLocaleDateString("en-US"),
                     publishdate: doc.data().publish_time.toDate().toLocaleString(),
+                    place: doc.data().place,
+                    link_url: doc.data().link_url
                 })
             })
 
@@ -57,29 +63,61 @@ export class Tabsection5 extends Component{
         this.navigate('EventScreen',{item:item})
     }
 
+    // renderItem(item){
+    //     console.log("item: ", item)
+    //     return(
+    //         <TouchableOpacity style={styles.cardevent}
+    //         onPress={() => this.pressEventcard(item)}>
+    //             <FastImageBackground
+    //             source={{uri: item.imgurl}}
+    //             imageStyle={{borderRadius: 5}}
+    //             resizeMode= 'cover'
+    //             style={styles.backgroundImage}>
+    //              <View style={styles.containerlayerCategory} opacity={0.16}/>
+    //              <View  style={styles.bottomlayerCategory} opacity={0.6}/>
+    //              <View style={styles.bottomlayertextCategory} opacity={1}>
+    //                     <Text style={styles.eventtitlee}>
+    //                         {item.title}
+    //                     </Text>
+    //                     <Text style={styles.eventdate}>
+    //                         On {item.date}
+    //                     </Text>
+    //                 </View>
+
+    //             </FastImageBackground>
+    //         </TouchableOpacity>
+    //     )
+    // }
+
     renderItem(item){
-        console.log("item: ", item)
         return(
-            <TouchableOpacity style={styles.cardevent}
-            onPress={() => this.pressEventcard(item)}>
-                <FastImageBackground
-                source={{uri: item.imgurl}}
-                imageStyle={{borderRadius: 5}}
-                resizeMode= 'cover'
-                style={styles.backgroundImage}>
-                 <View style={styles.containerlayerCategory} opacity={0.16}/>
-                 <View  style={styles.bottomlayerCategory} opacity={0.6}/>
-                 <View style={styles.bottomlayertextCategory} opacity={1}>
-                        <Text style={styles.eventtitlee}>
-                            {item.title}
-                        </Text>
-                        <Text style={styles.eventdate}>
+            // <View style={styles.cardeventnew}>
+            //     <TouchableOpacity style={{ flex: 1}}
+                <TouchableOpacity style={styles.cardeventnew}
+                onPress={() => this.pressEventcard(item)}>
+                    <Text style={styles.titletxt}>
+                        {item.title}
+                    </Text>
+                    <FastImage 
+                        style={styles.imageevent}
+                        source={{
+                            uri: item.imgurl
+                        }}
+                        resizeMode= 'cover'
+                    />
+                    <View style={styles.dateplaceview}>
+                        <Text style={styles.dateplacetxt}>
                             On {item.date}
                         </Text>
+                        <Text style={styles.dateplacetxt}>
+                            At {item.place}
+                        </Text>
                     </View>
-
-                </FastImageBackground>
-            </TouchableOpacity>
+                    <Text style={styles.linktxt}>
+                        {item.link_url}
+                    </Text>
+                </TouchableOpacity>
+            // </View>
         )
     }
    
@@ -102,7 +140,8 @@ export class Tabsection5 extends Component{
 }
 const styles = StyleSheet.create({
       container:{
-          flex: 1
+          flex: 1,
+          backgroundColor: AppColors.lightWhite
     },
     cardevent: {
         // backgroundColor:'white',
@@ -111,14 +150,60 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginBottom: 8,
         // marginHorizontal: wp2dp('2%'),
-        width:wp2dp('98%'),
-        height: 200,
+        width: width*0.98,
+        // height: 300,
         elevation:7,
         alignSelf: "center",
         // alignItems: 'center'
         // borderBottomWidth:0.8
         // borderWidth:0.8
-        borderRadius:5
+        borderRadius:12
+    },
+    cardeventnew: {
+        width: wp2dp('98%'),
+        alignSelf: "center",
+        justifyContent: "center",
+        elevation: 0.5,
+        zIndex: 0.5,
+        borderRadius: 2,
+        marginVertical: 8,
+    },
+    titletxt: {
+        fontSize: 20,
+        color: AppColors.black,
+        paddingVertical: 4,
+        marginTop: 16,
+        marginBottom: 4,
+        marginLeft: 8,
+        fontFamily: "bold"
+    },
+    imageevent: {
+        width: wp2dp('98%'),
+        height: 200,
+        marginTop: 4,
+        marginBottom: 4,
+    },
+    dateplaceview: {
+        flexDirection: 'row',
+        marginHorizontal: 8,
+        marginVertical: 4,
+        alignItems: "flex-start",
+        justifyContent: "space-between"
+    },
+    dateplacetxt: {
+        color: AppColors.black,
+        fontSize: 14
+    },
+    linktxt: {
+        color: AppColors.deepblue,
+        fontSize: 16,
+        textDecorationLine: "underline",
+        textDecorationStyle: "solid",
+        textDecorationColor: AppColors.deepblue,
+        marginTop: 4,
+        marginHorizontal: 8,
+        marginBottom: 10,
+        paddingVertical: 4
     },
     containerlayerCategory: {
         flex: 1,
