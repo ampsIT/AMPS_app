@@ -450,15 +450,15 @@ import AppColors from '../../../lib/AppColors';
             color: AppColors.white,
             fontSize: 18,
             fontWeight: "bold",
-            paddingVertical: 5,
-            paddingHorizontal: 15
+            paddingVertical: 7,
+            paddingHorizontal: 18
           },
           primetypechiptxt: {
             color: AppColors.black,
             fontSize: 18,
             fontWeight: "bold",
-            paddingVertical: 5,
-            paddingHorizontal: 15
+            paddingVertical: 7,
+            paddingHorizontal: 18
           }
 
 
