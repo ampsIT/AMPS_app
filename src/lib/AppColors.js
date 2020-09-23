@@ -18,6 +18,11 @@ export default {
     grey: "#aaa",
     lightgrey: "#ccc",
 
-    greenligth: "#0d2b17"
+    greenligth: "#0d2b17",
+
+    semiTransparentDark: 'rgba(0, 0, 0, 0.33)',
+    semiTransparentlow: 'rgba(0, 0, 0, 0.18)',
+    lowersemiTransparentDark: 'rgba(0, 0, 0, 0.46)',
+    lowTransparentDark: 'rgba(0, 0, 0, 0.56)',
 }
 

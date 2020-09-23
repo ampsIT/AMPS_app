@@ -12,6 +12,8 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import firestore from '@react-native-firebase/firestore';
 
+import { CommonActions } from '@react-navigation/native';
+
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 
@@ -39,10 +41,120 @@ export class AddAcharyaPersonal extends Component {
             ph_no: "",
             email_address: "",
 
-            submitStatus: "submit"
+            submitStatus: "submit",
+
+            isLoadingModal: false
         }
         // this.navigate = this.props.navigation.navigate;
+        
 
+    }
+
+    componentDidMount(){
+        this.loadPersonalInfo();
+    }
+
+    loadPersonalInfo(){
+        console.log("itemsval: ", this.props.items.val().age)
+        if(this.props.items){
+            var initiated_person_name = '';
+            var date_of_initiation = '';
+            var fathers_name = '';
+            var age = '';
+            var dob = '';
+            var village = '';
+            var post_office = '';
+            var police_station = '';
+            var district = '';
+            var state = '';
+            var postal_code = '';
+            var qualification = '';
+            var occupation = '';
+            var ph_no = '';
+            var email_address = '';
+            var submitStatus = 'update';
+
+            if(this.props.items.val().initiated_person_name){
+                initiated_person_name = this.props.items.val().initiated_person_name
+            }
+
+            if(this.props.items.val().date_of_initiation){
+                date_of_initiation = this.props.items.val().date_of_initiation
+            }
+
+            if(this.props.items.val().fathers_name){
+                fathers_name = this.props.items.val().fathers_name
+            }
+
+            if(this.props.items.val().age){
+                age = this.props.items.val().age
+            }
+
+            if(this.props.items.val().dob){
+                dob = this.props.items.val().dob
+            }
+
+            if(this.props.items.val().village){
+                village = this.props.items.val().village
+            }
+
+            if(this.props.items.val().post_office){
+                post_office = this.props.items.val().post_office
+            }
+
+            if(this.props.items.val().police_station){
+                police_station = this.props.items.val().police_station
+            }
+
+            if(this.props.items.val().district){
+                district = this.props.items.val().district
+            }
+
+            if(this.props.items.val().state){
+                state = this.props.items.val().state
+            }
+
+            if(this.props.items.val().postal_code){
+                postal_code = this.props.items.val().postal_code
+            }
+
+            if(this.props.items.val().qualification){
+                qualification = this.props.items.val().qualification
+            }
+
+            if(this.props.items.val().occupation){
+                occupation = this.props.items.val().occupation
+            }
+
+            if(this.props.items.val().ph_no){
+                ph_no = this.props.items.val().ph_no
+            }
+
+            if(this.props.items.val().email_address){
+                email_address = this.props.items.val().email_address
+            }
+
+            this.setState({
+                initiated_person_name: initiated_person_name,
+                date_of_initiation: date_of_initiation,
+                fathers_name: fathers_name,
+                age: age,
+                dob: dob,
+                village: village,
+                post_office: post_office,
+                police_station: police_station,
+                district: district,
+                state: state,
+                postal_code: postal_code,
+                qualification: qualification,
+                occupation: occupation,
+                ph_no: ph_no,
+                email_address: email_address,
+    
+                submitStatus: submitStatus
+            })
+        }
+        
     }
 
     _setInitiatedPersonName(val){
@@ -202,6 +314,8 @@ export class AddAcharyaPersonal extends Component {
     }
 
     updatedataToDataBase(){
+        let self = this;
+        this.loadingstate(true);
         let user_id = auth().currentUser.uid;
         var firebaseref = database().ref("acharya_diary_info").child(user_id);
         firebaseref.set({
@@ -220,6 +334,20 @@ export class AddAcharyaPersonal extends Component {
             occupation: this.state.occupation,
             ph_no: this.state.ph_no,
             email_address: this.state.email_address
+        },
+        function(error) {
+            if(error) {
+                self.loadingstate(false);
+             }else{
+                self.loadingstate(false);
+                self.props.navigation.dispatch(CommonActions.goBack());
+             }
+        })
+    }
+
+    loadingstate(val){
+        this.setState({
+            isLoadingModal: val
         })
     }
    
@@ -343,11 +471,28 @@ export class AddAcharyaPersonal extends Component {
                         />
                          <TouchableOpacity style={styles.submitBtn}
                             onPress={() => this._SubmitAcharyaInfo()}>
+                            {(this.state.submitStatus === "submit") ? 
                             <Text style={styles.submittext}>
                                 SUBMIT
-                            </Text>
+                            </Text> : 
+                            <Text style={styles.submittext}>
+                                UPDATE
+                            </Text>}
                         </TouchableOpacity>
                     </ScrollView>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={this.state.isLoadingModal}
+                        onRequestClose={() => {
+                            // Alert.alert('Modal has been closed.');
+                        }}>   
+                        <View style={{ flex: 1, alignItems:'center', justifyContent:'center', backgroundColor: AppColors.lowersemiTransparentDark }}>
+                            <ActivityIndicator 
+                                    style={{position: 'absolute', bottom: 84}} 
+                                        size="large" color={AppColors.accent} />        
+                        </View>	 
+                    </Modal>
                 </View>
             );
     }
