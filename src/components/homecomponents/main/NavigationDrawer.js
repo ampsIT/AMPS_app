@@ -120,7 +120,7 @@ export class NavigationDrawer extends Component{
                 />)}
                 label="Acarya Diary"
                 labelStyle={styles.labelStyle}
-                onPress={() => {}}
+                onPress={() => {this.props.navigation.navigate('AcharyaDiaryScreen')}}
             />
             <DrawerItem
                 icon={() => ( <Icon

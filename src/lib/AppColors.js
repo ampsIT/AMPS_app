@@ -1,7 +1,7 @@
 /* eslint-disable */
 // // https://htmlcolorcodes.com/color-chart/material-design-color-chart/
 export default {
-    // primary: "#005b96",
+    ligthblue: "#005b96",
     primary: "#fc4c02",//"#EA7773",
     // lightprimary: "#03396c",
     secondary: "#162525",//"#00cccd",
@@ -16,6 +16,8 @@ export default {
     semiblack: "#222",
     black: "#000",
     grey: "#aaa",
-    lightgrey: "#ccc"
+    lightgrey: "#ccc",
+
+    greenligth: "#0d2b17"
 }
 
