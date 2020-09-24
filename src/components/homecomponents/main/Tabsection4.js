@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import firestore from '@react-native-firebase/firestore';
+import AppColors from '../../../lib/AppColors';
 
 const DATA = [
     {
@@ -77,9 +78,9 @@ export default class Tabsection4 extends Component{
         super(props)
         this.state={
             category:[
-                {title: 'yoga', data: []}, 
-                {title:'motivational', data: []}, 
-                {title:'meditation', data: []}],
+                {title: 'Yoga', data: []}, 
+                {title:'Motivational', data: []}, 
+                {title:'Meditation', data: []}],
             
         }
 
@@ -212,11 +213,12 @@ export default class Tabsection4 extends Component{
                             {item.title}
                         </Text>
                         </View>
-                        <View style={{justifyContent:'center',marginRight:wp2dp('2%')}}>
+                        <View style={{justifyContent:'center', paddingRight: 12}}>
                             <Icon
                                 name={'arrow-right'}
-                                size={20}
+                                size={16}
                                 // style={styles.arrow}
+                                color={AppColors.grey}
                                 />
                         </View>
                    </View>
@@ -243,27 +245,39 @@ const styles = StyleSheet.create({
       container:{
           flex:1
 },
+listContainer: {
+    marginVertical: 12,
+    marginHorizontal: 12,
+    paddingBottom: 12,
+    backgroundColor: AppColors.white,
+    shadowColor: AppColors.grey,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    zIndex: 2,
+    elevation: 2,
+    borderRadius: 8
+},
 cardContainer:{
     alignItems:"flex-start",
     // backgroundColor:"yellow",
-    // marginHorizontal:wp2dp('%'),
-    marginRight:wp2dp('2%'),
-    marginLeft:wp2dp('1%')
-
+    marginHorizontal: 8,
+    marginVertical: 12
 },
 
 card:{
     // backgroundColor: 'blue',
     height:hp2dp('25%'),
     width:wp2dp('40%'),
-    borderRadius:12,
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
     elevation:2,
 },
 heading:{
-    fontSize:30,
-    fontWeight: 'bold'
+    fontSize: 20,
+    // fontWeight: 'bold',
+    color: AppColors.greymid
 },
 HView:{
     paddingLeft:wp2dp('3%'),
@@ -274,7 +288,7 @@ HView:{
     alignItems:'center'
 },
 listView:{
-    paddingLeft:wp2dp('2%'),
+    // paddingLeft:wp2dp('2%'),
 
 },
 titleView:{
@@ -287,7 +301,7 @@ titleText:{
 cardImage:{
  height:hp2dp('25%'),
  width:wp2dp('40%'),
- borderRadius:12,
+ borderRadius: 8,
 },
 subtitleText:{
     fontSize:14,

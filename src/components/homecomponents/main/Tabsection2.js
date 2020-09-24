@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, TextInput,
     ImageBackground, Image, Alert,TouchableOpacity  } from 'react-native';
+import AppColors from '../../../lib/AppColors';
 
 
     export default class TabSection2 extends Component {
@@ -15,9 +16,10 @@ import { View, Text, ActivityIndicator, StyleSheet, Modal, Platform, Linking, Te
     
         render() {
             return (
-                    <View>
-                        <Text style={{ alignSelf: "center", fontSize: 22}}>
-                            IdioLogy Section Coming Soon
+                    <View style={{ flex: 1, justifyContent: 'center'}}>
+                        <Text style={{ alignSelf: "center", fontSize: 16, 
+                                color: AppColors.greymid}}>
+                            Coming Soon....
                         </Text>
                     </View>
             )

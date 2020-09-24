@@ -14,56 +14,54 @@ import AppColors from '../../../lib/AppColors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Share from "react-native-share";
 
-const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
+const shareIcon = <Icon name='share-alt' color={AppColors.greymid} size={16}/>
 
     const Item = ({postTitle,content,image,timestamp, onPress, onSharePress}) => (
-      <TouchableOpacity onPress={onPress}>
-            <View style={styles.item}>
-                <View style={styles.HView}>
-                <Text 
-                  // style={styles.title}
-                  style={material.headline}
-                  >
-                    {postTitle}
-                    {/* THIS IS THE LONG HEADING */}
-                  </Text>
-              </View>
-                <View
-                style={styles.CView}
-                >
-                  <Text style={styles.paragraph}>
-                    {content}
-                    {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  */}
-                  </Text>
-              </View>
-                <View
-                style={styles.TView22}
-                >
-                <Text style={styles.timestamp}>
-                  {timestamp}
-                </Text>
-              </View>
-              <Image
-                resizeMode='cover'
-                style={styles.CardImage}
-                source={{uri: image}}
-                // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
-                />
-            </View>
-            <TouchableOpacity style={styles.shareicon}
+      <TouchableOpacity style={styles.item} onPress={onPress}>
+        <View>
+          <View style={styles.HView}>
+            <Text 
+              // style={styles.title}
+              style={[material.subheading, 
+                  {fontSize: 20, color: AppColors.darkgrey, paddingHorizontal: 6}]}
+              >
+              {postTitle}
+              {/* THIS IS THE LONG HEADING */}
+            </Text>
+          </View>
+          <View
+            style={styles.CView}
+            >
+            <Text style={[styles.paragraph, 
+                {paddingHorizontal: 6}]}>
+              {content}
+              {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  */}
+            </Text>
+          </View>
+          <View
+            style={styles.TView22}
+            >
+            <Text style={[styles.timestamp, {paddingHorizontal: 6}]}>
+              {timestamp}
+            </Text>
+          </View>
+          <Image
+            resizeMode='cover'
+            style={styles.CardImage}
+            source={{uri: image}}
+            // source={{uri: 'https://www.w3schools.com/w3css/img_lights.jpg'}}
+            />
+        </View>
+          <TouchableOpacity style={styles.shareicon}
             onPress={onSharePress}>
-              {shareIcon}
-            </TouchableOpacity>
+            {shareIcon}
+          </TouchableOpacity>
         </TouchableOpacity>
-          );
-
+    );
 
     const HItem = ({name,icon,onPress}) => (
-
       <TouchableOpacity onPress={onPress}>
-            <View 
-        style={styles.Hitem}
-        >
+        <View style={styles.Hitem}>
             <View 
             style={styles.IView}
             >
@@ -182,22 +180,21 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
 
         render() {
             const renderItem = ({ item }) => (
-                <Item 
+              <Item 
                 postTitle={item.postTitle} 
                 content={item.content}
                 image={item.images}
                 timestamp={item.timestamp.toDate().toDateString()}
                 onPress={() => {this.onPressNews(item)}}
                 onSharePress={() => {this.onSharePressitem(item)}} 
-                />
+              />
               );
 
               const hrenderItem = ({item}) => (
-             
                 <HItem 
-                name={item.name}
-                icon={item.icon}
-                onPress={() => {this.onPressDept(item)}} 
+                  name={item.name}
+                  icon={item.icon}
+                  onPress={() => {this.onPressDept(item)}} 
                 />
               
             )
@@ -208,23 +205,21 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
                     style={styles.Hlist}
                     >
                     <FlatList
-                    horizontal
-                    data={this.state.Hlist}
-                    renderItem={hrenderItem}
-                    showsHorizontalScrollIndicator={false}
-                    // stickyHeaderIndices={[1]}
+                      horizontal
+                      data={this.state.Hlist}
+                      renderItem={hrenderItem}
+                      showsHorizontalScrollIndicator={false}
+                      // stickyHeaderIndices={[1]}
                     />
                   </View>
                 
                   <FlatList
-                    style={{flex: 1}}
+                    style={{flex: 1, paddingBottom: 16,}}
                     data={this.state.Newlist}
                     renderItem={renderItem}
                     keyExtractor={item => item.postId}
                     showsVerticalScrollIndicator={false}
                   />
-                
-
               </SafeAreaView>
             )
         }    
@@ -233,7 +228,7 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          backgroundColor: AppColors.lightWhitemore
+          backgroundColor: AppColors.lightWhite,//lightWhitemore
           // marginTop: StatusBar.currentHeight || 0,
           // marginTop: HW'',
           // marginTop:hp2dp('0.5%')
@@ -241,12 +236,12 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
         },
         item: {
           backgroundColor:'white',
-          // padding: wp2dp('4%'),
+          // paddingHorizontal: 6,
           // marginVertical: hp2dp('1%'),
-          marginTop: 10,
-          marginBottom: 8,
+          marginTop: 12,
+          marginBottom: 12,
           // marginHorizontal: wp2dp('2%'),
-          width:wp2dp('98%'),
+          width:wp2dp('92%'),
           elevation:5,
           alignSelf: "center",
           // alignItems: 'center'
@@ -260,7 +255,7 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
           fontWeight:'600'
         },
         CardImage: {
-          width: wp2dp('98%'),
+          width: wp2dp('92%'),
           height:hp2dp('35%'),
           // marginBottom:hp2dp('1%'),
           // marginTop:hp2dp('-2.3%'),
@@ -271,7 +266,8 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
         },
         paragraph: {
           fontSize: 14,
-          lineHeight: 20,
+          lineHeight: 28,
+          color: AppColors.greymid
         },
         timestamp:{
           fontSize:12,
@@ -282,8 +278,8 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
           // borderBottomWidth:1,
           // backgroundColor:'black',
           // width:wp2dp('100%'),
-          borderBottomWidth:1,
-          borderColor:'rgba(128,128,128,0.2)'
+          // borderBottomWidth:1,
+          // borderColor:'rgba(128,128,128,0.2)'
         },
         HView:{
           marginBottom: 3,
@@ -315,14 +311,18 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
           paddingVertical:hp2dp('2%')
         },
         Hlist:{
-          backgroundColor: 'white',
-          // elevation:2,
-          // marginBottom:hp2dp('1%'),
-          borderWidth:0.2,
+          backgroundColor: AppColors.white,
+          // marginBottom: hp2dp('1%'),
+          // borderWidth:0.2,
           // height: hp2dp('10%')
-  
           // borderWidth:1
-        },
+          shadowColor: AppColors.black,
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.4,
+          shadowRadius: 6,
+          zIndex: 5,
+          elevation: 5
+      },
         Hitem:{
           // backgroundColor: 'white',
           // padding: wp2dp('3%'),
@@ -332,7 +332,7 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
           // marginBottom:hp2dp('1%'),
           paddingBottom:hp2dp('1%'),
           marginHorizontal: wp2dp('2%'),
-          width:wp2dp('20%'),
+          width:wp2dp('24%'),
           // marginRight:wp2dp('2%'),
           // marginLeft:wp2dp('5%'),
   
@@ -343,24 +343,25 @@ const shareIcon = <Icon name='share-alt' color={AppColors.black} size={20}/>
           // justifyContent:''
         },
         Himage:{
-          width: 50,
-          height: 50,
+          width: 36,
+          height: 36,
           alignSelf: "center"
           // marginHorizontal:hp2dp('1%')
           // alignItems: 'center',
   
         },
         Htext:{
-          fontSize:14,
-          textAlign: 'center'
+          fontSize: 12,
+          textAlign: 'center',
+          color: AppColors.greymid,
         },
         shareicon: {
           position: 'absolute',
-          right: 12,
-          top: 16,
-          elevation: 5,
-          zIndex: 5,
-          padding: 3,
+          right: 0,
+          top: 0,
+          // elevation: 5,
+          // zIndex: 5,
+          padding: 12,
         }
         
       });

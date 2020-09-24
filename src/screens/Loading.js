@@ -36,6 +36,7 @@ export class Loading extends Component {
           Animated.timing(LogoText, {
             toValue: 1,
             duration: 4000,
+            useNativeDriver: true,
           }),
         ]).start(() => {
           this.setState({

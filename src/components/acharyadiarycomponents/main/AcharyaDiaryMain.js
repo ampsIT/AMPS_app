@@ -24,7 +24,7 @@ export class AcharyaDiaryMain extends Component {
         super(props)
 
         this.state = {
-            acharyaDiaryData: null,
+            acharyaDiaryData: {},
             isAcharyaProfilePresent: false,
 
             isDiaryItem: false,

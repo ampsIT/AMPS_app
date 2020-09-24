@@ -112,9 +112,9 @@ export class HomeMain extends Component {
                     <Tab.Navigator
                     initialRouteName="Section1"
                     style={styles.bottomtab}
-                    activeColor={AppColors.primary}
-                    inactiveColor={"grey"}
-                    barStyle={{ backgroundColor: "white" }}
+                    activeColor={AppColors.white}
+                    inactiveColor={AppColors.lowersemiTransparentDark}
+                    barStyle={{ backgroundColor: AppColors.primary, height: 54 }}
                     backBehavior={"none"}
                     >
                     <Tab.Screen
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
         justifyContent:'flex-end',
     },
     Hitem:{
-        // backgroundColor: 'white',
+        backgroundColor: AppColors.primary,
         // padding: wp2dp('3%'),
         paddingTop:hp2dp('2%'),
         // paddingHorizontal: wp2dp('2%'),

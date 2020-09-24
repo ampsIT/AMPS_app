@@ -51,11 +51,11 @@ export class AddAcharyaPersonal extends Component {
     }
 
     componentDidMount(){
-        this.loadPersonalInfo();
+        // this.loadPersonalInfo();
     }
 
     loadPersonalInfo(){
-        console.log("itemsval: ", this.props.items.val().age)
+        // console.log("itemsval: ", this.props.items.val().age)
         if(this.props.items){
             var initiated_person_name = '';
             var date_of_initiation = '';

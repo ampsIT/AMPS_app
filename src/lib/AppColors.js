@@ -16,6 +16,8 @@ export default {
     semiblack: "#222",
     black: "#000",
     grey: "#aaa",
+    darkgrey: "#666",
+    greymid: "#888",
     lightgrey: "#ccc",
 
     greenligth: "#0d2b17",

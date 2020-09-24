@@ -74,7 +74,7 @@ import AppColors from '../../../lib/AppColors';
           <View
           style={styles.HView}
           >
-            <View style={{ width:wp2dp('75%')}}>
+            <View style={{ width:wp2dp('80%')}}>
               <Text style={styles.title}>
                 {/* {postTitle} */}
                 {/* THIS IS THE LONG HEADING */}
@@ -83,10 +83,12 @@ import AppColors from '../../../lib/AppColors';
             </View>
 
             <View style={{justifyContent:'center'}}>
-              <TouchableOpacity onPress={()=>{console.log('video Menu')}}>
+              <TouchableOpacity 
+                style={{paddingHorizontal: 6}}
+                onPress={()=>{console.log('video Menu')}}>
                   <Icon
                   name={'dots-three-vertical'}
-                  size={20}
+                  size={16}
                   />
               </TouchableOpacity>
             </View>
@@ -334,30 +336,30 @@ import AppColors from '../../../lib/AppColors';
         item: {
             backgroundColor:'white',
             // padding: wp2dp('4%'),
-            marginVertical: hp2dp('1%'),
+            marginVertical: 16,
             marginBottom:hp2dp('0.5%'),
-            // marginHorizontal: wp2dp('2%'),
-            width:wp2dp('95%'),
-            elevation:1,
+            marginHorizontal: 12,
+            // width:wp2dp('95%'),
+            elevation: 5,
             // borderBottomWidth:0.8
             // borderWidth:0.8
-            borderRadius:10,
+            borderRadius:8,
             paddingBottom:hp2dp('1%')
           },
           title: {
-            fontSize: 24,
+            fontSize: 16,
             // fontWeight:'700',
-            // color:'white'
+            color: AppColors.darkgrey
           },
           CardImage: {
-            width: wp2dp('95%'),
+            // width: wp2dp('95%'),
             height:hp2dp('35%'),
             // marginBottom:hp2dp('1%'),
             // marginTop:hp2dp('-2.3%'),
             // borderRadius:10,
             // backgroundColor:'black',
-            borderTopRightRadius:10,
-            borderTopLeftRadius:10
+            borderTopRightRadius:8,
+            borderTopLeftRadius:8
           },
           overlay: {
             position: 'absolute',
@@ -366,18 +368,20 @@ import AppColors from '../../../lib/AppColors';
             bottom: 0,
             left: 0,
             backgroundColor: 'black',
-            opacity: 0.2,
-            borderRadius:10,
-
+            opacity: 0.5,
+            // borderRadius:10,
+            borderTopRightRadius:8,
+            borderTopLeftRadius:8
           },
           paragraph: {
             fontSize: 16
             
           },
           timestamp:{
-            fontSize:14,
+            fontSize: 12,
             // marginVertical:hp2dp('1%'),
-            // color:'white'
+            marginTop: 12,
+            color: AppColors.grey
           },
           IView:{
             // alignItems: 'center',
@@ -431,34 +435,34 @@ import AppColors from '../../../lib/AppColors';
             paddingHorizontal: 6,
           },
           primetypechip: {
-            borderRadius: 7,
-            borderWidth: 1,
-            borderColor: AppColors.black,
+            borderRadius: 20,
+            // borderWidth: 1,
+            // borderColor: AppColors.black,
             backgroundColor: AppColors.grey,
             marginHorizontal: 4,
             // height: 20
           },
           selectedprimetypechip: {
-            borderRadius: 7,
+            borderRadius: 20,
             borderWidth: 1,
             borderColor: AppColors.white,
-            backgroundColor: AppColors.deepblue,
+            backgroundColor: AppColors.secondary,
             marginHorizontal: 4,
             // height: 20
           },
           selectedprimetypechiptxt: {
             color: AppColors.white,
-            fontSize: 18,
+            fontSize: 14,
             fontWeight: "bold",
-            paddingVertical: 7,
-            paddingHorizontal: 18
+            paddingVertical: 6,
+            paddingHorizontal: 16
           },
           primetypechiptxt: {
-            color: AppColors.black,
-            fontSize: 18,
-            fontWeight: "bold",
-            paddingVertical: 7,
-            paddingHorizontal: 18
+            color: AppColors.secondary,
+            fontSize: 14,
+            // fontWeight: "bold",
+            paddingVertical: 6,
+            paddingHorizontal: 16
           }
 
 

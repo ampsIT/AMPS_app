@@ -95,7 +95,7 @@ export class Tabsection5 extends Component{
             //     <TouchableOpacity style={{ flex: 1}}
                 <TouchableOpacity style={styles.cardeventnew}
                 onPress={() => this.pressEventcard(item)}>
-                    <Text style={styles.titletxt}>
+                    <Text style={[material.subheading, styles.titletxt]}>
                         {item.title}
                     </Text>
                     <FastImage 
@@ -139,7 +139,7 @@ export class Tabsection5 extends Component{
     )}
 }
 const styles = StyleSheet.create({
-      container:{
+    container:{
           flex: 1,
           backgroundColor: AppColors.lightWhite
     },
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginBottom: 8,
         // marginHorizontal: wp2dp('2%'),
-        width: width*0.98,
+        width: width*0.92,
         // height: 300,
         elevation:7,
         alignSelf: "center",
@@ -160,25 +160,30 @@ const styles = StyleSheet.create({
         borderRadius:12
     },
     cardeventnew: {
-        width: wp2dp('98%'),
+        width: wp2dp('92%'),
         alignSelf: "center",
         justifyContent: "center",
-        elevation: 0.5,
-        zIndex: 0.5,
-        borderRadius: 2,
+        borderRadius: 8,
         marginVertical: 8,
-    },
+        shadowColor: AppColors.grey,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+        zIndex: 2,
+        elevation: 2,
+        borderRadius: 8
+        },
     titletxt: {
-        fontSize: 20,
-        color: AppColors.black,
+        fontSize: 16,
+        color: AppColors.greymid,
         paddingVertical: 4,
-        marginTop: 16,
+        marginTop: 6,
         marginBottom: 4,
         marginLeft: 8,
-        fontFamily: "bold"
+        // fontFamily: "bold"
     },
     imageevent: {
-        width: wp2dp('98%'),
+        width: wp2dp('92%'),
         height: 200,
         marginTop: 4,
         marginBottom: 4,
@@ -191,15 +196,15 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     dateplacetxt: {
-        color: AppColors.black,
+        color: AppColors.grey,
         fontSize: 14
     },
     linktxt: {
-        color: AppColors.deepblue,
+        color: AppColors.darkgrey,
         fontSize: 16,
         textDecorationLine: "underline",
         textDecorationStyle: "solid",
-        textDecorationColor: AppColors.deepblue,
+        textDecorationColor: AppColors.darkgrey,
         marginTop: 4,
         marginHorizontal: 8,
         marginBottom: 10,
@@ -207,11 +212,11 @@ const styles = StyleSheet.create({
     },
     containerlayerCategory: {
         flex: 1,
-        backgroundColor: AppColors.black,  
+        backgroundColor: AppColors.grey,  
         // opacity: 0.29
     },
     bottomlayerCategory: {
-        backgroundColor: AppColors.black,  
+        backgroundColor: AppColors.grey,  
         // opacity: 15.00,
         width: "100%",
         height: 60,
@@ -268,7 +273,7 @@ const styles = StyleSheet.create({
     },
     timestamp:{
         fontSize:16,
-        color: AppColors.deepblue
+        color: AppColors.darkgrey
     },
     backgroundImage: {
         flex: 1,

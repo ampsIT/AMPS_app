@@ -103,7 +103,7 @@ export class HomeToolbar extends Component{
 const styles = StyleSheet.create({
     toolbarcontainer: {
           // width,
-          height: 60,
+          height: 54,
           backgroundColor: AppColors.primary,
           // borderRadius: 12,
           // marginHorizontal: 6,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
       },
       toolbarheadertext: {
         color: AppColors.white,
-        fontSize: 24,
+        fontSize: 20,
         fontFamily: "Montserrat-Bold",
         alignSelf: 'center',
         justifyContent: "flex-start"

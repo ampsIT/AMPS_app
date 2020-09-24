@@ -23,11 +23,12 @@ export class Home extends Component {
                 <View style={styles.container}>
                    <HomeToolbar 
                     navigation={this.props.navigation}
-                    title={"AMPS"}
+                    title={"Ananda Marga"}
                     showDrawer={true}
                     onIconPress={()=>{this.props.navigation.openDrawer()}}
-
-                    />
+                    >
+                        <Text>hh</Text>
+                    </HomeToolbar>
                     <HomeMain style={styles.mainContainer}
                     navigation={this.props.navigation}
                     />

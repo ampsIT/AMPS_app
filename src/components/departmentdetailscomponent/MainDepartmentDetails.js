@@ -171,8 +171,12 @@ export class DepartmentDetails extends Component{
                     <View>
                         {
                         (!this.state.collapseAboutUs)?
-                        <Image source={require('./../../lib/up.png')}/>:
-                        <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                         }
                     </View>
                 </TouchableOpacity>
@@ -192,7 +196,7 @@ export class DepartmentDetails extends Component{
     _showVisionMision(){
         return(
             <View>
-                 <TouchableOpacity style={styles.headerCardView}
+                 <TouchableOpacity style={styles.headerCardView1}
                  onPress={() => this.pressVisionMision()}>
                      <Text style={styles.heading}>
                      Vision & Mission:
@@ -200,8 +204,12 @@ export class DepartmentDetails extends Component{
                      <View>
                          {
                          (!this.state.collapseVisionMision)?
-                         <Image source={require('./../../lib/up.png')}/>:
-                         <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                          }
                      </View>
                  </TouchableOpacity>
@@ -221,7 +229,7 @@ export class DepartmentDetails extends Component{
     _showPrinciples(){
         return(
             <View>
-                 <TouchableOpacity style={styles.headerCardView}
+                 <TouchableOpacity style={styles.headerCardView1}
                  onPress={() => this.pressPrinciples()}>
                      <Text style={styles.heading}>
                      Principles:
@@ -229,8 +237,12 @@ export class DepartmentDetails extends Component{
                      <View>
                          {
                          (!this.state.collapsePrinciples)?
-                         <Image source={require('./../../lib/up.png')}/>:
-                         <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                          }
                      </View>
                  </TouchableOpacity>
@@ -250,7 +262,7 @@ export class DepartmentDetails extends Component{
     _showBackground(){
         return(
             <View>
-                 <TouchableOpacity style={styles.headerCardView}
+                 <TouchableOpacity style={styles.headerCardView1}
                  onPress={() => this.pressBackground()}>
                      <Text style={styles.heading}>
                      Background:
@@ -258,8 +270,12 @@ export class DepartmentDetails extends Component{
                      <View>
                          {
                          (!this.state.collapseBackground)?
-                         <Image source={require('./../../lib/up.png')}/>:
-                         <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                          }
                      </View>
                  </TouchableOpacity>
@@ -279,7 +295,7 @@ export class DepartmentDetails extends Component{
     _showServiceAndSolution(){
         return(
             <View>
-                 <TouchableOpacity style={styles.headerCardView}
+                 <TouchableOpacity style={styles.headerCardView1}
                  onPress={() => this.pressServiceSol()}>
                      <Text style={styles.heading}>
                      Services and Solutions:
@@ -287,8 +303,12 @@ export class DepartmentDetails extends Component{
                      <View>
                          {
                          (!this.state.collapseServiceSol)?
-                         <Image source={require('./../../lib/up.png')}/>:
-                         <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                          }
                      </View>
                  </TouchableOpacity>
@@ -308,7 +328,7 @@ export class DepartmentDetails extends Component{
     _showArticlesReserch(){
         return(
             <View>
-                 <TouchableOpacity style={styles.headerCardView}
+                 <TouchableOpacity style={styles.headerCardView1}
                  onPress={() => this.pressArticlesReserch()}>
                      <Text style={styles.heading}>
                      Articles and Research:
@@ -316,8 +336,12 @@ export class DepartmentDetails extends Component{
                      <View>
                          {
                          (!this.state.collapseArticlesreserch)?
-                         <Image source={require('./../../lib/up.png')}/>:
-                         <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                          }
                      </View>
                  </TouchableOpacity>
@@ -355,7 +379,7 @@ export class DepartmentDetails extends Component{
     _showOldProjects(){
         return(
             <View>
-                 <TouchableOpacity style={styles.headerCardView}
+                 <TouchableOpacity style={styles.headerCardView1}
                  onPress={() => this.pressOldProjects()}>
                      <Text style={styles.heading}>
                      Old Projects:
@@ -363,8 +387,12 @@ export class DepartmentDetails extends Component{
                      <View>
                          {
                          (!this.state.collapseOldProjects)?
-                         <Image source={require('./../../lib/up.png')}/>:
-                         <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                          }
                      </View>
                  </TouchableOpacity>
@@ -408,7 +436,7 @@ export class DepartmentDetails extends Component{
     _showLiveProjects(){
         return(
             <View>
-                 <TouchableOpacity style={styles.headerCardView}
+                 <TouchableOpacity style={styles.headerCardView1}
                  onPress={() => this.pressLiveProjects()}>
                      <Text style={styles.heading}>
                      Live projects Details:
@@ -416,8 +444,12 @@ export class DepartmentDetails extends Component{
                      <View>
                          {
                          (!this.state.collapseLiveProjects)?
-                         <Image source={require('./../../lib/up.png')}/>:
-                         <Image source={require('./../../lib/down.png')}/>
+                        <Icon name="arrow-up" color={AppColors.grey} size={20} />
+                        :
+                        <Icon name="arrow-down" color={AppColors.grey} size={20} />
+
+                        // <Image source={require('./../../lib/up.png')}/>:
+                        // <Image source={require('./../../lib/down.png')}/>
                          }
                      </View>
                  </TouchableOpacity>
@@ -444,8 +476,8 @@ export class DepartmentDetails extends Component{
     render(){
         return(
             <View style={styles.container}>
-                <ScrollView style={{ flex:1, paddingBottom: 16, }}>
-                    <View style={{ flex:1 }}>
+                <ScrollView style={{ flex:1, }}>
+                    <View style={{ flex:1, paddingBottom: 16 }}>
                         {this._showImage()}
                         {this._showAboutUs()}
                         {this._showVisionMision()}
@@ -465,6 +497,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: AppColors.lightWhite,
+        // paddingBottom: 16
     },
     headerCardView: {
         paddingLeft: 10,
@@ -479,44 +512,42 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.white
     },
     headerCardView1: {
-        paddingLeft: 10,
-        paddingTop: 6,
-        paddingBottom: 6,
-        paddingRight: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 12,
         flexDirection:'row',
-        // backgroundColor:'blue',
         alignItems:'center',
         justifyContent: 'space-between',
-        marginTop: 12,
-        marginBottom: 4,
-        backgroundColor: AppColors.white
+        marginTop: 20,
+        marginHorizontal: 12,
+        backgroundColor: AppColors.white,
+        borderRadius: 4,
+        elevation: 1
     },
     heading: {
-        fontSize:20,
-        fontWeight: 'bold',
-        color: AppColors.deepblue
+        fontSize: 16,
+        // fontWeight: 'bold',
+        color: AppColors.greymid
     },
     infoCardView: {
         width: wp2dp('96%'),
         alignSelf: "center",
         justifyContent: 'center',
-        padding: 8,
-        marginVertical: 3,
+        paddingVertical: 8,
+        paddingHorizontal: 24,
+        // marginVertical: 3,
         backgroundColor: AppColors.white,
         borderRadius: 5,
         elevation: 5,
         zIndex: 5
     },
     infoView: {
-        paddingLeft: 6,
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingHorizontal: 22,
+        paddingVertical: 2,
         // height: 120
     },
     infoView1: {
-        paddingLeft: 6,
-        paddingTop: 5,
-        paddingBottom: 5,
+        // paddingHorizontal: 24,
+        paddingVertical: 4,
         height: 120
     },
     infoCardinnermain: {
@@ -555,7 +586,8 @@ const styles = StyleSheet.create({
         // fontWeight: 'bold'
     },
     cardtxt: {
-        fontSize:18,
+        fontSize: 16,
+        color: AppColors.greymid
     }
 })
 export default DepartmentDetails 

@@ -82,20 +82,20 @@ export class NavigationDrawer extends Component{
     >
        <View >
             <View style={styles.userSection}>
-            <Avatar
-                rounded
-                // source={{
-                //     uri:'',
-                // }}
-                overlayContainerStyle={{backgroundColor: AppColors.primary}}
-                color={AppColors.primary}
-                title={this.state.userLetter}
-                size="xlarge"
-                // activeOpacity={0.3}
-            />
+                <Avatar
+                    rounded
+                    // source={{
+                    //     uri:'',
+                    // }}
+                    overlayContainerStyle={{backgroundColor: AppColors.primary}}
+                    color={AppColors.primary}
+                    title={this.state.userLetter}
+                    size="large"
+                    // activeOpacity={0.3}
+                />
                 <Text style={styles.nameText}>
-                    Welcome, {this.state.username}
-                 </Text>
+                    Welcome {this.state.username}!
+                </Text>
             </View>
 
             <View style={styles.drawerItems}>
@@ -105,7 +105,7 @@ export class NavigationDrawer extends Component{
                 // color={'grey'}
                 // size={25}
                 // />)}
-                icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'location-arrow' : 'location-arrow'} />}
+                icon={({ focused, color, size }) => <Icon color={'grey'} size={16} name={focused ? 'location-arrow' : 'location-arrow'} />}
                 label="AMPS Navigation"
                 labelStyle={styles.labelStyle}
                 onPress={(focused) => {this.props.navigation.navigate('Navigation')}}
@@ -116,7 +116,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='list-alt'
                 color={'grey'}
-                size={25}
+                size={16}
                 />)}
                 label="Acarya Diary"
                 labelStyle={styles.labelStyle}
@@ -126,7 +126,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='user-friends'
                 color={'grey'}
-                size={20}
+                size={16}
                 />)}
                 label="Revolutionary Marriage"
                 labelStyle={styles.labelStyle}
@@ -143,7 +143,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='share'
                 color={'grey'}
-                size={20}
+                size={16}
                 />)}
                 label="Share With Friends"
                 labelStyle={styles.labelStyle}
@@ -153,7 +153,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='share'
                 color={'grey'}
-                size={20}
+                size={16}
                 />)}
                 label="Donate Us"
                 labelStyle={[styles.labelStyle, {marginLeft:wp2dp('1%')}]}
@@ -163,7 +163,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='info'
                 color={'grey'}
-                size={25}
+                size={16}
                 />)}
                 label="AMPS Calender"
                 labelStyle={[styles.labelStyle, {marginLeft:wp2dp('3.5%')}]}
@@ -173,7 +173,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='mobile'
                 color={'grey'}
-                size={24}
+                size={16}
                 />)}
                 label="Connect With us"
                 labelStyle={[styles.labelStyle,{marginLeft:wp2dp('2.5%')}]}
@@ -183,7 +183,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='address-book'
                 color={'grey'}
-                size={25}
+                size={16}
                 />)}
                 label="Contact Us"
                 labelStyle={[styles.labelStyle,{marginLeft:wp2dp('1%')}]}
@@ -193,7 +193,7 @@ export class NavigationDrawer extends Component{
                 icon={() => ( <Icon
                 name='comment'
                 color={'grey'}
-                size={24}
+                size={16}
                 />)}
                 label="Feedback"
                 labelStyle={[styles.labelStyle,{marginLeft:wp2dp('1%')}]}
@@ -207,7 +207,7 @@ export class NavigationDrawer extends Component{
                     icon={() => ( <Icon
                     name='external-link-alt'
                     color={'grey'}
-                    size={24}
+                    size={16}
                     />)}
                     label="SignOut"
                     labelStyle={[styles.labelStyle,{marginLeft:wp2dp('1.5%')}]}
@@ -231,33 +231,36 @@ const styles = StyleSheet.create({
         // backgroundColor:'red'
     },
     userSection:{
+        flexDirection: 'row',
         // backgroundColor:"green",
-        paddingTop:hp2dp('2%'),
+        paddingStart: 12,
         marginTop:hp2dp('-1%'),
-        alignItems: 'center',
-        paddingBottom: hp2dp('2%'),
-        borderBottomWidth:0.2,
+        // alignItems: 'center',
+        paddingVertical: 16,
+        // borderBottomWidth:0.2,
         backgroundColor:AppColors.secondary,
     },
     nameText:{
-        fontSize:25,
-        color: AppColors.white
+        fontSize: 16,
+        color: AppColors.white,
+        alignSelf: 'center',
+        paddingStart: 12
     },
     drawerItems: {
         // paddingBottom: hp2dp('1%'),
-        borderBottomWidth:0.2
+        // borderBottomWidth:0.2
     },
     labelStyle:{
-        fontSize:16,
+        fontSize: 14,
         // fontWeight:'500'
-        color:'black'
+        color:'grey'
     },
     comItems:{
-        borderBottomWidth:0.2
+        // borderBottomWidth:0.2
     },
     headingText:{
         fontSize:16,
-        padding: wp2dp('3%')
+        padding: wp2dp('2%')
     },
     buttonView:{
         // marginTop:hp2dp('25%'),
