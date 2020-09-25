@@ -167,7 +167,7 @@ export class NavigationDrawer extends Component{
                 />)}
                 label="AMPS Calender"
                 labelStyle={[styles.labelStyle, {marginLeft:wp2dp('3.5%')}]}
-                onPress={() => {}}
+                onPress={() => {this.props.navigation.navigate('AMPSCalenderScreen')}}
             />
              <DrawerItem
                 icon={() => ( <Icon

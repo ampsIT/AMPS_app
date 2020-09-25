@@ -15,6 +15,7 @@ import { CardStyleInterpolators } from '@react-navigation/stack';
 import { ReadBookpdf } from './../components/publicationcomponents/ReadBookPdf';
 import { AcharyaDiary } from './../screens/AcharyaDiary';
 import { AddPersonalForAcharyaDiary } from './../screens/AddPeronalForAcharyaDiary';
+import { AMPSCalender } from './../screens/AMPSCalender';
 import AppColors from './../lib/AppColors';
 
 const Homenavigator = createStackNavigator();
@@ -95,6 +96,7 @@ const HNav = () =>(
             < HNavigator.Screen name='ReadBookScreen' component={ReadBookpdf}/>
             < HNavigator.Screen name='AcharyaDiaryScreen' component={AcharyaDiary}/>
             < HNavigator.Screen name='AddAcharyaPersonalScreen' component={AddPersonalForAcharyaDiary}/>
+            < HNavigator.Screen name='AMPSCalenderScreen' component={AMPSCalender}/>
 
     </ HNavigator.Navigator>
 )
