@@ -24,7 +24,7 @@ export class AcharyaDiaryMain extends Component {
         super(props)
 
         this.state = {
-            acharyaDiaryData: {},
+            acharyaDiaryData: null,
             isAcharyaProfilePresent: false,
 
             isDiaryItem: false,
@@ -89,7 +89,12 @@ export class AcharyaDiaryMain extends Component {
     }
 
     _addOrEditProfile(){
-        this.navigate("AddAcharyaPersonalScreen", {item: this.state.acharyaDiaryData});
+        if(this.state.acharyaDiaryData === null){
+            this.navigate("AddAcharyaPersonalScreen", {item: "no_data"});
+        }
+        else{
+            this.navigate("AddAcharyaPersonalScreen", {item: this.state.acharyaDiaryData});
+        }
     }
 
     _addNewDiaryItem(){
